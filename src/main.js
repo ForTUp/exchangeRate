@@ -12,7 +12,7 @@ Vue.use(ElementUI);
 Vue.prototype.$axios = axios;		//$axios：在需要axios的vue文件中引用axios的别名，比如this.$axios.post()...
 									//如果写成Vue.prototype.$http = axios,那么要改成this.$http.post()...
 Vue.prototype.qs = Qs;	
-
+//使用路由1
 Vue.use(VueRouter)			
 const router = new VueRouter({
 	mode: 'history',
