@@ -43,7 +43,7 @@ export default {
 	    return {
 	      // 图片地址数组
 	    imgList: [
-	        {
+	       /* {
 	          url: require("")
 	        },
 	        {
@@ -51,7 +51,7 @@ export default {
 	        },
 	        {
 	          url: require("")
-	        }
+	        } */
 	      ],
 	      // 图片父容器高度
 	      bannerHeight: 1000,
