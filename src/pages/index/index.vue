@@ -44,14 +44,14 @@ export default {
 	      // 图片地址数组
 	    imgList: [
 	        {
-	          url: require("")
+	          url: require('../../static/image/banner1.png')
 	        },
 	        {
-	          url: require("")
+	          url: require('../../static/image/banner1.png')
 	        },
 	        {
-	          url: require("")
-	        }
+	          url: require('../../static/image/banner1.png')
+	        } 
 	      ],
 	      // 图片父容器高度
 	      bannerHeight: 1000,

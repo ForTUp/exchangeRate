@@ -1,5 +1,6 @@
-import Index from './pages/index/index.vue'
 import Vue from 'vue'
+import Index from './pages/index/index.vue'
+import Login from './pages/login/login.vue'
 
 const routers = [
 	{
@@ -10,6 +11,11 @@ const routers = [
 		path: '/index',
 		name:'Index',
 		component:Index,
+	},
+	{
+		path: '/login',
+		name: 'login',
+		component:Login
 	}
 ]
 
