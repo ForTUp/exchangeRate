@@ -1,18 +1,18 @@
 <template>
-		<div id="index">
+		<div id="vipApply">
 			<el-container>
 				<el-header>
 					<el-row :gutter="20">
-					<el-col :span="18">
+					<el-col :span="16">
 						<div class="grid-content bg-purple ">
 							<div class="logoDiv">
-								<el-link :underline="false">登录</el-link>
+								<el-link :underline="false">会员申请</el-link>
 							</div>
 						</div>
 					</el-col>
-					  <el-col :span="4">
+					  <el-col :span="8">
 						<div class="grid-content bg-purple">
-							<el-button  class="vipButton" @click="vipApply">会员申请</el-button>
+							<el-button  class="loginButton " @click="loadLogin">登录</el-button>
 						</div>
 					  </el-col>
 					</el-row>
@@ -21,7 +21,7 @@
 				<el-main>
 					<div class="formDiv">
 						<div class="headForm">
-							<span class="spanMsg">登录 | Login</span>
+							<span class="spanMsg">找回密码</span>
 						</div>
 						<div class="bodyForm">
 							<el-form ref="form" :model="form" label-width="28rem">
@@ -30,17 +30,29 @@
 							  <el-form-item label="账号/User ID：">
 									<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
 							  </el-form-item>
-							  <el-form-item label="密码/Password：">
-									<el-input v-model="form.password" placeholder="请输入密码" show-password></el-input>
+							  <el-form-item label="手机号码/Phone Number：">
+									<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+							  </el-form-item>
+							  <el-form-item label="证件类型/ID Type：">
+									 <el-select v-model="form.idcord" placeholder="请选择">
+									    <el-option
+									      v-for="item in options"
+									      :key="item.value"
+									      :label="item.label"
+									      :value="item.value">
+									    </el-option>
+									  </el-select>
+							  </el-form-item>
+							  <el-form-item label="证件号码/ID Number：">
+							  		<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
 							  </el-form-item>
 							  <el-form-item>
-								<el-button class="sumbitButton" @click="onSubmit">登录/Login</el-button>
+								<el-button class="sumbitButton" @click="onSubmit">立即找回</el-button>
 							  </el-form-item>
 							  <el-form-item >
 							  </el-form-item>
 							</el-form>
 						</div>
-						<div class="bottomForm"><el-link href="retrievePwd">忘记密码？</el-link></div>
 					</div>
 					
 				</el-main>
@@ -50,28 +62,48 @@
 
 <script>
 export default{
-	name:"login",
+	name:"vipApply",
 	data() {
-	return {
-		form: {
-			username: '',
-			password: '',
-			}
+		return {
+			form: {
+				username: '',
+				password: '',
+				idcord:'',
+				number:''
+			},
+			options: [{
+				  value: '选项1',
+				  label: '黄金糕'
+				}, {
+				  value: '选项2',
+				  label: '双皮奶'
+				}, {
+				  value: '选项3',
+				  label: '蚵仔煎'
+				}, {
+				  value: '选项4',
+				  label: '龙须面'
+				}, {
+				  value: '选项5',
+				  label: '北京烤鸭'
+			}],
 		}
+		
 	},
 	methods: {
 		onSubmit() {
 			console.log(this.form);
 		},
-		vipApply(){
-			this.$router.push('/vipApply');
-		}
+		loadLogin(){
+			this.$router.push('/login');
+		},
+		
 		
 	}
 }	
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 	body{
 		width: 62.5rem;
 		margin: 0 auto !important;
@@ -90,13 +122,11 @@ export default{
 		 background-color: #F7F7F7;
 		 color: #333;
 		 text-align: center;
+		 height: 45rem !important;
 	}
 	body > .el-container {
 		width: 62.5rem;
-		margin: 0 auto !important;
-		border: 0.0625rem solid #F7F7F7;
-		font-family: 'ArialMT', 'Arial', sans-serif;
-		border-radius:0rem;
+		
 	}
 
 	.el-container:nth-child(5) .el-aside,
@@ -137,14 +167,13 @@ export default{
 	.formDiv {
 		border-radius: 1px;
 		background-color: #F7F7F7;
-		width:  28rem;
+		width:  62rem;
 		height: 22rem;
-		margin: 6.25rem   auto;
 		
 	}
 	.headForm{
 		background-color: #FFF;
-		width:  28rem;
+		width:  62rem;
 		height: 3.75rem;
 		margin:0 auto;
 		border:0.0625rem none #695D69 ;
@@ -159,10 +188,6 @@ export default{
 		margin-top: 0.125rem;
 		background-color: #FFF;
 		margin-bottom: 0.125rem;
-	}
-	.bottomForm{
-		height: 5rem;
-		text-align: center;
 	}
 	.sumbitButton{
 		background-color: #169bd5 !important;
@@ -179,9 +204,17 @@ export default{
 	.vipButton{
 		border: 0.0625rem #02a7f0 solid;
 		color: #02a7f0;
-		margin-right: -10rem;
+		margin: 0 1rem;
 		border-radius:0.125rem !important;
+		width: 5rem;
+
 	}
+	
+	.loginButton{
+		background-color: #169bd5 !important;
+		color: #fff;
+	}
+	
 	
 	.logoDiv{
 		margin-left: 1rem;
