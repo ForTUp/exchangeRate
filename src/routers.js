@@ -1,5 +1,8 @@
-import Index from './pages/index/index.vue'
 import Vue from 'vue'
+import Index from './pages/index/index.vue'
+import Login from './pages/login/login.vue'
+import RetrievePwd from './pages/login/retrievePwd.vue'
+import VipApply from './pages/login/vipApply.vue'
 
 const routers = [
 	{
@@ -8,8 +11,23 @@ const routers = [
 	},
 	{
 		path: '/index',
-		name:'Index',
+		name:'index',
 		component:Index,
+	},
+	{
+		path: '/login',
+		name: 'login',
+		component:Login
+	},
+	{
+		path:'/retrievePwd',
+		name:'retrievePwd',
+		component:RetrievePwd
+	},
+	{
+		path:'/vipApply',
+		name:'vipApply',
+		component:VipApply
 	}
 ]
 
