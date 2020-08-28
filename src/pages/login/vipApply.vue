@@ -2,57 +2,360 @@
 		<div id="vipApply">
 			<el-container>
 				<el-header>
-					<el-row :gutter="20">
-					<el-col :span="16">
-						<div class="grid-content bg-purple ">
-							<div class="logoDiv">
-								<el-link :underline="false">会员申请</el-link>
+					<el-row >
+						<el-col :span="20">
+							<div class="grid-content bg-purple ">
+								<div class="logoDiv">
+									<el-link :underline="false">会员申请</el-link>
+								</div>
 							</div>
-						</div>
-					</el-col>
-					  <el-col :span="8">
+						</el-col>
+						  <el-col :span="4">
 						<div class="grid-content bg-purple">
 							<el-button  class="loginButton " @click="loadLogin">登录</el-button>
 						</div>
 					  </el-col>
 					</el-row>
-					
 				</el-header>
 				<el-main>
 					<div class="formDiv">
-						<div class="headForm">
-							<span class="spanMsg">找回密码</span>
-						</div>
-						<div class="bodyForm">
-							<el-form ref="form" :model="form" label-width="28rem">
-								<el-form-item >
-								</el-form-item>
-							  <el-form-item label="账号/User ID：">
-									<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
-							  </el-form-item>
-							  <el-form-item label="手机号码/Phone Number：">
-									<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
-							  </el-form-item>
-							  <el-form-item label="证件类型/ID Type：">
-									 <el-select v-model="form.idcord" placeholder="请选择">
-									    <el-option
-									      v-for="item in options"
-									      :key="item.value"
-									      :label="item.label"
-									      :value="item.value">
-									    </el-option>
-									  </el-select>
-							  </el-form-item>
-							  <el-form-item label="证件号码/ID Number：">
-							  		<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
-							  </el-form-item>
-							  <el-form-item>
-								<el-button class="sumbitButton" @click="onSubmit">立即找回</el-button>
-							  </el-form-item>
-							  <el-form-item >
-							  </el-form-item>
-							</el-form>
-						</div>
+						<el-form ref="form" :model="form" label-width="19rem">
+							<div class="bodyForm">
+								<div class="headForm">
+									<span class="spanMsg">客户资料 | Customer detail</span>
+								</div>
+								<el-row></el-row>
+								<el-row  :gutter="24">
+									<el-col :span="6">
+										<el-form-item class="labelName" label="账号/User ID：" >
+											<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="手机号码/Phone Number："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+											<div class="formRadio">
+											<el-radio v-model="form.radio" label="1">男</el-radio>
+											<el-radio v-model="form.radio" label="2">女</el-radio>
+											</div>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件号码/ID Number："  class="labelName"> 
+												<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
+										</el-form-item>
+									</el-col>
+									
+								</el-row>
+								<el-row :gutter="24">
+									<el-col :span="6">
+										<el-form-item class="labelName" label="账号/User ID：" >
+											<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="手机号码/Phone Number："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+											<el-option
+											  v-for="item in options"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+											</el-option>
+										  </el-select>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row  :gutter="24">
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+											<el-option
+											  v-for="item in idcord"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+											</el-option>
+										  </el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<div class="formSpan">-</div>
+										<el-form-item label="手机号码/Phone Number："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+											<el-option
+											  v-for="item in idcord"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+											</el-option>
+										  </el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<div class="formSpan">-</div>
+										<el-form-item label="证件号码/ID Number："  class="labelName"> 
+											<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row  :gutter="24">
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+											<el-option
+											  v-for="item in idcord"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+											</el-option>
+										  </el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<div class="formSpan">-</div>
+										<el-form-item label="手机号码/Phone Number："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+											<el-option
+											  v-for="item in idcord"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+											</el-option>
+										  </el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<div class="formSpan">-</div>
+										<el-form-item label="证件号码/ID Number："  class="labelName"> 
+											<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row  :gutter="18">
+									<el-col :span="12">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" class="formAddr"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6" :push="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<!-- <el-row>
+									<el-col :span="24">
+										<el-form-item>
+											<el-button class="sumbitButton" @click="onSubmit">立即找回</el-button>
+										</el-form-item>
+									</el-col>
+								</el-row> -->
+							</div>
+							<div class="bodyForm bodyFormNext">
+								<div class="headForm">
+									<span class="spanMsg">客户证件 | Customer identification（1）</span>
+								</div>
+								<el-row  :gutter="24"></el-row>
+								<el-row  :gutter="24">
+									<el-col :span="6">
+										<el-form-item class="labelName" label="账号/User ID：" >
+											<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="手机号码/Phone Number："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+											<div class="formRadio">
+											<el-radio v-model="form.radio" label="1">男</el-radio>
+											<el-radio v-model="form.radio" label="2">女</el-radio>
+											</div>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件号码/ID Number："  class="labelName"> 
+												<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
+										</el-form-item>
+									</el-col>
+									
+								</el-row>
+								<el-row  :gutter="24">
+									<el-col :span="6">
+										<el-form-item class="labelName" label="账号/User ID：" >
+											<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="手机号码/Phone Number："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+											<el-option
+											  v-for="item in options"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+											</el-option>
+										  </el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+									</el-col>
+								</el-row>
+								<el-row  :gutter="24">
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+											<el-option
+											  v-for="item in idcord"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+											</el-option>
+										  </el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<div class="formSpan">-</div>
+										<el-form-item label="手机号码/Phone Number："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+											<el-option
+											  v-for="item in idcord"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+											</el-option>
+										  </el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<div class="formSpan">-</div>
+										<el-form-item label="证件号码/ID Number："  class="labelName"> 
+											<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+							</div>
+							
+							<div class="bodyForm bodyFormNext">
+								<div class="headForm">
+									<span class="spanMsg">客户证件 | Customer identification（2）</span>
+								</div>
+								<el-row  :gutter="24"></el-row>
+								<el-row  :gutter="24">
+									<el-col :span="6">
+										<el-form-item label="证件类型/ID Type："  class="labelName">
+										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+											<el-option
+											  v-for="item in idcord"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+											</el-option>
+										  </el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="手机号码/Phone Number："  class="labelName">
+											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件有效期/Date of expiration："  class="labelName">
+										 <el-date-picker
+										       v-model="form.expirationDate"
+										       type="date"
+										       placeholder="选择日期">
+										 </el-date-picker>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6">
+										<el-form-item label="证件号码/ID Number："  class="labelName"> 
+											<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row  :gutter="18">
+									<el-col :span="6">
+										<el-form-item label="*护照照片/Passport Photo："  class="labelName">
+											<el-upload 
+											  class="avatar-uploader "
+											  action="https://jsonplaceholder.typicode.com/posts/"
+											  :show-file-list="false"
+											  :on-success="handleAvatarSuccess"
+											  :before-upload="beforeAvatarUpload">
+											  
+											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											</el-upload>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6" class="imgUpload">
+										<el-form-item label=""  class="labelName">
+											<el-upload 
+											  class="avatar-uploader "
+											  action="https://jsonplaceholder.typicode.com/posts/"
+											  :show-file-list="false"
+											  :on-success="handleAvatarSuccess"
+											  :before-upload="beforeAvatarUpload">
+											  
+											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											</el-upload>
+											</el-form-item>
+									</el-col>
+									<el-col :span="6" class="imgUpload">
+										<el-form-item label=""  class="labelName">
+											<el-upload 
+											  class="avatar-uploader "
+											  action="https://jsonplaceholder.typicode.com/posts/"
+											  :show-file-list="false"
+											  :on-success="handleAvatarSuccess"
+											  :before-upload="beforeAvatarUpload">
+											  
+											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											</el-upload>
+											</el-form-item>
+									</el-col>
+									
+								</el-row>
+							</div>
+						</el-form>
 					</div>
 					
 				</el-main>
@@ -69,9 +372,13 @@ export default{
 				username: '',
 				password: '',
 				idcord:'',
-				number:''
+				number:'',
+				radio: '1',
+				expirationDate:'',
+				imageUrl:''
 			},
-			options: [{
+			options: [
+				{
 				  value: '选项1',
 				  label: '黄金糕'
 				}, {
@@ -87,6 +394,21 @@ export default{
 				  value: '选项5',
 				  label: '北京烤鸭'
 			}],
+			idcord: [
+				{
+				  value: '选项1',
+				  label: 'Driver‘s license'
+				}, {
+				  value: '选项2',
+				  label: 'Photo ID'
+				}, {
+				  value: '选项3',
+				  label: 'Identity card'
+				}, {
+				  value: '选项4',
+				  label: 'Credit / debit card',
+				},
+			],
 		}
 		
 	},
@@ -97,86 +419,51 @@ export default{
 		loadLogin(){
 			this.$router.push('/login');
 		},
-		
+		handleAvatarSuccess(res, file) {
+			this.imageUrl = URL.createObjectURL(file.raw);
+		},
+		beforeAvatarUpload(file) {
+			const isJPG = file.type === 'image/jpeg';
+			const isLt2M = file.size / 1024 / 1024 < 2;
+
+			if (!isJPG) {
+				this.$message.error('上传头像图片只能是 JPG 格式!');
+			}
+			if (!isLt2M) {
+				this.$message.error('上传头像图片大小不能超过 2MB!');
+			}
+				return isJPG && isLt2M;
+		}
 		
 	}
 }	
 </script>
 
-<style scoped>
-	body{
-		width: 62.5rem;
-		margin: 0 auto !important;
-		border: 0.0625rem solid #F7F7F7;
-		font-family: 'ArialMT', 'Arial', sans-serif;
-		border-radius:0rem;
+<style scoped lang="scss">
+	body > .el-container {
+		width: 82rem;
 	}
 	.el-header, .el-footer {
-		color: #333;
-		text-align: center;
-		line-height: 3.75rem;
-		width: 62.5rem;
+		width: 82rem;
 	}
 	.el-main {
-		 width: 62.5rem;
-		 background-color: #F7F7F7;
-		 color: #333;
-		 text-align: center;
-		 height: 45rem !important;
-	}
-	body > .el-container {
-		width: 62.5rem;
-		
-	}
-
-	.el-container:nth-child(5) .el-aside,
-	.el-container:nth-child(6) .el-aside {
-		line-height: 16.25rem;
-	}
-
-	.el-container:nth-child(7) .el-aside {
-		line-height: 20rem;
-	}
-	.el-carousel__item h3 {
-		color: #475669;
-		font-size: 14px;
-		opacity: 0.75;
-		line-height: 18.75rem;
-		margin: 0;
+		width: 82rem;
 	}
 	
-	.el-form-item__label{
-		margin-left:2rem;
-		text-align: left;
-		float:left;
-		font-weight: 600;
-		font-size: 0.75rem;
-	}
-	.el-form-item__content{
-		margin-left: 2.5rem !important;
-		font-size: 0.75rem;
-		
-	}
-	.el-input{
-		width: 25rem;
-		margin-left: -2rem !important;
-	}
-	.el-input__inner{
-		border-radius:0.125rem !important;
-	}
 	.formDiv {
 		border-radius: 1px;
 		background-color: #F7F7F7;
-		width:  62rem;
-		height: 22rem;
+		width:  78rem;
+		height: 50rem;
+		margin: 1rem  auto ;
 		
 	}
 	.headForm{
 		background-color: #FFF;
-		width:  62rem;
+		width:  78rem;
 		height: 3.75rem;
 		margin:0 auto;
-		border:0.0625rem none #695D69 ;
+		border:0.0625rem solid #e9e9e9 ;
 		text-align:left;
 		line-height: 3.75rem;
 	}
@@ -189,36 +476,61 @@ export default{
 		background-color: #FFF;
 		margin-bottom: 0.125rem;
 	}
-	.sumbitButton{
-		background-color: #169bd5 !important;
-		width: 25rem !important;
-		margin-left: -2rem;
-		color: #fff;
-		border-radius:0.125rem !important;
-		
-	}
-	
-	.sumbitButton:hover{
-		color:#fff ;
-	}
-	.vipButton{
-		border: 0.0625rem #02a7f0 solid;
-		color: #02a7f0;
-		margin: 0 1rem;
-		border-radius:0.125rem !important;
-		width: 5rem;
-
+	.bodyFormNext{
+		margin-top:1rem;
 	}
 	
 	.loginButton{
 		background-color: #169bd5 !important;
 		color: #fff;
+		margin-right: -85rem;
+	}
+	.loginButton span{
+		text-align: center;
+		margin-left: 0rem;
+	}
+	
+	.loginButton:hover{
+		color:#fff ;
+	}
+	.el-input{
+		width: 18rem;
+		margin-left: -1rem;
+	}
+	.formAddr{
+		width: 37.5rem;
+	}
+	.el-input__inner{
+		width: 18rem !important;
+	}
+	
+	.el-select {
+		width: 18rem !important;
+		margin-left: -1rem;
+	}
+	.labelName  {
+		font-size: 0.5rem !important;
+		margin-left: -1rem;
+	}
+	.el-col {
+		width: 19.5rem;
+		
+	}
+	.formRadio{
+		margin-left: -12rem;
+	}
+	.formSpan {
+		position: absolute;
+		top:3rem;
+		color: #AAAAAA;
+		width: 2rem;
+		height: 3rem;
+		margin-left: -1.25rem;
 	}
 	
 	
-	.logoDiv{
-		margin-left: 1rem;
-		height: 3.75rem;
-		width: 3.75rem;
+	.imgUpload {
+		margin-left: 6rem;
+		margin-top: 2.5rem;
 	}
 </style>

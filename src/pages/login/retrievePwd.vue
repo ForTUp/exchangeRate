@@ -74,20 +74,18 @@ export default{
 			},
 			options: [{
 				  value: '选项1',
-				  label: '黄金糕'
+				  label: 'Driver‘s license'
 				}, {
 				  value: '选项2',
-				  label: '双皮奶'
+				  label: 'Photo ID'
 				}, {
 				  value: '选项3',
-				  label: '蚵仔煎'
+				  label: 'Identity card'
 				}, {
 				  value: '选项4',
-				  label: '龙须面'
-				}, {
-				  value: '选项5',
-				  label: '北京烤鸭'
-			}],
+				  label: 'Credit / debit card',
+				},
+			],
 		}
 		
 	},
@@ -106,114 +104,30 @@ export default{
 }	
 </script>
 
-<style scoped>
-	body{
-		width: 62.5rem;
-		margin: 0 auto;
-		border: 0.0625rem solid #F7F7F7;
-		font-family: 'ArialMT', 'Arial', sans-serif;
-		border-radius:0rem;
-	}
-	.el-header, .el-footer {
-		color: #333;
-		text-align: center;
-		line-height: 3.75rem;
-		width: 62.5rem;
-	}
-	.el-main {
-		 width: 62.5rem;
-		 background-color: #F7F7F7;
-		 color: #333;
-		 text-align: center;
-		 height: 45rem !important;
-	}
-	body > .el-container {
-		width: 62.5rem;
-		
-	}
-
-	.el-container:nth-child(5) .el-aside,
-	.el-container:nth-child(6) .el-aside {
-		line-height: 16.25rem;
-	}
-
-	.el-container:nth-child(7) .el-aside {
-		line-height: 20rem;
-	}
-	.el-carousel__item h3 {
-		color: #475669;
-		font-size: 14px;
-		opacity: 0.75;
-		line-height: 18.75rem;
-		margin: 0;
-	}
-	
-	.el-form-item__label{
-		margin-left:2rem;
-		text-align: left;
-		float:left;
-		font-weight: 600;
-		font-size: 0.75rem;
-	}
-	.el-form-item__content{
-		margin-left: 2.5rem !important;
-		font-size: 0.75rem;
-		
-	}
-	.el-input{
-		width: 25rem;
-		margin-left: -2rem !important;
-	}
-	.el-input__inner{
-		border-radius:0.125rem !important;
-	}
-	.formDiv {
-		border-radius: 1px;
-		background-color: #F7F7F7;
-		width:  28rem;
-		height: 22rem;
-		margin: 6.25rem   auto;
-		
-	}
-	.headForm{
-		background-color: #FFF;
-		width:  28rem;
-		height: 3.75rem;
-		margin:0 auto;
-		border:0.0625rem none #695D69 ;
-		text-align:left;
-		line-height: 3.75rem;
-	}
-	.spanMsg{
-		margin-left: 0.5rem;
-		font-weight: 800;
-	}
-	.bodyForm{
-		margin-top: 0.125rem;
-		background-color: #FFF;
-		margin-bottom: 0.125rem;
-	}
-	.sumbitButton{
-		background-color: #169bd5 !important;
-		width: 25rem !important;
-		margin-left: -2rem;
-		color: #fff;
-		border-radius:0.125rem !important;
-		
-	}
-	
-	.sumbitButton:hover{
-		color:#fff ;
-	}
+<style scoped lang="scss">
 	.vipButton{
 		border: 0.0625rem #02a7f0 solid;
 		color: #02a7f0;
 		margin: 0 1rem;
 		border-radius:0.125rem !important;
 		width: 5rem;
+		padding: 0.75rem 0.625rem;
 
 	}
-	.vipButton > span{
+	.el-input{
+		width: 25rem;
+		margin-left: -2rem !important;
+		
+	}
+	.el-input__inner{
+		border-radius:0.125rem !important;
+		text-align: center;
+	}
+	.el-select {
+		width: 25rem !important;
+		margin-left: -2rem !important;
+	}
+	.vipButton span{
 		text-align: center;
 		margin-left: -0.6rem;
 	}
@@ -222,7 +136,7 @@ export default{
 		background-color: #169bd5 !important;
 		color: #fff;
 	}
-	.loginButton > span{
+	.loginButton span{
 		text-align: center;
 		margin-left: 0rem;
 	}
@@ -231,9 +145,4 @@ export default{
 		color:#fff ;
 	}
 	
-	.logoDiv{
-		margin-left: 1rem;
-		height: 3.75rem;
-		width: 3.75rem;
-	}
 </style>
