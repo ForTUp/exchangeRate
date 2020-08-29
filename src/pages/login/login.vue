@@ -6,7 +6,10 @@
 					<el-col :span="18">
 						<div class="grid-content bg-purple ">
 							<div class="logoDiv">
-								<el-link :underline="false">登录</el-link>
+								<el-image class="topImage"
+								      :src="imageUrl"
+								      :fit="fit"></el-image>
+								<el-link :underline="false" class="topLink">登录</el-link>
 							</div>
 						</div>
 					</el-col>
@@ -52,11 +55,12 @@
 export default{
 	name:"login",
 	data() {
-	return {
-		form: {
-			username: '',
-			password: '',
-			}
+		return {
+			form: {
+				username: '',
+				password: '',
+			},
+			imageUrl:require('../../static/image/u95.png'),
 		}
 	},
 	methods: {

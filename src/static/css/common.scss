@@ -12,6 +12,7 @@ body{
 	width: 62.5rem;
 	margin: 0 auto !important;
 	border: 0.0625rem solid #F7F7F7;
+	height: 5rem !important;
 }
 .el-main {
 	 width: 62.5rem;
@@ -137,4 +138,17 @@ body > .el-container {
 	width: 24rem;
 	height: 12rem;
 	display: block;
+}
+
+.topImage{
+	width: 7.5rem;
+	height:2.5rem;
+	margin-top: 1rem;
+}
+.topLink{
+	width: 10rem;
+	height: 2rem;
+	position: absolute;
+	top:1.5rem;
+	left:8rem;
 }

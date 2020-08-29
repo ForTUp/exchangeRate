@@ -6,7 +6,10 @@
 					<el-col :span="16">
 						<div class="grid-content bg-purple ">
 							<div class="logoDiv">
-								<el-link :underline="false" >找回密码</el-link>
+								<el-image class="topImage"
+								      :src="imageUrl"
+								      :fit="fit"></el-image>
+								<el-link :underline="false" class="topLink">找回密码</el-link>
 							</div>
 						</div>
 					</el-col>
@@ -86,6 +89,7 @@ export default{
 				  label: 'Credit / debit card',
 				},
 			],
+			imageUrl:require('../../static/image/u95.png'),
 		}
 		
 	},

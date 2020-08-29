@@ -6,7 +6,10 @@
 						<el-col :span="20">
 							<div class="grid-content bg-purple ">
 								<div class="logoDiv">
-									<el-link :underline="false">会员申请</el-link>
+									<el-image class="topImage"
+									      :src="imageUrl"
+									      :fit="fit"></el-image>
+									<el-link :underline="false" class="topLink">会员申请</el-link>
 								</div>
 							</div>
 						</el-col>
@@ -419,6 +422,7 @@ export default{
 				  label: 'Credit / debit card',
 				},
 			],
+			imageUrl:require('../../static/image/u95.png'),
 		}
 		
 	},
@@ -494,6 +498,7 @@ export default{
 	}
 	.el-header, .el-footer {
 		width: 82rem;
+		
 	}
 	.el-main {
 		width: 82rem;
@@ -618,4 +623,6 @@ export default{
 		background-color: #169bd5 !important;
 		color: #fff;
 	}
+	
+	
 </style>
