@@ -178,58 +178,6 @@
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
-										<el-form-item class="labelName" label="账号/User ID：" >
-											<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
-										</el-form-item>
-									</el-col>
-									<el-col :span="6">
-										<el-form-item label="手机号码/Phone Number："  class="labelName">
-											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
-										</el-form-item>
-									</el-col>
-									<el-col :span="6">
-										<el-form-item label="证件类型/ID Type："  class="labelName">
-											<div class="formRadio">
-											<el-radio v-model="form.radio" label="1">男</el-radio>
-											<el-radio v-model="form.radio" label="2">女</el-radio>
-											</div>
-										</el-form-item>
-									</el-col>
-									<el-col :span="6">
-										<el-form-item label="证件号码/ID Number："  class="labelName"> 
-												<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
-										</el-form-item>
-									</el-col>
-									
-								</el-row>
-								<el-row  :gutter="24">
-									<el-col :span="6">
-										<el-form-item class="labelName" label="账号/User ID：" >
-											<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
-										</el-form-item>
-									</el-col>
-									<el-col :span="6">
-										<el-form-item label="手机号码/Phone Number："  class="labelName">
-											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
-										</el-form-item>
-									</el-col>
-									<el-col :span="6">
-										<el-form-item label="证件类型/ID Type："  class="labelName">
-										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
-											<el-option
-											  v-for="item in options"
-											  :key="item.value"
-											  :label="item.label"
-											  :value="item.value">
-											</el-option>
-										  </el-select>
-										</el-form-item>
-									</el-col>
-									<el-col :span="6">
-									</el-col>
-								</el-row>
-								<el-row  :gutter="24">
-									<el-col :span="6">
 										<el-form-item label="证件类型/ID Type："  class="labelName">
 										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
 											<el-option
@@ -265,6 +213,39 @@
 											<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
 										</el-form-item>
 									</el-col>
+								</el-row>
+								<el-row  :gutter="18">
+									<el-col :span="6">
+										<el-form-item label="*护照照片/Passport Photo："  class="labelName">
+											<el-upload 
+											  class="avatar-uploader "
+											  action="https://jsonplaceholder.typicode.com/posts/"
+											  :show-file-list="false"
+											  :on-success="handleAvatarSuccess"
+											  :before-upload="beforeAvatarUpload">
+											  
+											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											</el-upload>
+										</el-form-item>
+									</el-col>
+									<el-col :span="6" class="imgUpload">
+										<el-form-item label=""  class="labelName">
+											<el-upload 
+											  class="avatar-uploader "
+											  action="https://jsonplaceholder.typicode.com/posts/"
+											  :show-file-list="false"
+											  :on-success="handleAvatarSuccess"
+											  :before-upload="beforeAvatarUpload">
+											  
+											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											</el-upload>
+											</el-form-item>
+									</el-col>
+									
 								</el-row>
 							</div>
 							
@@ -305,6 +286,7 @@
 											<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
 										</el-form-item>
 									</el-col>
+									
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="6">
@@ -355,6 +337,34 @@
 									
 								</el-row>
 							</div>
+							
+							<div class="bodyForm bodyFormNext esignFormDiv">
+								<div class="headForm">
+									<span class="spanMsg">客户签名 | Customer sign</span>
+								</div>
+								<vue-esign ref="esign"
+									   :isCrop="isCrop"
+									   :lineWidth="lineWidth"
+									   :lineColor="lineColor"
+									   :bgColor.sync="bgColor" 
+									   class="vueEsign"/>
+								<el-row  :gutter="24" class="esignBtn">
+									<el-col :span="6" :pull="12">
+										<div class="btn">
+											<el-button  class="vipButton" @click="handleReset">重置</el-button>
+											<el-button  class="loginButton vipButton" @click="handleGenerate">确定</el-button>
+										</div>
+									</el-col>
+								</el-row>	
+								<!-- <el-row :gutter="24"  class="esignBtn"></el-row> -->
+							</div>
+							<div class="checkDiv">
+								<el-checkbox v-model="checked">我已阅读并同意<span class="checkBtn">《隐私保护政策条款》</span>，并确认上述信息和提供的文件真实无误。</el-checkbox>
+							</div>
+							<div class="formSubmitBtn">
+								<el-button  class="submitBtn" >提交</el-button>
+							</div>
+							
 						</el-form>
 					</div>
 					
@@ -433,7 +443,46 @@ export default{
 				this.$message.error('上传头像图片大小不能超过 2MB!');
 			}
 				return isJPG && isLt2M;
-		}
+		},
+		handleReset () { // 清除
+		  this.$refs.esign.reset()
+		},
+		handleGenerate () { // 获取base64
+		  var _this = this
+		  _this.$refs.esign.generate().then(res => {
+			// 转成文件
+			var blob = _this.dataURLtoBlob(res)
+			var tofile = _this.blobToFile(blob, '签名.jpg')
+			console.log(tofile)
+			setTimeout(async () => {
+			  const formData = new FormData()
+			  formData.append('file', tofile, tofile.name)
+			  formData.append('fileType', 9)
+			  // ajax 请求
+			})
+		  }).catch(err => {
+			_this.$toast(err) // 画布没有签字时会执行这里 'Not Signned'
+		  })
+		},
+		// 将base64转换为blob
+		dataURLtoBlob (dataurl) {
+		  var arr = dataurl.split(',')
+		  var mime = arr[0].match(/:(.*?);/)[1]
+		  var bstr = atob(arr[1])
+		  var n = bstr.length
+		  var u8arr = new Uint8Array(n)
+		  while (n--) {
+			u8arr[n] = bstr.charCodeAt(n)
+		  }
+		  return new Blob([u8arr], { type: mime })
+		},
+		// 将blob转换为file
+		blobToFile (theBlob, fileName) {
+		  theBlob.lastModifiedDate = new Date()
+		  theBlob.name = fileName
+		  return theBlob
+		},
+		
 		
 	}
 }	
@@ -454,7 +503,7 @@ export default{
 		border-radius: 1px;
 		background-color: #F7F7F7;
 		width:  78rem;
-		height: 50rem;
+		height: 135rem !important;
 		margin: 1rem  auto ;
 		
 	}
@@ -532,5 +581,41 @@ export default{
 	.imgUpload {
 		margin-left: 6rem;
 		margin-top: 2.5rem;
+	}
+	.vueEsign{
+		border: 0.0625rem solid #F7F7F7;
+		width: 30rem !important;
+		height: 20rem !important;
+		background-color: #F7F7F7 !important;
+		margin-left: 1rem;
+		margin-top: 1rem;
+	}
+	.esignBtn{
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+	.esignFormDiv{
+		padding-bottom: 0.5rem;
+	}
+	.checkBtn{
+		color:  #02A7F0;
+	}
+	.checkDiv{
+		margin-top: 1.5rem;
+		margin-bottom: 1rem;
+		margin-left: 0;
+		text-align: left;
+		font-family: PingFangSC-Regular, "PingFang SC", sans-serif;
+		font-size: 14px;
+	}
+	.formSubmitBtn{
+		float: left;
+		margin-top: 1rem;
+		margin-left: 68rem;
+	}
+	.submitBtn{
+		width: 10rem;
+		background-color: #169bd5 !important;
+		color: #fff;
 	}
 </style>

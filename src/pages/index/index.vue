@@ -13,8 +13,8 @@
 				</el-col>
 				  <el-col :span="8">
 					<div class="grid-content bg-purple">
-						<el-button>默认按钮</el-button>
-						<el-button type="primary">主要按钮</el-button>
+						<el-button  class="vipButton" @click="vipApply">会员申请</el-button>
+						<el-button  class="loginButton vipButton" @click="loadLogin">登录</el-button>s
 					</div>
 				  </el-col>
 				</el-row>
@@ -63,7 +63,13 @@ export default {
 	    setSize: function() {
 	      // 通过浏览器宽度(图片宽度)计算高度
 	      this.bannerHeight = (400 / 1920) * this.screenWidth;
-	    }
+	    },
+		loadLogin(){
+			this.$router.push('/login');
+		},
+		vipApply(){
+			this.$router.push('/vipApply');
+		}
 	  },
 	  mounted() {
 	    // 首次加载时,需要调用一次

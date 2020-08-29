@@ -7,14 +7,16 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import routers from './routers'
 import "@/static/css/common.scss";
+import vueEsign from 'vue-esign'
 
 //Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.prototype.$axios = axios;		//$axios：在需要axios的vue文件中引用axios的别名，比如this.$axios.post()...
 									//如果写成Vue.prototype.$http = axios,那么要改成this.$http.post()...
 Vue.prototype.qs = Qs;	
-//使用路由1
-Vue.use(VueRouter)			
+
+Vue.use(VueRouter)	;	 //使用路由1
+Vue.use(vueEsign) ; //vue 使用 canvas 实现手写电子签名功能
 const router = new VueRouter({
 	mode: 'history',
 	routes: routers
