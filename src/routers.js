@@ -3,6 +3,7 @@ import Index from './pages/index/index.vue'
 import Login from './pages/login/login.vue'
 import RetrievePwd from './pages/login/retrievePwd.vue'
 import VipApply from './pages/login/vipApply.vue'
+import Workbench from './pages/workbench/workbench.vue'
 
 const routers = [
 	{
@@ -28,6 +29,11 @@ const routers = [
 		path:'/vipApply',
 		name:'vipApply',
 		component:VipApply
+	},
+	{
+		path:'/workbench',
+		name:'workbench',
+		component:Workbench
 	}
 ]
 
