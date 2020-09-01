@@ -31,7 +31,7 @@
 								<el-form-item >
 								</el-form-item>
 							  <el-form-item label="账号/User ID：">
-									<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
+									<el-input v-model="form.account" placeholder="请输入ID" ></el-input>
 							  </el-form-item>
 							  <el-form-item label="密码/Password：">
 									<el-input v-model="form.password" placeholder="请输入密码" show-password></el-input>
@@ -57,7 +57,7 @@ export default{
 	data() {
 		return {
 			form: {
-				username: '',
+				account: '',
 				password: '',
 			},
 			imageUrl:require('../../static/image/u95.png'),
@@ -65,7 +65,14 @@ export default{
 	},
 	methods: {
 		onSubmit() {
-			console.log(this.form);
+			let params = this.qs.stringify(this.form)
+			console.log(params);
+			this.$post('/api/user/login',params
+			).then((response) => {
+				console.log(response.data)
+			}).catch(function(err){
+				console.log(err)
+			})
 		},
 		vipApply(){
 			this.$router.push('/vipApply');
