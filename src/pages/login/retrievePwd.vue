@@ -96,6 +96,24 @@ export default{
 	methods: {
 		onSubmit() {
 			console.log(this.form);
+			let params = this.qs.stringify(this.form)
+			this.$post('/api/user/forgetpwd',params).then((response)=>{
+				console.log(response);
+				if(response.code>0){
+					that.$message({
+					  message: response.msg,
+					  type: 'success'
+					});
+					that.$router.push('/login');
+				}else{
+					this.$message({
+					  message: response.msg,
+					  type: 'warning'
+					});
+				}
+			}).catch((err)=>{
+				
+			})
 		},
 		loadLogin(){
 			this.$router.push('/login');

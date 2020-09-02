@@ -96,7 +96,7 @@ export default {
 					  message: response.msg,
 					  type: 'success'
 					});
-					that.$router.push('/');
+					that.$router.push('/login');
 				}else{
 					 this.$message({
 					  message: response.msg,
@@ -118,6 +118,11 @@ export default {
 	      this.screenWidth = window.innerWidth;
 	      this.setSize();
 	    };
+		this.$get('/api/category/getConfig?type=nationality').then((response)=>{
+			console.log(response)
+		}).catch((err)=>{
+			
+		})
 	  }
 }
 </script>
