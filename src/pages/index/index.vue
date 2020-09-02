@@ -13,8 +13,10 @@
 				</el-col>
 				  <el-col :span="8">
 					<div class="grid-content bg-purple">
-						<el-button  class="vipButton" @click="vipApply">会员申请</el-button>
-						<el-button  class="loginButton vipButton" @click="loadLogin">登录</el-button>s
+						<el-button  class="vipButton" @click="vipApply" v-if="username==null">会员申请</el-button>
+						<el-button  class="loginButton vipButton" @click="loadLogin" v-if="username==null">登录 </el-button>
+						<span v-if="username!=null">{{username}}</span>
+						<el-button  class="loginButton vipButton" @click="loginout" v-if="username!=null">退出登录</el-button>
 					</div>
 				  </el-col>
 				</el-row>
@@ -37,7 +39,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
+	computed:{...mapGetters(['token','id','username','nickname','mobile','avatar','score','userId','createtime','expiretime','expiresIn'])},
 	name:'index',
 	data() {
 	    return {
@@ -56,7 +60,7 @@ export default {
 	      // 图片父容器高度
 	      bannerHeight: 1000,
 	      // 浏览器宽度
-	      screenWidth: 0
+	      screenWidth: 0,
 	    };
 	  },
 	  methods: {
@@ -69,9 +73,43 @@ export default {
 		},
 		vipApply(){
 			this.$router.push('/vipApply');
+		},
+		loginout(){
+			let that = this;
+			this.$get('/api/user/logout').then((response) => {
+				console.log(response.data)
+				const {data} = response;
+				console.log(data)
+				if(response.code>0){
+					that.$store.commit("user/SET_USER_ID",null);
+					that.$store.commit("user/SET_TOKEN",null);
+					that.$store.commit("user/SET_USER_NAME",null);
+					that.$store.commit("user/SET_MOBILE",null);
+					that.$store.commit("user/SET_NICKNAME",null);
+					that.$store.commit("user/SET_AVATER",null);
+					that.$store.commit("user/SET_SCORE",null);
+					that.$store.commit("user/SET_REMIND_COUNT",null);
+					that.$store.commit("user/SET_CREATETIME",null);
+					that.$store.commit("user/SET_EXPIRETIME",null);
+					that.$store.commit("user/SET_EXPIRESIN",null);
+					that.$message({
+					  message: response.msg,
+					  type: 'success'
+					});
+					that.$router.push('/');
+				}else{
+					 this.$message({
+					  message: response.msg,
+					  type: 'warning'
+					});
+				}
+			}).catch(function(err){
+				console.log(err)
+			})
 		}
 	  },
 	  mounted() {
+		this.user_id = this.$store.state.user.userId;
 	    // 首次加载时,需要调用一次
 	    this.screenWidth = window.innerWidth;
 	    this.setSize();

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import VueAxios from 'vue-axios'
 import router from '../routers'
+import { getToken, setToken, removeToken } from '../utils/token.js'   //引入auth.js
 
 axios.defaults.timeout = 5000; //请求超时5秒
 //axios.defaults.baseURL ='http://hh.praymore.xyz/';  //请求base url
@@ -11,6 +12,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.interceptors.request.use(
   config => {
     let token = sessionStorage.getItem('token')
+	console.log('token'+getToken())
     if (token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
       config.headers = {
         'token': token
