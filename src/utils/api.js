@@ -20,30 +20,12 @@ export default {
 	},
 	
 	login:(data)=>{
-		return new Promise((resolve, reject) => {
-			post('/api/user/login',data).then((response)=>{
-				 resolve(response);
-			}).catch((err)=>{
-				 reject(err);
-			})
-		})
+		return post('/api/user/login',data)
 	},
 	logout:(data)=>{
-		return new Promise((resolve, reject) => {
-			get('/api/user/logout',data).then((response)=>{
-				 resolve(response);
-			}).catch((err)=>{
-				 reject(err);
-			})
-		})
+		return get('/api/user/logout',data)
 	},
 	forgetpwd:(data)=>{
-		return new Promise((resolve, reject) => {
-			post('/api/user/forgetpwd',data).then((response)=>{
-				 resolve(response);
-			}).catch((err)=>{
-				 reject(err);
-			})
-		})
+		return post('/api/user/forgetpwd',data)
 	},
 }

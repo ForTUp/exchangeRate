@@ -76,36 +76,43 @@ export default {
 		},
 		loginout(){
 			let that = this;
-			this.$api.logout().then((response) => {
-				console.log(response.data)
-				const {data} = response;
-				console.log(data)
-				if(response.code>0){
-					that.$store.commit("user/SET_USER_ID",'');
-					that.$store.commit("user/SET_TOKEN",'');
-					that.$store.commit("user/SET_USER_NAME",'');
-					that.$store.commit("user/SET_MOBILE",'');
-					that.$store.commit("user/SET_NICKNAME",'');
-					that.$store.commit("user/SET_AVATER",'');
-					that.$store.commit("user/SET_SCORE",'');
-					that.$store.commit("user/SET_REMIND_COUNT",'');
-					that.$store.commit("user/SET_CREATETIME",'');
-					that.$store.commit("user/SET_EXPIRETIME",'');
-					that.$store.commit("user/SET_EXPIRESIN",'');
-					that.$message({
-					  message: response.msg,
-					  type: 'success'
-					});
-					that.$router.push('/login');
-				}else{
-					 this.$message({
-					  message: response.msg,
-					  type: 'warning'
-					});
-				}
-			}).catch(function(err){
-				console.log(err)
-			})
+			this.$confirm('是否退出登录?', '提示', {
+			  confirmButtonText: '确定',
+			  cancelButtonText: '取消',
+			  type: 'warning'
+			}).then(() => {
+				this.$api.logout().then((response) => {
+					console.log(response.data)
+					const {data} = response;
+					console.log(data)
+					if(response.code>0){
+						that.$store.commit("user/SET_USER_ID",'');
+						that.$store.commit("user/SET_TOKEN",'');
+						that.$store.commit("user/SET_USER_NAME",'');
+						that.$store.commit("user/SET_MOBILE",'');
+						that.$store.commit("user/SET_NICKNAME",'');
+						that.$store.commit("user/SET_AVATER",'');
+						that.$store.commit("user/SET_SCORE",'');
+						that.$store.commit("user/SET_REMIND_COUNT",'');
+						that.$store.commit("user/SET_CREATETIME",'');
+						that.$store.commit("user/SET_EXPIRETIME",'');
+						that.$store.commit("user/SET_EXPIRESIN",'');
+						that.$message({
+						  message: response.msg,
+						  type: 'success'
+						});
+						that.$router.push('/login');
+					}else{
+						 this.$message({
+						  message: response.msg,
+						  type: 'warning'
+						});
+					}
+				}).catch(function(err){
+					console.log(err)
+				})
+			}).catch(() => {
+			});
 		}
 	  },
 	  mounted() {

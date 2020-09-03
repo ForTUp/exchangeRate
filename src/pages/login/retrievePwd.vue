@@ -82,7 +82,6 @@ export default{
 	},
 	methods: {
 		onSubmit() {
-			console.log(this.form);
 			let params = this.qs.stringify(this.form)
 			this.$api.forgetpwd(params).then((response)=>{
 				if(response.code>0){
