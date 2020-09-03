@@ -9,9 +9,12 @@ import "@/static/css/common.scss";
 import vueEsign from 'vue-esign'
 import store from "./store";
 import {post,get} from "./utils/http.js"
+import api from "./utils/api.js"
+
 //定义全局变量
 Vue.prototype.$post = post;
 Vue.prototype.$get = get;
+Vue.prototype.$api = api;
 //Vue.config.productionTip = false
 Vue.use(ElementUI);
 //Vue.prototype.$axios = axios;		//$axios：在需要axios的vue文件中引用axios的别名，比如this.$axios.post()...

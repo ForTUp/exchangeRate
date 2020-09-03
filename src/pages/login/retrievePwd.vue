@@ -40,7 +40,7 @@
 							  <el-form-item label="证件类型/ID Type：">
 									 <el-select v-model="form.idcord" placeholder="请选择">
 									    <el-option
-									      v-for="item in options"
+									      v-for="item in idtype"
 									      :key="item.value"
 									      :label="item.label"
 									      :value="item.value">
@@ -75,20 +75,7 @@ export default{
 				idcord:'',
 				number:''
 			},
-			options: [{
-				  value: '选项1',
-				  label: 'Driver‘s license'
-				}, {
-				  value: '选项2',
-				  label: 'Photo ID'
-				}, {
-				  value: '选项3',
-				  label: 'Identity card'
-				}, {
-				  value: '选项4',
-				  label: 'Credit / debit card',
-				},
-			],
+			idtype: [],
 			imageUrl:require('../../static/image/u95.png'),
 		}
 		
@@ -97,8 +84,7 @@ export default{
 		onSubmit() {
 			console.log(this.form);
 			let params = this.qs.stringify(this.form)
-			this.$post('/api/user/forgetpwd',params).then((response)=>{
-				console.log(response);
+			this.$api.forgetpwd(params).then((response)=>{
 				if(response.code>0){
 					that.$message({
 					  message: response.msg,
@@ -122,6 +108,11 @@ export default{
 			this.$router.push('/vipApply');
 		}
 		
+	},
+	mounted() {
+		this.$api.getConfig({type:'idtype'}).then((response)=>{
+			this.idtype = response
+		})
 	}
 }	
 </script>

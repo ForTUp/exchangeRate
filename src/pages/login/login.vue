@@ -70,11 +70,9 @@ export default{
 			let params = this.qs.stringify(this.form)
 			let that = this;
 			console.log(params);
-			this.$post('/api/user/login',params
-			).then((response) => {
+			this.$api.login(params).then((response) => {
 				console.log(response.data)
 				const {data} = response;
-				console.log(data)
 				if(response.code>0){
 					that.$store.commit("user/SET_USER_ID",data.userinfo.user_id);
 					that.$store.commit("user/SET_TOKEN",data.userinfo.token);

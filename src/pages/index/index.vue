@@ -13,10 +13,10 @@
 				</el-col>
 				  <el-col :span="8">
 					<div class="grid-content bg-purple">
-						<el-button  class="vipButton" @click="vipApply" v-if="username==null">会员申请</el-button>
-						<el-button  class="loginButton vipButton" @click="loadLogin" v-if="username==null">登录 </el-button>
-						<span v-if="username!=null">{{username}}</span>
-						<el-button  class="loginButton vipButton" @click="loginout" v-if="username!=null">退出登录</el-button>
+						<el-button  class="vipButton" @click="vipApply" v-if="username==''">会员申请</el-button>
+						<el-button  class="loginButton vipButton" @click="loadLogin" v-if="username==''">登录 </el-button>
+						<span v-if="username!=''">{{username}}</span>
+						<el-button  class="loginButton vipButton" @click="loginout" v-if="username!=''">退出登录</el-button>
 					</div>
 				  </el-col>
 				</el-row>
@@ -76,22 +76,22 @@ export default {
 		},
 		loginout(){
 			let that = this;
-			this.$get('/api/user/logout').then((response) => {
+			this.$api.logout().then((response) => {
 				console.log(response.data)
 				const {data} = response;
 				console.log(data)
 				if(response.code>0){
-					that.$store.commit("user/SET_USER_ID",null);
-					that.$store.commit("user/SET_TOKEN",null);
-					that.$store.commit("user/SET_USER_NAME",null);
-					that.$store.commit("user/SET_MOBILE",null);
-					that.$store.commit("user/SET_NICKNAME",null);
-					that.$store.commit("user/SET_AVATER",null);
-					that.$store.commit("user/SET_SCORE",null);
-					that.$store.commit("user/SET_REMIND_COUNT",null);
-					that.$store.commit("user/SET_CREATETIME",null);
-					that.$store.commit("user/SET_EXPIRETIME",null);
-					that.$store.commit("user/SET_EXPIRESIN",null);
+					that.$store.commit("user/SET_USER_ID",'');
+					that.$store.commit("user/SET_TOKEN",'');
+					that.$store.commit("user/SET_USER_NAME",'');
+					that.$store.commit("user/SET_MOBILE",'');
+					that.$store.commit("user/SET_NICKNAME",'');
+					that.$store.commit("user/SET_AVATER",'');
+					that.$store.commit("user/SET_SCORE",'');
+					that.$store.commit("user/SET_REMIND_COUNT",'');
+					that.$store.commit("user/SET_CREATETIME",'');
+					that.$store.commit("user/SET_EXPIRETIME",'');
+					that.$store.commit("user/SET_EXPIRESIN",'');
 					that.$message({
 					  message: response.msg,
 					  type: 'success'
@@ -118,18 +118,12 @@ export default {
 	      this.screenWidth = window.innerWidth;
 	      this.setSize();
 	    };
-		this.$get('/api/category/getConfig?type=nationality').then((response)=>{
-			console.log(response)
-		}).catch((err)=>{
-			
-		})
 	  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
- 
 	img {
 	  /*设置图片宽度和浏览器宽度一致*/
 	  width: 100%;
