@@ -15,7 +15,7 @@
 						</el-col>
 						  <el-col :span="4">
 						<div class="grid-content bg-purple">
-							<el-button  class="loginButton " @click="loadLogin">登录</el-button>
+							<el-button  class="loginButton loginButtonTop" @click="loadLogin">登录</el-button>
 						</div>
 					  </el-col>
 					</el-row>
@@ -219,9 +219,9 @@
 										<el-form-item label="*护照照片/Passport Photo："  class="labelName">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="https://jsonplaceholder.typicode.com/posts/"
+											  action="/api/common/upload"
 											  :show-file-list="false"
-											  :on-success="handleAvatarSuccess"
+											  :on-success="handleAvatarSuccess" 
 											  :before-upload="beforeAvatarUpload">
 											  
 											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
@@ -238,7 +238,6 @@
 											  :show-file-list="false"
 											  :on-success="handleAvatarSuccess"
 											  :before-upload="beforeAvatarUpload">
-											  
 											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -412,6 +411,13 @@ export default{
 			account:[],
 			source:[],
 			purpose:[],
+			lineWidth: 6,
+			lineColor: "#000000",
+			bgColor: "",
+			resultImg: "",
+			isCrop: false,
+			fit:'',
+			checked:''
 		}
 		
 	},
@@ -423,7 +429,8 @@ export default{
 			this.$router.push('/login');
 		},
 		handleAvatarSuccess(res, file) {
-			this.imageUrl = URL.createObjectURL(file.raw);
+			this.form.imageUrl = URL.createObjectURL(file.raw);
+			console.log(JSON.stringify(res))
 		},
 		beforeAvatarUpload(file) {
 			const isJPG = file.type === 'image/jpeg';
@@ -552,6 +559,9 @@ export default{
 		background-color: #169bd5 !important;
 		color: #fff;
 		margin-right: -85rem;
+	}
+	.loginButtonTop{
+		margin-right: -93rem;
 	}
 	.loginButton span{
 		text-align: center;

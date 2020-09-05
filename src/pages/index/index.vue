@@ -3,64 +3,193 @@
 		<el-container>
 			<el-header>
 				<el-row :gutter="20">
-				<el-col :span="16">
-					<div class="grid-content bg-purple">
-						<el-link type="primary" href="https://element.eleme.io" target="_blank">首页 </el-link>
-						<el-link >服务项目</el-link>
-						<el-link >实时汇率</el-link>
-						<el-link >联系我们</el-link>
+				<el-col :span="12" :push="4" class="headerCol">
+					<div class="grid-content bg-purple ">
+						<div class="logoDiv">
+							<el-image class="topImage"
+							      :src="imageUrl"
+							      :fit="fit"></el-image>
+						</div>
+						<div class="topLinkDiv topLinkDivFirst" >
+							<el-link :underline="false"  type="primary">首页</el-link>
+						</div>
+						<div class="topLinkDiv">
+							<el-link :underline="false" >为什么选择我们</el-link>
+						</div>
+						<div class="topLinkDiv">
+							<el-link :underline="false" >联系我们</el-link>
+						</div>
 					</div>
 				</el-col>
-				  <el-col :span="8">
-					<div class="grid-content bg-purple">
-						<el-button  class="vipButton" @click="vipApply" v-if="username==''">会员申请</el-button>
-						<el-button  class="loginButton vipButton" @click="loadLogin" v-if="username==''">登录 </el-button>
-						<span v-if="username!=''">{{username}}</span>
-						<el-button  class="loginButton vipButton" @click="loginout" v-if="username!=''">退出登录</el-button>
+				  <el-col :span="4" :push="4" class="headerColLast">
+					<div class="grid-content bg-purple loginout" v-if="userInfo!=null">
+						<span  class="userName">{{userInfo.username}}</span>
+						<el-button  class="loginButton loginoutButton" @click="loginout">退出登录</el-button>
+					</div>
+					<div v-if="userInfo==null" class="loginDiv">
+						<el-button type="primary" class="loginButton " @click="loadLogin"> 登录 </el-button>
+						<el-button  class="vipButton" @click="vipApply" >会员申请</el-button>
 					</div>
 				  </el-col>
 				</el-row>
-				
 			</el-header>
 			<el-main>
 				<div id="banner">
 				    <!--动态将图片轮播图的容器高度设置成与图片一致-->
-				    <el-carousel :height="bannerHeight + 'px'">
-				      <!--遍历图片地址,动态生成轮播图-->
-				      <el-carousel-item v-for="item in imgList" :key="item">
-				        <img :src="item" alt />
-				      </el-carousel-item>
-				    </el-carousel>
+					 <el-carousel class="lun_imgs" ref="carousel" @click.native="linkTo">
+					   <el-carousel-item class="lun_img" v-for="item in imgList" v-bind:key="item.url" >
+						 <img :src="item.url"/>
+					   </el-carousel-item>
+					 </el-carousel>
+				</div>
+				<!--货币兑换 -->
+				<div id="showCurrencyDiv" class="iocnDiv currency" @click="showCurrencyShow">
+					<i class="iconfont iconhuobiduihuan1"></i><br>
+					<span>货币兑换</span>
+				</div>
+				
+				<!--微信入口 -->
+				<div class="iocnDiv  weixin">
+					<i class="iconfont iconWeChat"></i><br>
+					<span>公众号</span>
+				</div>
+				
+				<!--中间件 -->
+				<div class="coreService">
+					<div class="coreHead">
+						<h1>三大核心服务项目</h1>
+					</div>
+					<div class="coreContent">
+						<div class="coreContentList coreContentListFirst">
+							<h1>双向汇款</h1>
+							<ul class="coreUl">
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>资金安全</span></li>
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>诚信可靠</span></li>
+							</ul>
+						</div>
+						<div class="coreContentList">
+							<h1>国际结算</h1>
+							<ul class="coreUl coreUlTe">
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>满足任何种类货币的兑换</span></li>
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>满足多种结算方式：现金，电汇，银行</span></li>
+							</ul>
+						</div>
+						<div class="coreContentList">
+							<h1>现金兑换</h1>
+							<ul class="coreUl">
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>无需手续费</span></li>
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>无金额限制</span></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="coreHead">
+						<h1>实时汇率</h1>
+					</div>
+					<div class="coreContent">
+						<div class="coreContentTable">
+							 <el-table
+							      :data="tableData"
+							      style="width: 100%">
+							      <el-table-column
+							        prop="currencyF_Name"
+							        label="Code"
+							        width="180">
+							      </el-table-column>
+							      <el-table-column
+							        prop="currencyT"
+							        label="Currency"
+							        width="180">
+							      </el-table-column>
+							      <el-table-column
+							        prop="exchange11"
+							        label="Cash buy">
+							      </el-table-column>
+								  <el-table-column
+								    prop="exchange12"
+								    label="Cash Sale">
+								  </el-table-column>
+								  <el-table-column
+								    prop="exchange21"
+								    label="Remittance buy">
+								  </el-table-column>
+								  <el-table-column
+								    prop="exchange21"
+								    label="Remittance Sale">
+								  </el-table-column>
+							</el-table>
+						</div>
+						<div class="block">
+						  <el-pagination
+							@current-change="handleCurrentChange"
+							:current-page.sync="offset"
+							:page-size="limit"
+						    layout="prev, pager, next"
+						    :total="total">
+						  </el-pagination>
+						</div>
+					</div>
+					
+					<div class="coreContent">
+							<h1>为什么选我们</h1>
+					</div>
+					<div class="coreContent">
+							<h1>联系我们</h1>
+					</div>
 				</div>
 			</el-main>
-			<el-footer>Footer</el-footer>
+			<el-footer>
+				<div class="buttom">
+					<span>&copy; 2020 Wenzhou Finance Group Ltd by 3A IT Solutions. All rights reserved.  Privacy</span>
+				</div>
+			</el-footer>
 		</el-container>
+		
+		<div style="display: none;" class="currencyShow" id="currencyShow">
+			<el-form ref="currencyForm" :model="currencyForm" label-width="80px">
+			  <el-form-item label="活动名称">
+			    <el-input v-model="currencyForm.name"></el-input>
+			  </el-form-item>
+			  <el-form-item>
+			    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+			    <el-button>取消</el-button>
+			  </el-form-item>
+			</el-form>
+		</div>
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 export default {
-	computed:{...mapGetters(['token','id','username','nickname','mobile','avatar','score','userId','createtime','expiretime','expiresIn'])},
+	computed:{...mapGetters(['userId','userInfo'])},
 	name:'index',
 	data() {
 	    return {
-	      // 图片地址数组
-	    imgList: [
-	       /* {
-	          url: require("")
-	        },
-	        {
-	          url: require("")
-	        },
-	        {
-	          url: require("")
-	        } */
-	      ],
-	      // 图片父容器高度
-	      bannerHeight: 1000,
-	      // 浏览器宽度
-	      screenWidth: 0,
+			imageUrl:require('../../static/image/u95.png'),
+			
+			  // 图片地址数组
+			imgList: [
+			    {
+				  url: require('../../static/image/banner1.png')
+				},
+				{
+				  url: require('../../static/image/u95.png')
+				},
+			  ],
+			  // 图片父容器高度
+			  bannerHeight: 1000,
+			  // 浏览器宽度
+			  screenWidth: 0,
+			  fit:'',
+			  tableData:[],
+			  offset:0,
+			  limit:8,
+			  total:0,
+			  currencyForm:{
+				  name:''
+			  }
+			  
 	    };
 	  },
 	  methods: {
@@ -86,17 +215,7 @@ export default {
 					const {data} = response;
 					console.log(data)
 					if(response.code>0){
-						that.$store.commit("user/SET_USER_ID",'');
-						that.$store.commit("user/SET_TOKEN",'');
-						that.$store.commit("user/SET_USER_NAME",'');
-						that.$store.commit("user/SET_MOBILE",'');
-						that.$store.commit("user/SET_NICKNAME",'');
-						that.$store.commit("user/SET_AVATER",'');
-						that.$store.commit("user/SET_SCORE",'');
-						that.$store.commit("user/SET_REMIND_COUNT",'');
-						that.$store.commit("user/SET_CREATETIME",'');
-						that.$store.commit("user/SET_EXPIRETIME",'');
-						that.$store.commit("user/SET_EXPIRESIN",'');
+						sessionStorage.clear()
 						that.$message({
 						  message: response.msg,
 						  type: 'success'
@@ -113,11 +232,52 @@ export default {
 				})
 			}).catch(() => {
 			});
+		},
+		handleCurrentChange(val){
+			this.offset=val;
+			this.$api.getExchangeList({offset:this.offset,limit:this.limit}).then((response) =>{
+				const {data} = response;
+				if(response.code==1){
+					this.tableData= [];
+					let array = new Array();
+					this.total=data.total;
+					for(let item in data.rows){
+						let map = new Map();
+						for(let key in data.rows[item]){
+							map.set(key,data.rows[item][key])
+						}
+						array.push(map);
+						console.log(map,'map')
+					}
+					console.log(array,'array')
+					
+					this.tableData.push(array);
+				}
+				console.log(this.tableData,'tabledata')
+			})
+			
+			
+			console.log(this.total,'total');
+		},
+		showCurrencyShow(){
+			this.$layer.open({
+				type: 1,
+				  shade: false,
+				  title: '货币兑换计算器', //不显示标题
+				  content: document.getElementById('currencyShow'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+				   shadeClose: true,
+					maxmin: true, //开启最大化最小化按钮
+					area: ['60rem', '40rem'],
+				  cancel: function(){
+				    layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', {time: 5000, icon:6});
+				  }
+			})
+		},
+		onSubmit(){
+			
 		}
 	  },
 	  mounted() {
-		this.user_id = this.$store.state.user.userId;
-	    // 首次加载时,需要调用一次
 	    this.screenWidth = window.innerWidth;
 	    this.setSize();
 	    // 窗口大小发生改变时,调用一次
@@ -125,6 +285,27 @@ export default {
 	      this.screenWidth = window.innerWidth;
 	      this.setSize();
 	    };
+		
+		this.$api.getExchangeList({offset:this.offset,limit:this.limit}).then((response) =>{
+			const {data} = response;
+			if(response.code==1){
+				this.tableData= [];
+				let array = new Array();
+				this.total=data.total;
+				for(let item in data.rows){
+					let map = new Map();
+					for(let key in data.rows[item]){
+						map.set(key,data.rows[item][key])
+					}
+					array.push(map);
+					console.log(map,'map')
+				}
+				console.log(array,'array')
+				
+				this.tableData.push(array);
+			}
+			console.log(this.tableData,'tabledata')
+		});
 	  }
 }
 </script>
@@ -135,5 +316,148 @@ export default {
 	  /*设置图片宽度和浏览器宽度一致*/
 	  width: 100%;
 	  height: inherit;
+	}
+	body > .el-container {
+		width: 100rem;
+		margin: 0 auto !important;
+		border: 0.0625rem solid #F7F7F7;
+		font-family: 'ArialMT', 'Arial', sans-serif;
+		border-radius:0rem;
+	}
+	
+	.el-header, .el-footer {
+		color: #333;
+		text-align: center;
+		line-height: 3.75rem;
+		width: 100rem;
+		margin: 0 auto !important;
+		border: 0.0625rem solid #F7F7F7;
+		height: 5rem !important;
+	}
+	.el-main {
+		 width: 100rem;
+		 background-color: #FFF;
+		 color: #333;
+		 text-align: center;
+		 margin: 0 auto !important;
+		 border: 0.0625rem solid #F7F7F7;
+		 padding: 0;
+	}
+	.topLinkDiv{
+		with:8rem;
+		height: 3.75rem;
+		float: left;
+		margin-left:2rem;
+		margin-top: -3rem;
+	}
+	.headerCol{
+		margin-left: -4rem !important;
+	}
+	.headerColLast{
+		margin-left: 8rem;
+	}
+	.topLinkDivFirst{
+		margin-left:12rem !important;
+	}
+	.userName{
+		margin-right: 2rem;
+		margin-left: 1rem;
+	}
+	
+	.vipButton{
+		border: 0.0625rem #02a7f0 solid;
+		color: #02a7f0;
+		margin-right: -10rem;
+		border-radius:0.125rem !important;
+	}
+	.coreService{
+		
+		border: 0.0625rem solid red;
+		height: 120rem;
+		width: 70rem;
+		margin: 0 auto;
+		margin-top: 2rem !important;
+	}
+	.coreHead{
+		margin: 0 auto;
+		height: 3rem;
+		width: 30rem;
+		border: 0.0625rem solid blue;
+		padding: 0;
+		
+	}
+	.coreContent{
+		height: 22rem;
+		border: 0.0625rem solid blue;
+		margin-top: 2rem;
+	}
+	.coreContentList{
+		height: 22rem;
+		width: 22rem;
+		border: 0.0625rem solid orange;
+		float: left;
+		margin-left: 1.73rem;
+		background-color: #fff;
+		text-align: center;
+		.coreUl{
+			li{
+				margin-top: 1rem;
+				text-align: center !important;
+				margin-left: -4rem;
+				span{
+					margin-left: 0.5rem;
+					font-size: 1rem !important;
+					
+				}
+			}
+		}
+		h1{
+			margin-top: 8rem;
+			font-size: 2rem !important;
+		}
+		.coreUlTe{
+			li{
+				text-align: left !important;
+				margin-left: 0rem;
+			}
+		}
+		
+	}
+
+	.coreContentListFirst{
+		margin-left:0rem !important;
+		
+	}
+	.el-footer{
+		 background-color: #F7F7F7;
+	}
+	.loginDiv{
+		margin-left: -7rem;
+	}
+	.loginout{
+		margin-left: 2rem;
+	}
+	.iocnDiv{
+		width: 3.2rem;
+		height: 3.2rem;
+		background-color: #fff;
+		border: 0.0625rem solid  #8F8F8F;
+		border-radius: 0.7rem 0rem 0rem 0.7rem;
+		position: absolute;
+		left: 107rem;
+		span{
+			font-size: 0.3rem !important;
+		}
+		i{
+			font-size: 1.6rem;
+		}
+		
+	}
+	
+	.currency{
+		top:25rem;
+	}
+	.weixin{
+		top:28.5rem;
 	}
 </style>

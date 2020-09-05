@@ -63,29 +63,18 @@ export default{
 				password: '',
 			},
 			imageUrl:require('../../static/image/u95.png'),
+			fit:'',
+			userInfo:{}
 		}
 	},
 	methods: {
 		onSubmit() {
 			let params = this.qs.stringify(this.form)
 			let that = this;
-			console.log(params);
+			localStorage.clear();
 			this.$api.login(params).then((response) => {
-				console.log(response.data)
 				const {data} = response;
 				if(response.code>0){
-					that.$store.commit("user/SET_USER_ID",data.userinfo.user_id);
-					that.$store.commit("user/SET_TOKEN",data.userinfo.token);
-					that.$store.commit("user/SET_USER_NAME",data.userinfo.username);
-					that.$store.commit("user/SET_MOBILE",data.userinfo.mobile);
-					that.$store.commit("user/SET_NICKNAME",data.userinfo.nickname);
-					that.$store.commit("user/SET_AVATER",data.userinfo.avatar);
-					that.$store.commit("user/SET_SCORE",data.userinfo.score);
-					that.$store.commit("user/SET_REMIND_COUNT",data.userinfo.remind_count);
-					that.$store.commit("user/SET_CREATETIME",data.userinfo.createtime);
-					that.$store.commit("user/SET_EXPIRETIME",data.userinfo.expiretime);
-					that.$store.commit("user/SET_EXPIRESIN",data.userinfo.expires_in);
-					setToken(data.userinfo.token);
 					that.$message({
 					  message: response.msg,
 					  type: 'success'
@@ -104,6 +93,9 @@ export default{
 		vipApply(){
 			this.$router.push('/vipApply');
 		}
+		
+	},
+	mounted() {
 		
 	}
 }	

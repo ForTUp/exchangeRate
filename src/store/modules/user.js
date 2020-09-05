@@ -1,58 +1,48 @@
 import http from '../../utils/http.js'
 import { getToken, setToken, removeToken } from '../../utils/token.js'   //引入auth.js
 
+
 const state = {
-  token: getToken() ,
-  id: '',
-  username: '',
-  nickname : '',
-  mobile:'',
-  avatar:'',
-  score:'',
-  userId: '',
-  createtime:'',
-  expiretime: '',
-  expiresIn:'',
+  token: sessionStorage.getItem('token'),
+  userInfo: JSON.parse(sessionStorage.getItem('userInfo')),
+  userId: sessionStorage.getItem('userId')
 }
 
 const mutations = {
-  SET_TOKEN: (state, token) => {
+  setToken: (state, token) => {
     state.token = token;
+	sessionStorage.setItem('token',token);
   },
-  SET_USER_ID: (state, userId) => {
-    state.userId = userId
+  setUserId: (state, userId) => {
+    state.userId = userId;
+	sessionStorage.setItem('userId',userId);
   },
-  SET_USER_NAME: (state, username) => {
-    state.username = username
+  setUserInfo: (state, userInfo) => {
+    state.userInfo = JSON.parse(userInfo);
+	sessionStorage.setItem('userInfo',JSON.stringify(userInfo));
   },
-  SET_MOBILE: (state, mobile) => {
-    state.mobile = mobile
-  },
-  SET_NICKNAME: (state, nickname) => {
-    state.nickname = nickname
-  },
-  SET_AVATER: (state, avatar) => {
-    state.avatar = avatar
-  },
-  SET_SCORE: (state, score) => {
-    state.score = score
-  },
-  SET_REMIND_COUNT: (state, remind_count) => {
-    state.remind_count = remind_count
-  },
-  SET_CREATETIME: (state, createtime) => {
-    state.createtime = createtime
-  },
-  SET_EXPIRETIME: (state, expiretime) => {
-    state.expiretime = expiretime
-  },
-  SET_EXPIRESIN: (state, expiresIn) => {
-    state.expiresIn = expiresIn
-  }
 }
+
+// const actions = {
+//   // 登录
+//   handleLogin({ commit }, { userName, password }) {
+//    commit('setUserId', userinfo.id)
+//    commit('setUserName', userinfo.username)
+//    commit('setToken', userinfo.token)
+//    commit('setEmail', userinfo.email)
+//   },
+//   // 退出登录
+//   handleLogOut() {
+//    sessionStorage.removeItem("id")
+//    sessionStorage.removeItem("username")
+//    sessionStorage.removeItem("token")
+//   }
+//  }
+
 
 export default {
 	namespaced:true,
 	state,
 	mutations,
+	// actions
 }

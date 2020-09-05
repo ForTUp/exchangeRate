@@ -4,6 +4,7 @@ body{
 		
 		font-family: 'ArialMT', 'Arial', sans-serif;
 		border-radius:0rem;
+		
 }
 .el-header, .el-footer {
 	color: #333;
@@ -151,4 +152,8 @@ body > .el-container {
 	position: absolute;
 	top:1.5rem;
 	left:8rem;
+}
+
+ul{
+	list-style:none;
 }

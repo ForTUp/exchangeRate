@@ -10,11 +10,18 @@ import vueEsign from 'vue-esign'
 import store from "./store";
 import {post,get} from "./utils/http.js"
 import api from "./utils/api.js"
+import { getToken, setToken, removeToken } from './utils/token.js'   //引入auth.js
+import './assets/icon/iconfont.css';
+import layer from 'vue-layer'
 
 //定义全局变量
 Vue.prototype.$post = post;
 Vue.prototype.$get = get;
 Vue.prototype.$api = api;
+Vue.prototype.$getToken = getToken;
+Vue.prototype.$setToken = setToken;
+Vue.prototype.$removeToken = removeToken;
+Vue.prototype.$layer = layer(Vue);
 //Vue.config.productionTip = false
 Vue.use(ElementUI);
 //Vue.prototype.$axios = axios;		//$axios：在需要axios的vue文件中引用axios的别名，比如this.$axios.post()...
