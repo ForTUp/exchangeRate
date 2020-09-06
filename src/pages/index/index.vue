@@ -43,7 +43,7 @@
 					 </el-carousel>
 				</div>
 				<!--货币兑换 -->
-				<div id="showCurrencyDiv" class="iocnDiv currency" @click="showCurrencyShow">
+				<div id="showCurrencyDiv" class="iocnDiv currency" @click="dialogFormVisible = true">
 					<i class="iconfont iconhuobiduihuan1"></i><br>
 					<span>货币兑换</span>
 				</div>
@@ -145,17 +145,38 @@
 			</el-footer>
 		</el-container>
 		
-		<div style="display: none;" class="currencyShow" id="currencyShow">
-			<el-form ref="currencyForm" :model="currencyForm" label-width="80px">
-			  <el-form-item label="活动名称">
-			    <el-input v-model="currencyForm.name"></el-input>
-			  </el-form-item>
-			  <el-form-item>
-			    <el-button type="primary" @click="onSubmit">立即创建</el-button>
-			    <el-button>取消</el-button>
-			  </el-form-item>
-			</el-form>
-		</div>
+		<el-dialog title="货币兑换计算器" :visible.sync="dialogFormVisible" width="20%" >
+		  <el-form :model="form">
+		    <el-form-item label="卖出币种:" :label-width="formLabelWidth">
+			  
+			  <el-select v-model="form.from" placeholder="请选择" class="formSelect" clearable filterable >
+			  	<el-option
+			  	  v-for="item in currencyList"
+			  	 :key="item.code"
+			  	 :label="item.name+item.code"
+			  	 :value="item.code">
+			  	</el-option>
+			   </el-select>
+		    </el-form-item>
+			<el-form-item label="买入币种:" :label-width="formLabelWidth">
+			  <el-select v-model="form.to" placeholder="请选择" class="formSelect" clearable filterable >
+			  	<el-option
+			  	  v-for="item in currencyList"
+			  	 :key="item.code"
+			  	 :label="item.name+item.code"
+			  	 :value="item.code">
+			  	</el-option>
+			   </el-select>
+			</el-form-item>
+			<el-form-item label="买入金额:" :label-width="formLabelWidth" >
+			  <el-input v-model="form.money" autocomplete="off"></el-input>
+			</el-form-item>
+		  </el-form>
+		  <div slot="footer" class="dialog-footer">
+		    <el-button @click="dialogFormVisible = false">取 消</el-button>
+		    <el-button type="primary" @click="dialogFormVisible = false">计 算</el-button>
+		  </div>
+		</el-dialog>
 	</div>
 </template>
 
@@ -186,9 +207,14 @@ export default {
 			  offset:0,
 			  limit:8,
 			  total:0,
-			  currencyForm:{
-				  name:''
-			  }
+			  form:{
+				  money:0,
+				  from:'',
+				  to:''
+			  },
+			  dialogFormVisible:false,
+			  formLabelWidth:'100px',
+			  currencyList:[]
 			  
 	    };
 	  },
@@ -237,41 +263,14 @@ export default {
 			this.offset=val;
 			this.$api.getExchangeList({offset:this.offset,limit:this.limit}).then((response) =>{
 				const {data} = response;
+				this.total=data.total;
 				if(response.code==1){
-					this.tableData= [];
-					let array = new Array();
-					this.total=data.total;
-					for(let item in data.rows){
-						let map = new Map();
-						for(let key in data.rows[item]){
-							map.set(key,data.rows[item][key])
-						}
-						array.push(map);
-						console.log(map,'map')
-					}
-					console.log(array,'array')
-					
-					this.tableData.push(array);
+					this.tableData= data.rows;
 				}
-				console.log(this.tableData,'tabledata')
 			})
 			
 			
 			console.log(this.total,'total');
-		},
-		showCurrencyShow(){
-			this.$layer.open({
-				type: 1,
-				  shade: false,
-				  title: '货币兑换计算器', //不显示标题
-				  content: document.getElementById('currencyShow'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
-				   shadeClose: true,
-					maxmin: true, //开启最大化最小化按钮
-					area: ['60rem', '40rem'],
-				  cancel: function(){
-				    layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', {time: 5000, icon:6});
-				  }
-			})
 		},
 		onSubmit(){
 			
@@ -286,26 +285,20 @@ export default {
 	      this.setSize();
 	    };
 		
+		//获取费率列表
 		this.$api.getExchangeList({offset:this.offset,limit:this.limit}).then((response) =>{
 			const {data} = response;
+			console.log(response,'response');
+			this.total=data.total;
 			if(response.code==1){
-				this.tableData= [];
-				let array = new Array();
-				this.total=data.total;
-				for(let item in data.rows){
-					let map = new Map();
-					for(let key in data.rows[item]){
-						map.set(key,data.rows[item][key])
-					}
-					array.push(map);
-					console.log(map,'map')
-				}
-				console.log(array,'array')
-				
-				this.tableData.push(array);
+				this.tableData= data.rows;
 			}
 			console.log(this.tableData,'tabledata')
 		});
+		//获取货币列表
+		this.$api.getCurrencyList().then((response) =>{
+			this.currencyList= response.data.rows;
+		})
 	  }
 }
 </script>
@@ -342,6 +335,7 @@ export default {
 		 margin: 0 auto !important;
 		 border: 0.0625rem solid #F7F7F7;
 		 padding: 0;
+		 position: relative;
 	}
 	.topLinkDiv{
 		with:8rem;
@@ -444,7 +438,7 @@ export default {
 		border: 0.0625rem solid  #8F8F8F;
 		border-radius: 0.7rem 0rem 0rem 0.7rem;
 		position: absolute;
-		left: 107rem;
+		right: 0;
 		span{
 			font-size: 0.3rem !important;
 		}
@@ -455,9 +449,18 @@ export default {
 	}
 	
 	.currency{
-		top:25rem;
+		top:20rem;
 	}
 	.weixin{
-		top:28.5rem;
+		top:24rem;
+	}
+	.el-dialog{
+		.el-input{
+			width: 50%;
+		}
+		.el-select{
+			width: 50%;
+		}
+		
 	}
 </style>

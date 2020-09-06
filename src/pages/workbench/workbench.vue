@@ -247,6 +247,7 @@ export default{
 </script>
 
 <style scoped lang="scss">
+	@import "../../static/css/form-item.css";  //引入方式
 	body > .el-container {
 		width: 82rem;
 	}

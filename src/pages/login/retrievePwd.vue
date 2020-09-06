@@ -117,6 +117,7 @@ export default{
 </script>
 
 <style scoped lang="scss">
+	@import "../../static/css/form-item.css";  //引入方式
 	.vipButton{
 		border: 0.0625rem #02a7f0 solid;
 		color: #02a7f0;

@@ -7,14 +7,7 @@ export default {
 		return new Promise((resolve, reject) => {
 			get('/api/category/getConfig',data).then((response)=>{
 				let {data} = response;
-				let array = new Array();
-				for(var item in data){
-					var map = new Map();
-					map.value = item;
-					map.label = data[item];
-					array.push(map)
-				}
-				 resolve(array);
+				 resolve(data);
 			}).catch((err)=>{
 				 reject(err);
 			})
@@ -43,25 +36,16 @@ export default {
 	forgetpwd:(data)=>{
 		return post('/api/user/forgetpwd',data)
 	},
-	refreshToken:(data)=>{
-		return new Promise((resolve, reject) => {
-			get('/api/token/refresh',data).then((response)=>{
-				let {data} = response;
-				if(response.code>0){
-					store.commit("user/setToken",data.userinfo.token);
-				}
-				resolve(response);
-			}).catch((err)=>{
-				 reject(err);
-			})
-		})
-		
-	},
 	checkToken:(data)=>{
 		return get('/api/token/check',data)
 	},
 	getExchangeList:(data)=>{
 		return post('/api/exchange/getExchangeList',data)
-	}
-	
+	},
+	getCurrencyList:(data)=>{
+		return get('/api/exchange/getCurrencyList',data)
+	},
+	apply:(data)=>{
+		return get('/api/user/apply',data)
+	},
 }

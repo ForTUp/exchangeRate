@@ -11,7 +11,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 
 
 // // 是否正在刷新的标记 -- 防止重复发出刷新token接口
-// let isRefreshing = false;
+let isRefreshing = true;
 // // 判断token是否失效: return: true为过期
 // function isOAverdue() {
 //     // 当离过期时间还有半小时时, 也判断为过期
@@ -24,7 +24,6 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.interceptors.request.use(
   config => {
     let token = sessionStorage.getItem('token');
-	console.log('token'+token)
     if (token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
       config.headers = {
         'token': token
@@ -40,50 +39,16 @@ axios.interceptors.request.use(
 //http response 拦截器
 axios.interceptors.response.use(
   response => {
-	  console.log(response)
-	  if(response.code == '401'){
-		  this.$router.push('/login');
+	  if(response.code == 401 && isRefreshing){
+		  refreshToken()
+		  isRefreshing = false;
+		  const retryOriginalRequest = new Promise((resolve) => {
+				  addSubscriber(()=> {
+					  resolve(againReqest(response))
+				  })
+			  });
+		  return retryOriginalRequest;
 	  }
-	//console.log( (Date.now() - store.state.user.expiresIn) / 1000 );
-	//console.log( store.state.user.expiretime);
-	
-	// if(getToken() && (( Math.floor((Date.now() - store.state.user.expiresIn) / 1000) + 30 * 60 < store.state.user.expiretime))){
-	// 	api.checkToken().then((response)=>{
-	// 		if(response.code<1){
-	// 			api.refreshToken().then((response)=>{
-	// 				let {data} = response;
-	// 				if(response.code>0){
-	// 					setToken(data.token);
-	// 				}else{
-	// 					removeToken();
-	// 					store.commit("user/SET_USER_ID",'');
-	// 					store.commit("user/SET_TOKEN",'');
-	// 					store.commit("user/SET_USER_NAME",'');
-	// 					store.commit("user/SET_MOBILE",'');
-	// 					store.commit("user/SET_NICKNAME",'');
-	// 					store.commit("user/SET_AVATER",'');
-	// 					store.commit("user/SET_SCORE",'');
-	// 					store.commit("user/SET_REMIND_COUNT",'');
-	// 					store.commit("user/SET_CREATETIME",'');
-	// 					store.commit("user/SET_EXPIRETIME",'');
-	// 					store.commit("user/SET_EXPIRESIN",'');
-	// 				}
-	// 			})
-	// 		}
-	// 	})
-	// }else{
-	// 	store.commit("user/SET_USER_ID",'');
-	// 	store.commit("user/SET_TOKEN",'');
-	// 	store.commit("user/SET_USER_NAME",'');
-	// 	store.commit("user/SET_MOBILE",'');
-	// 	store.commit("user/SET_NICKNAME",'');
-	// 	store.commit("user/SET_AVATER",'');
-	// 	store.commit("user/SET_SCORE",'');
-	// 	store.commit("user/SET_REMIND_COUNT",'');
-	// 	store.commit("user/SET_CREATETIME",'');
-	// 	store.commit("user/SET_EXPIRETIME",'');
-	// 	store.commit("user/SET_EXPIRESIN",'');
-	// }
     return response
   }, 
   err => {
@@ -91,7 +56,30 @@ axios.interceptors.response.use(
   }
 )
 
+refreshToken:(data)=>{
+	return new Promise((resolve, reject) => {
+		get('/api/token/refresh',data).then((response)=>{
+			let {data} = response;
+			if(response.code==1){
+				store.commit("user/setToken",data.userinfo.token);
+			}else{
+				sessionStorage.clear();
+				this.$router.push('/login');
+			}
+			isRefreshing = true;
+			resolve(response);
+		}).catch((err)=>{
+			 reject(err);
+		})
+	})
+},
 
+async function againReqest(response){
+	let config = response.config
+	config.header['token'] =sessionStorage.getItem('token');
+	let res = post(config);
+	return res;
+}
 /**
  * 封装get方法
  * @param url
@@ -131,3 +119,5 @@ export function get(url, params={}, headers={}){
       })
    })
  }
+ 
+ 

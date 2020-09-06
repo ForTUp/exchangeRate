@@ -31,26 +31,26 @@
 								<el-row  :gutter="24">
 									<el-col :span="6">
 										<el-form-item class="labelName" label="名/First Name：：" >
-											<el-input v-model="form.username" placeholder="请输入" ></el-input>
+											<el-input v-model="form.firstname" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="姓/Last Name："  class="labelName">
-											<el-input v-model="form.password" placeholder="请输入" ></el-input>
+											<el-input v-model="form.lastname" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="性别/Gender："  class="labelName">
 											<div class="formRadio">
-											<el-radio v-model="form.radio" label="1">男</el-radio>
-											<el-radio v-model="form.radio" label="2">女</el-radio>
+											<el-radio v-model="form.gender" label="1">男</el-radio>
+											<el-radio v-model="form.gender" label="2">女</el-radio>
 											</div>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="*出生年月/Date of birth："  class="labelName"> 
 											<el-date-picker
-												  v-model="form.expirationDate"
+												  v-model="form.birthday"
 												  type="date"
 												  placeholder="选择日期">
 											</el-date-picker>
@@ -61,43 +61,43 @@
 								<el-row :gutter="24">
 									<el-col :span="6">
 										<el-form-item class="labelName" label="*国籍/Nationality：" >
-											<el-select v-model="form.nationality" placeholder="请选择" class="formSelect">
+											<el-select v-model="form.nationality_id" placeholder="请选择" class="formSelect">
 												<el-option
 												  v-for="item in nationality"
-												  :key="item.value"
-												  :label="item.label"
-												  :value="item.value">
+												  :key="item.id"
+												  :label="item.name"
+												  :value="item.id">
 												</el-option>
 											 </el-select>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="职业/Occupation："  class="labelName">
-											<el-select v-model="form.occupation" placeholder="请选择" class="formSelect">
+											<el-select v-model="form.occupation_id" placeholder="请选择" class="formSelect">
 												<el-option
 												  v-for="item in occupation"
-												  :key="item.value"
-												  :label="item.label"
-												  :value="item.value">
+												 :key="item.id"
+												 :label="item.name"
+												 :value="item.id">
 												</el-option>
 											 </el-select>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="邮箱地址/Email Address：："  class="labelName">
-											<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+											<el-input v-model="form.email" placeholder="请输入密码" ></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
 										<el-form-item label="手机/Phone："  class="labelName">
-										 <el-select v-model="form.areacode" placeholder="请选择区号" class="formSelect">
+										 <el-select v-model="form.areacode_id" placeholder="请选择区号" class="formSelect">
 											<el-option
 											  v-for="item in areacode"
-											  :key="item.value"
-											  :label="item.label"
-											  :value="item.value">
+											 :key="item.id"
+											 :label="item.name"
+											 :value="item.id">
 											</el-option>
 										  </el-select>
 										</el-form-item>
@@ -105,17 +105,17 @@
 									<el-col :span="6" >
 										<div class="formSpan">-</div>
 										<el-form-item label=""  class="labelName labelNameDown">
-											<el-input v-model="form.password" placeholder="请输入您的手机号码" ></el-input>
+											<el-input v-model="form.mobile" placeholder="请输入您的手机号码" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="备用手机/Spare Phone："  class="labelName">
-										 <el-select v-model="form.areacodespare" placeholder="请选择区号" class="formSelect">
+										 <el-select v-model="form.areacode2_id" placeholder="请选择区号" class="formSelect">
 											<el-option
 											  v-for="item in areacode"
-											  :key="item.value"
-											  :label="item.label"
-											  :value="item.value">
+											 :key="item.id"
+											 :label="item.name"
+											 :value="item.id">
 											</el-option>
 										  </el-select>
 										</el-form-item>
@@ -123,48 +123,48 @@
 									<el-col :span="6">
 										<div class="formSpan">-</div>
 										<el-form-item label=""  class="labelName labelNameDown"> 
-											<el-input v-model="form.number" placeholder="请输入证件号码" ></el-input>
+											<el-input v-model="form.mobile2" placeholder="请输入您的手机号码" ></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
 										<el-form-item label="*居住国家/Residence Country："  class="labelName">
-										 <el-select v-model="form.nationality" placeholder="请选择" class="formSelect">
+										 <el-select v-model="form.country_id" placeholder="请选择" class="formSelect">
 											<el-option
 											  v-for="item in nationality"
-											  :key="item.value"
-											  :label="item.label"
-											  :value="item.value">
+											 :key="item.id"
+											 :label="item.name"
+											 :value="item.id">
 											</el-option>
 										  </el-select>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="省/State："  class="labelName">
-											<el-input v-model="form.password" placeholder="请输入" ></el-input>
+											<el-input v-model="form.province" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="市/Suburb："  class="labelName">
-											<el-input v-model="form.password" placeholder="请输入" ></el-input>
+											<el-input v-model="form.city" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="区县/Area："  class="labelName"> 
-											<el-input v-model="form.number" placeholder="请输入" ></el-input>
+											<el-input v-model="form.area" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="12">
 										<el-form-item label="居住地址/Residence Address："  class="labelName">
-											<el-input v-model="form.password" placeholder="请输入您的常住地址，详细至街道，门牌号" class="formAddr"></el-input>
+											<el-input v-model="form.address" placeholder="请输入您的常住地址，详细至街道，门牌号" class="formAddr"></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6" :push="6">
 										<el-form-item label="邮编/Postcode："  class="labelName">
-											<el-input v-model="form.password" placeholder="请输入邮编" ></el-input>
+											<el-input v-model="form.postcode" placeholder="请输入邮编" ></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
@@ -177,37 +177,37 @@
 								<el-row  :gutter="24">
 									<el-col :span="6">
 										<el-form-item label="护照/Passport："  class="labelName">
-										 <el-select v-model="form.nationality" placeholder="请选择" class="formSelect">
+										 <el-select v-model="form.certificate.passport.type" placeholder="请选择" class="formSelect">
 											<el-option
 											  v-for="item in nationality"
-											  :key="item.value"
-											  :label="item.label"
-											  :value="item.value">
+											 :key="item.id"
+											 :label="item.name"
+											 :value="item.id">
 											</el-option>
 										  </el-select>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="护照发证机构/Passport Issuer："  class="labelName">
-											<el-select v-model="form.issuer" placeholder="请选择" class="formSelect">
+											<el-select v-model="form.certificate.passport.issuer_id" placeholder="请选择" class="formSelect">
 												<el-option
 												  v-for="item in issuer"
-												  :key="item.value"
-												  :label="item.label"
-												  :value="item.value">
+												  :key="item.id"
+												  :label="item.name"
+												  :value="item.id">
 												</el-option>
 											 </el-select>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="护照号码/Passport Number："  class="labelName">
-										  <el-input v-model="form.password" placeholder="请输入" ></el-input>
+										  <el-input v-model="form.certificate.passport.number" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="护照有效期/Date of expiration："  class="labelName"> 
 											<el-date-picker
-											      v-model="form.expirationDate"
+											      v-model="form.certificate.passport.expiration"
 											      type="date"
 											      placeholder="选择日期">
 											</el-date-picker>
@@ -224,7 +224,7 @@
 											  :on-success="handleAvatarSuccess" 
 											  :before-upload="beforeAvatarUpload">
 											  
-											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <img v-if="firstImage" :src="firstImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
 											</el-upload>
@@ -238,7 +238,7 @@
 											  :show-file-list="false"
 											  :on-success="handleAvatarSuccess"
 											  :before-upload="beforeAvatarUpload">
-											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <img v-if="secondImage" :src="secondImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
 											</el-upload>
@@ -253,7 +253,7 @@
 											  :on-success="handleAvatarSuccess"
 											  :before-upload="beforeAvatarUpload">
 											  
-											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <img v-if="thirdImage" :src="thirdImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
 											</el-upload>
@@ -270,37 +270,37 @@
 								<el-row  :gutter="24">
 									<el-col :span="6">
 										<el-form-item label="证件类型/ID Type："  class="labelName">
-										 <el-select v-model="form.idcord" placeholder="请选择" class="formSelect">
+										 <el-select v-model="form.certificate.idcard.type_id" placeholder="请选择" class="formSelect">
 											<el-option
 											  v-for="item in idtype"
-											  :key="item.value"
-											  :label="item.label"
-											  :value="item.value">
+											  :key="item.id"
+											  :label="item.name"
+											  :value="item.id">
 											</el-option>
 										  </el-select>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="发证机构/Issuer："  class="labelName">
-											<el-select v-model="form.issuer" placeholder="请选择" class="formSelect">
+											<el-select v-model="form.certificate.idcard.issuer_id" placeholder="请选择" class="formSelect">
 												<el-option
 												  v-for="item in issuer"
-												  :key="item.value"
-												  :label="item.label"
-												  :value="item.value">
+												 :key="item.id"
+												 :label="item.name"
+												 :value="item.id">
 												</el-option>
 											 </el-select>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="证件号码/ID Number："  class="labelName">
-											<el-input v-model="form.number" placeholder="请输入" ></el-input>
+											<el-input v-model="form.certificate.idcard.number" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="证件有效期/Date of expiration："  class="labelName"> 
 											<el-date-picker
-											      v-model="form.expirationDate"
+											      v-model="form.certificate.idcard.expiration"
 											      type="date"
 											      placeholder="选择日期">
 											</el-date-picker>
@@ -318,7 +318,7 @@
 											  :on-success="handleAvatarSuccess"
 											  :before-upload="beforeAvatarUpload">
 											  
-											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <img v-if="fourImage" :src="fourImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
 											</el-upload>
@@ -333,7 +333,7 @@
 											  :on-success="handleAvatarSuccess"
 											  :before-upload="beforeAvatarUpload">
 											  
-											  <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
+											  <img v-if="fiveImage" :src="fiveImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
 											</el-upload>
@@ -368,7 +368,7 @@
 								<el-checkbox v-model="checked">我已阅读并同意<span class="checkBtn">《隐私保护政策条款》</span>，并确认上述信息和提供的文件真实无误。</el-checkbox>
 							</div>
 							<div class="formSubmitBtn">
-								<el-button  class="submitBtn" >提交</el-button>
+								<el-button  class="submitBtn" @click="onSubmit" >提交</el-button>
 							</div>
 							
 						</el-form>
@@ -385,20 +385,39 @@ export default{
 	data() {
 		return {
 			form: {
-				username: '',
-				password: '',
-				number:'',
-				radio: '1',
-				expirationDate:'',
-				imageUrl:'',
-				idcord: '',
-				nationality:'',
-				areacode:'',
-				areacodespare:'',
-				issuer:'',
-				account:'',
-				source:'',
-				purpose:'',
+				firstname:'张',
+				lastname:'三',
+				gender:'1',
+				birthday:'1991-03-13', 
+				nationality_id: '', 
+				occupation_id: '',
+				email: 'enoch0418@163.com', 
+				areacode_id:'',
+				mobile:'13888888888',
+				areacode2_id:'',
+				mobile2:'13988888888',
+				country_id:'',
+				province:'省',
+				city:'市',
+				area:'区',
+				address:'居住地址',
+				postcode:'邮编',
+				certificate:{
+					passport:{
+						type:'',
+						issuer_id:'',
+						number:'护照号码',
+						expiration:'',
+						photos:'',
+					},
+					idcard:{
+						type_id:'',
+						issuer_id:'',
+						number:'证件号码',
+						expiration:'',
+						photos:'',
+					},
+				},
 			},
 			options: [
 				],
@@ -417,20 +436,36 @@ export default{
 			resultImg: "",
 			isCrop: false,
 			fit:'',
-			checked:''
+			checked:'',
+			//图片blob
+			firstImage:'',
+			secondImage:'',
+			thirdImage:'',
+			fourImage:'',
+			fiveImage:''
 		}
 		
 	},
 	methods: {
 		onSubmit() {
 			console.log(this.form);
+			let params = this.qs.stringify(this.form);
+			this.$api.apply(params).then((response)=>{
+				console.log(response)
+			})
 		},
 		loadLogin(){
 			this.$router.push('/login');
 		},
 		handleAvatarSuccess(res, file) {
-			this.form.imageUrl = URL.createObjectURL(file.raw);
+			console.log(file)
+			this.firstImage = URL.createObjectURL(file.raw);
+			this.fiveImage = URL.createObjectURL(file.raw);
 			console.log(JSON.stringify(res))
+			this.form.certificate.passport.photos = this.form.certificate.idcard.photos + ','+res.data.url;
+			this.form.certificate.idcard.photos = this.form.certificate.idcard.photos + ','+res.data.url;
+			console.log(this.form.certificate.idcard.photos)
+			
 		},
 		beforeAvatarUpload(file) {
 			const isJPG = file.type === 'image/jpeg';
@@ -514,6 +549,7 @@ export default{
 </script>
 
 <style scoped lang="scss">
+	@import "../../static/css/form-item.css";  //引入方式
 	body > .el-container {
 		width: 82rem;
 	}
@@ -650,6 +686,4 @@ export default{
 		background-color: #169bd5 !important;
 		color: #fff;
 	}
-	
-	
 </style>

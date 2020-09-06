@@ -1,0 +1,11 @@
+.el-form-item__label{
+	margin-left:1.5rem;
+	text-align: left;
+	float:left;
+	font-weight: 600;
+	font-size: 0.75rem;
+}
+.el-form-item__content{
+	margin-left: 2.5rem !important;
+	
+}

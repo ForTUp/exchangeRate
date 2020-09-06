@@ -53,7 +53,6 @@
 
 <script>
 import { getToken, setToken, removeToken } from '../../utils/token.js'   //引入auth.js
-	
 export default{
 	name:"login",
 	data() {
@@ -102,7 +101,7 @@ export default{
 </script>
 
 <style scoped lang="scss">
-	
+	@import "../../static/css/form-item.css";  //引入方式
 	.formDiv {
 		border-radius: 1px;
 		background-color: #F7F7F7;
