@@ -12,7 +12,11 @@ import {post,get} from "./utils/http.js"
 import api from "./utils/api.js"
 import { getToken, setToken, removeToken } from './utils/token.js'   //引入auth.js
 import './assets/icon/iconfont.css';
+import BaiduMap from 'vue-baidu-map';
 
+Vue.use(BaiduMap, {
+ ak: 'F47hrcVkdz2MW5aoDkXpt42dHtRqnieG'
+})
 //定义全局变量
 Vue.prototype.$post = post;
 Vue.prototype.$get = get;

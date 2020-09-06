@@ -130,11 +130,66 @@
 						</div>
 					</div>
 					
-					<div class="coreContent">
-							<h1>为什么选我们</h1>
+					<div class="coreContent chanceDiv">
+						<div class="coreHead ">
+						<h1>为什么选我们</h1>
 					</div>
-					<div class="coreContent">
-							<h1>联系我们</h1>
+					</div>
+					<div class="coreHead">
+						<h1>联系我们</h1>
+					</div>
+					<div class="coreContent" style="height: 30rem !important;">
+						<div class="mapDiv" style="margin-left: 0 !important;">
+							<div class="mapHead">
+								<ul>
+									<li class="mapHeadTitle"><span>Chatswood</span></li>
+									<li class="mapHeadText"><span>周一至周五 9:30-5:30 营业，周六周日休息</span></li>
+								</ul>
+							</div>
+							<baidu-map class="map"  :center="center" :zoom="zoom" @read="handler">
+							</baidu-map>
+							<div class="mapButtom">
+								<ul>
+									<li ><i class="el-icon-mobile"></i><span>+61 2 9884 7388</span></li>
+									<li ><i class="el-icon-message"></i><span>Wenzhou@bluerate.net</span></li>
+									<li ><i class="el-icon-location-outline"></i><span>Shop 5, 379 Victoria Ave, Chatswood NSW 2067</span></li>
+								</ul>
+							</div>
+						</div>
+						<div class="mapDiv">
+							<div class="mapHead">
+								<ul>
+									<li class="mapHeadTitle"><span>Hornsby</span></li>
+									<li class="mapHeadText"><span>周一至周五 9:30-5:30 营业，周六周日休息</span></li>
+								</ul>
+							</div>
+							<baidu-map class="map"  :center="center" :zoom="zoom" @read="handler">
+							</baidu-map>
+							<div class="mapButtom">
+								<ul>
+									<li ><i class="el-icon-mobile"></i><span>+61 2 9987 0090</span></li>
+									<li ><i class="el-icon-message"></i><span>Wenzhou@bluerate.net</span></li>
+									<li ><i class="el-icon-location-outline"></i><span>Shop 3095, Westfield Hornsby 2077</span></li>
+								</ul>
+							</div>
+						</div>
+						<div class="mapDiv">
+							<div class="mapHead">
+								<ul>
+									<li class="mapHeadTitle"><span>Auburn</span></li>
+									<li class="mapHeadText"><span>周一至周五 9:30-5:30 营业，周六周日休息</span></li>
+								</ul>
+							</div>
+							<baidu-map class="map"  :center="center" :zoom="zoom" @read="handler">
+							</baidu-map>
+							<div class="mapButtom">
+								<ul>
+									<li ><i class="el-icon-mobile"></i><span>+61 2 8065 8700</span></li>
+									<li ><i class="el-icon-message"></i><span>Wenzhou@bluerate.net</span></li>
+									<li ><i class="el-icon-location-outline"></i><span>Level 1, 80-82 South Parade,Auburn 21447</span></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</el-main>
@@ -214,8 +269,10 @@ export default {
 			  },
 			  dialogFormVisible:false,
 			  formLabelWidth:'100px',
-			  currencyList:[]
-			  
+			  currencyList:[],
+			  //百度地图数据
+			  center: {lng: 116.404, lat: 39.915},
+			  zoom:15
 	    };
 	  },
 	  methods: {
@@ -274,7 +331,14 @@ export default {
 		},
 		onSubmit(){
 			
+		},
+		handler({BMap,map}){
+			console.log(BMap,map);
+			this.center.lng= 116.404;
+			this.center.lat=39.915;
+			this.zoom = 15;
 		}
+		
 	  },
 	  mounted() {
 	    this.screenWidth = window.innerWidth;
@@ -366,7 +430,7 @@ export default {
 	}
 	.coreService{
 		
-		border: 0.0625rem solid red;
+		// border: 0.0625rem solid red;
 		height: 120rem;
 		width: 70rem;
 		margin: 0 auto;
@@ -376,19 +440,19 @@ export default {
 		margin: 0 auto;
 		height: 3rem;
 		width: 30rem;
-		border: 0.0625rem solid blue;
+		// border: 0.0625rem solid blue;
 		padding: 0;
 		
 	}
 	.coreContent{
 		height: 22rem;
-		border: 0.0625rem solid blue;
+		// border: 0.0625rem solid blue;
 		margin-top: 2rem;
 	}
 	.coreContentList{
 		height: 22rem;
 		width: 22rem;
-		border: 0.0625rem solid orange;
+		// border: 0.0625rem solid orange;
 		float: left;
 		margin-left: 1.73rem;
 		background-color: #fff;
@@ -462,5 +526,66 @@ export default {
 			width: 50%;
 		}
 		
+	}
+	.mapDiv{
+		width: 18rem;
+		height: 30rem;
+		float: left;
+		// border: 0.0625rem solid red;
+		text-align: left;
+		margin-left: 7.7rem;
+		.map {
+		  width: 18rem;
+		  height: 18rem;
+		  border: 0.0625rem solid #FFF;
+		  border-radius: 1rem 1rem 1rem 1rem;
+		}
+		.mapHead{
+			width: 100%;
+			height: 3rem;
+			// border: 0.0625rem solid blue;
+			padding: 0;
+			ul{
+				padding: 0;
+				width: 100%;
+				height: 2rem;
+				margin: 0;
+			}
+			.mapHeadTitle{
+				font-size: 1rem;
+				font-weight: bold;
+			}
+			.mapHeadText{
+				font-size: 0.5rem;
+			}
+		}
+		.mapButtom{
+			width: 100%;
+			height: 8rem;
+			// border: 0.0625rem solid blue;
+			padding: 0;
+			ul{
+				padding: 0;
+				width: 100%;
+				height: 2rem;
+				margin: 0;
+				font-weight: 600;
+				font-size: 1rem;
+				li{
+					span{
+						margin-left: 0.1rem;
+					}
+					margin-top: 0.5rem;
+				}
+				
+				
+			}
+		}
+	}
+	
+	.chanceDiv{
+		border: 0.0625rem solid red;
+		border-radius: 2rem;
+		background-color: #EEE;
 	}
 </style>
