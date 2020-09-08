@@ -13,6 +13,13 @@ import api from "./utils/api.js"
 import { getToken, setToken, removeToken } from './utils/token.js'   //引入auth.js
 import './assets/icon/iconfont.css';
 import BaiduMap from 'vue-baidu-map';
+import moment from 'moment'
+ 
+Vue.use(require('vue-moment'));
+Vue.prototype.moment = moment;
+Vue.filter('dateYMDHMSFormat',function(dateStr,pattern='YYYY-MM-DD HH:mm:ss'){
+  return moment(dateStr).format(pattern);
+})
 
 Vue.use(BaiduMap, {
  ak: 'F47hrcVkdz2MW5aoDkXpt42dHtRqnieG'

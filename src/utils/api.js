@@ -7,7 +7,7 @@ export default {
 		return new Promise((resolve, reject) => {
 			get('/api/category/getConfig',data).then((response)=>{
 				let {data} = response;
-				 resolve(data);
+				 resolve(response);
 			}).catch((err)=>{
 				 reject(err);
 			})
@@ -48,4 +48,7 @@ export default {
 	apply:(data)=>{
 		return get('/api/user/apply',data)
 	},
+	remitList:(data)=>{
+		return get('/api/remit/index',data)
+	}
 }

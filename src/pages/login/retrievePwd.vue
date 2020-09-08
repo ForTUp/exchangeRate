@@ -41,9 +41,9 @@
 									 <el-select v-model="form.idcord" placeholder="请选择">
 									    <el-option
 									      v-for="item in idtype"
-									      :key="item.value"
-									      :label="item.label"
-									      :value="item.value">
+									      :key="item.id"
+									      :label="item.name"
+									      :value="item.id">
 									    </el-option>
 									  </el-select>
 							  </el-form-item>
@@ -61,6 +61,17 @@
 					
 				</el-main>
 			</el-container>
+			
+			<el-dialog
+			  title="找回密码"
+			  :visible.sync="dialogVisible"
+			  width="30%"
+			 >
+			  <span>{{msg}}</span>
+			  <span slot="footer" class="dialog-footer">
+			    <el-button type="primary" @click="loadLogin">确 定</el-button>
+			  </span>
+			</el-dialog>
 		</div>
 </template>
 
@@ -77,6 +88,9 @@ export default{
 			},
 			idtype: [],
 			imageUrl:require('../../static/image/u95.png'),
+			fit : '',
+			dialogVisible: false,
+			msg:''
 		}
 		
 	},
@@ -85,15 +99,16 @@ export default{
 			let params = this.qs.stringify(this.form)
 			this.$api.forgetpwd(params).then((response)=>{
 				if(response.code>0){
-					that.$message({
-					  message: response.msg,
-					  type: 'success'
-					});
-					that.$router.push('/login');
+					this.dialogVisible = true;
+					this.msg = '你密码已经成功重置为' + response.data.password +'请妥善保管';
 				}else{
-					this.$message({
-					  message: response.msg,
-					  type: 'warning'
+					this.$confirm('您提交的信息验证不通过，请重新提交！', '找回密码', {
+					  confirmButtonText: '确定',
+					  cancelButtonText: '取消',
+					  type: 'warning',
+					  center: true
+					}).then(() => {
+					}).catch(() => {
 					});
 				}
 			}).catch((err)=>{
@@ -110,7 +125,8 @@ export default{
 	},
 	mounted() {
 		this.$api.getConfig({type:'idtype'}).then((response)=>{
-			this.idtype = response
+			console.log(response)
+			this.idtype = response.data;
 		})
 	}
 }	

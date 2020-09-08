@@ -78,7 +78,7 @@ export default{
 					  message: response.msg,
 					  type: 'success'
 					});
-					that.$router.push('/');
+					that.$router.push('/Workbench');
 				}else{
 					 this.$message({
 					  message: response.msg,
