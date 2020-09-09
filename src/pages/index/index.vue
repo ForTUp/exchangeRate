@@ -87,6 +87,41 @@
 						<h1>实时汇率</h1>
 					</div>
 					<div class="coreContent">
+						<div class="tableHeader">
+							<el-form ref="form" :model="form">
+								<el-row :span="20">
+									<el-col :span="4">
+										<el-select v-model="form.from" placeholder="请选择" clearable filterable class="">
+											<el-option
+											  v-for="item in currencyList"
+											 :key="item.code"
+											 :label="item.name+item.code"
+											 :value="item.code">
+											</el-option>
+										 </el-select>
+									</el-col>
+									<el-col :span="4" style="width: 12rem;padding: 0;text-align: left;">
+										<el-input v-model="form.keyword" placeholder="请输入搜索的内容" style="width: 10rem;"></el-input>
+									</el-col>
+									<el-col :span="4">
+										<el-select v-model="form.from" placeholder="请选择" clearable filterable >
+											<el-option
+											  v-for="item in currencyList"
+											 :key="item.code"
+											 :label="item.name+item.code"
+											 :value="item.code">
+											</el-option>
+										 </el-select>
+									</el-col>
+									<el-col :span="4" style=" margin: 0;">
+										<el-input v-model="form.keyword" placeholder="请输入搜索的内容" style="width: 10rem;"></el-input>
+									</el-col>
+									<el-col class="line" :span="2">
+										<el-button type="primary" @click="loadLogin">搜 索</el-button>
+									</el-col>
+								</el-row>
+							</el-form>
+						</div>
 						<div class="coreContentTable">
 							 <el-table
 							      :data="tableData"
@@ -133,6 +168,12 @@
 					<div class="coreContent chanceDiv">
 						<div class="coreHead ">
 						<h1>为什么选我们</h1>
+						<p>
+							温州集团旗下Blue Rate Finance始建于澳大利亚悉尼 (澳洲金融牌照号AUSTRAC Registration Number：IND100583009-001)，作为一家提供多元化金融产品及服务的综合性金融机构，立足于房地产金融并稳步发展，目前已成为集地产投资、房屋贷款、个人及商业贷款、风险投资及其他金融业务在内的综合性金融集团。
+							Blue Rate Finance 拥有具二十多年中澳金融行业经验，贯通中西高度专业化，多元文化的资深管理团队 。凭借其对澳中两国金融、地产、经济及相关行业政策的深入了解，深耕于悉尼市场，在严格遵循金融行业法规的基础上，辅以严密的风险控制框架。
+							Blue Rate Finance与温州速汇（Blue Rate Remittance）共同为华侨同胞提供移民、留学、工作、置业的汇兑及投资服务，实现资产的保值增值。
+							Blue Rate Finance愿与您精诚合作，携手同进，共绘蓝图。
+						</p>
 					</div>
 					</div>
 					<div class="coreHead">
@@ -226,10 +267,16 @@
 			<el-form-item label="买入金额:" :label-width="formLabelWidth" >
 			  <el-input v-model="form.money" autocomplete="off"></el-input>
 			</el-form-item>
+			<el-form-item label="计算结果:" :label-width="formLabelWidth" >
+			  <el-input v-model="form.totalMoney" autocomplete="off"></el-input>
+			</el-form-item>
+			<el-form-item label="费率:" :label-width="formLabelWidth" >
+			  <el-input v-model="form.currencyFD" autocomplete="off"></el-input>
+			</el-form-item>
 		  </el-form>
 		  <div slot="footer" class="dialog-footer">
 		    <el-button @click="dialogFormVisible = false">取 消</el-button>
-		    <el-button type="primary" @click="dialogFormVisible = false">计 算</el-button>
+		    <el-button type="primary" @click="getExchangeInfo">计 算</el-button>
 		  </div>
 		</el-dialog>
 	</div>
@@ -262,17 +309,24 @@ export default {
 			  offset:0,
 			  limit:8,
 			  total:0,
+			  //货币计算表单
 			  form:{
 				  money:0,
 				  from:'',
-				  to:''
+				  to:'',
+				  totalMoney:'',
+				  currencyFD:''
 			  },
 			  dialogFormVisible:false,
 			  formLabelWidth:'100px',
 			  currencyList:[],
 			  //百度地图数据
 			  center: {lng: 116.404, lat: 39.915},
-			  zoom:15
+			  zoom:15,
+			  //实时汇率
+			  nowForm:{
+				  
+			  }
 	    };
 	  },
 	  methods: {
@@ -325,8 +379,6 @@ export default {
 					this.tableData= data.rows;
 				}
 			})
-			
-			
 			console.log(this.total,'total');
 		},
 		onSubmit(){
@@ -337,6 +389,15 @@ export default {
 			this.center.lng= 116.404;
 			this.center.lat=39.915;
 			this.zoom = 15;
+		},
+		getExchangeInfo(){
+			this.$api.getExchangeInfo(this.form).then((response)=>{
+				console.log(response)
+				let {data} = response;
+				this.form.totalMoney=this.form.money*data.currencyFD;
+				this.form.currencyFD =data.currencyFD;
+				console.log(this.form.totalMoney)
+			})
 		}
 		
 	  },
@@ -587,5 +648,11 @@ export default {
 		border: 0.0625rem solid red;
 		border-radius: 2rem;
 		background-color: #EEE;
+	}
+	.block{
+		margin-top: 1rem;
+		.el-pagination{
+			text-align: left;
+		}
 	}
 </style>

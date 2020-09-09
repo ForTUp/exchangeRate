@@ -50,5 +50,9 @@ export default {
 	},
 	remitList:(data)=>{
 		return get('/api/remit/index',data)
+	},
+	getExchangeInfo:(data)=>{
+		return get('/api/exchange/getExchangeInfo',data)
 	}
+	
 }
