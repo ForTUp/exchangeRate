@@ -126,7 +126,7 @@ export default{
 	mounted() {
 		this.$api.getConfig({type:'idtype'}).then((response)=>{
 			console.log(response)
-			this.idtype = response.data;
+			this.idtype = response;
 		})
 	}
 }	

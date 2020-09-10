@@ -8,7 +8,7 @@ import routers from './routers'
 import "@/static/css/common.scss";
 import vueEsign from 'vue-esign'
 import store from "./store";
-import {post,get} from "./utils/http.js"
+import {post,get,postJson} from "./utils/http.js"
 import api from "./utils/api.js"
 import { getToken, setToken, removeToken } from './utils/token.js'   //引入auth.js
 import './assets/icon/iconfont.css';
@@ -28,6 +28,7 @@ Vue.use(BaiduMap, {
 Vue.prototype.$post = post;
 Vue.prototype.$get = get;
 Vue.prototype.$api = api;
+Vue.prototype.$postJson = postJson;
 Vue.prototype.$getToken = getToken;
 Vue.prototype.$setToken = setToken;
 Vue.prototype.$removeToken = removeToken;

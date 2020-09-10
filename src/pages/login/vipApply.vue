@@ -448,9 +448,11 @@ export default{
 	},
 	methods: {
 		onSubmit() {
-			console.log(this.form);
+			console.log(JSON.stringify(this.form));
 			let params = this.qs.stringify(this.form);
-			this.$api.apply(params).then((response)=>{
+			let packJson  = {"data":JSON.stringify(this.form)};
+			console.log(packJson)
+			this.$api.apply({data:JSON.stringify(this.form)}).then((response)=>{
 				console.log(response)
 			})
 		},

@@ -87,11 +87,19 @@
 						<h1>实时汇率</h1>
 					</div>
 					<div class="coreContent">
-						<div class="tableHeader">
-							<el-form ref="form" :model="form">
+						<div class="tableHeader" style="margin-bottom: 2rem;">
+							<el-form ref="nowForm" :model="nowForm" >
 								<el-row :span="20">
 									<el-col :span="4">
-										<el-select v-model="form.from" placeholder="请选择" clearable filterable class="">
+										<span>持有币种</span>
+									</el-col>
+									<el-col :span="4" :push="7" style="margin-left: -0.8rem;">
+										<span>兑换币种</span>
+									</el-col>
+								</el-row>
+								<el-row :span="20">
+									<el-col :span="4">
+										<el-select v-model="nowForm.from" placeholder="请选择" clearable filterable class="">
 											<el-option
 											  v-for="item in currencyList"
 											 :key="item.code"
@@ -100,11 +108,14 @@
 											</el-option>
 										 </el-select>
 									</el-col>
-									<el-col :span="4" style="width: 12rem;padding: 0;text-align: left;">
-										<el-input v-model="form.keyword" placeholder="请输入搜索的内容" style="width: 10rem;"></el-input>
+									<el-col :span="4" >
+										<el-input v-model="nowForm.money" placeholder="" ></el-input>
+									</el-col>
+									<el-col :span="1" style="width: 8rem;text-align: center;">
+										<el-button style="border: 0.0625rem solid #0080FF;" @click="changeFiex"><i style="color: #0080FF;" class="iconfont iconjiaohuan"></i></el-button>
 									</el-col>
 									<el-col :span="4">
-										<el-select v-model="form.from" placeholder="请选择" clearable filterable >
+										<el-select v-model="nowForm.to" placeholder="请选择" clearable filterable >
 											<el-option
 											  v-for="item in currencyList"
 											 :key="item.code"
@@ -114,10 +125,7 @@
 										 </el-select>
 									</el-col>
 									<el-col :span="4" style=" margin: 0;">
-										<el-input v-model="form.keyword" placeholder="请输入搜索的内容" style="width: 10rem;"></el-input>
-									</el-col>
-									<el-col class="line" :span="2">
-										<el-button type="primary" @click="loadLogin">搜 索</el-button>
+										<el-input v-model="nowForm.totalMoney" readonly></el-input>
 									</el-col>
 								</el-row>
 							</el-form>
@@ -241,7 +249,7 @@
 			</el-footer>
 		</el-container>
 		
-		<el-dialog title="货币兑换计算器" :visible.sync="dialogFormVisible" width="20%" >
+		<el-dialog title="货币兑换计算器" :visible.sync="dialogFormVisible" width="30%" >
 		  <el-form :model="form">
 		    <el-form-item label="卖出币种:" :label-width="formLabelWidth">
 			  
@@ -311,7 +319,7 @@ export default {
 			  total:0,
 			  //货币计算表单
 			  form:{
-				  money:0,
+				  money:1,
 				  from:'',
 				  to:'',
 				  totalMoney:'',
@@ -325,7 +333,10 @@ export default {
 			  zoom:15,
 			  //实时汇率
 			  nowForm:{
-				  
+				  from:'',
+				  to:'',
+				  money:1,
+				  totalMoney:''
 			  }
 	    };
 	  },
@@ -381,9 +392,6 @@ export default {
 			})
 			console.log(this.total,'total');
 		},
-		onSubmit(){
-			
-		},
 		handler({BMap,map}){
 			console.log(BMap,map);
 			this.center.lng= 116.404;
@@ -391,13 +399,82 @@ export default {
 			this.zoom = 15;
 		},
 		getExchangeInfo(){
+			
+			if(this.form.from==null || this.form.from == '' ){
+				this.$message({
+					message: '请选择卖出币种',
+					type: 'warning'
+				})
+				return;
+			}
+			if(this.form.to ==null || this.form.to == ''){
+				this.$message({
+					message: '请选择买入币种',
+					type: 'warning'
+				})
+				return;
+			}
+			if(this.form.money == null || this.form.money == ''){
+				this.$message({
+					message: '请输入买入金额:',
+					type: 'warning'
+				})
+				return;
+			}
+			
 			this.$api.getExchangeInfo(this.form).then((response)=>{
 				console.log(response)
 				let {data} = response;
-				this.form.totalMoney=this.form.money*data.currencyFD;
-				this.form.currencyFD =data.currencyFD;
-				console.log(this.form.totalMoney)
+				if(response.code==1){
+					this.form.totalMoney=this.form.money*data.currencyFD;
+					this.form.currencyFD =data.currencyFD;
+					console.log(this.form.totalMoney)
+				}else{
+					this.$message({
+						message: response.msg,
+						type: 'warning'
+					})
+				}
+				
 			})
+		},
+		changeFiex(){
+			if(this.nowForm.from==null || this.nowForm.from == '' ){
+				this.$message({
+					message: '请选择持有币种',
+					type: 'warning'
+				})
+				return;
+			}
+			if(this.nowForm.to ==null || this.nowForm.to == ''){
+				this.$message({
+					message: '请选择兑换币种',
+					type: 'warning'
+				})
+				return;
+			}
+			if(this.nowForm.money == null || this.nowForm.money == ''){
+				this.$message({
+					message: '请输入兑换金额',
+					type: 'warning'
+				})
+				return;
+			}
+			this.$api.getExchangeInfo(this.nowForm).then((response)=>{
+				console.log(response)
+				let {data} = response;
+				if(response.code==1){
+					this.nowForm.totalMoney=this.nowForm.money*data.currencyFD;
+					console.log(this.nowForm.totalMoney)
+				}else{
+					this.$message({
+						message: response.msg,
+						type: 'warning'
+					})
+				}
+				
+			})
+			
 		}
 		
 	  },
@@ -653,6 +730,28 @@ export default {
 		margin-top: 1rem;
 		.el-pagination{
 			text-align: left;
+		}
+	}
+	.tableHeader{
+		background-color: #fff;
+		.el-row{
+			// border: 0.0625rem solid red;
+			height: 3rem;
+			padding: 0;
+			text-align: left;
+			line-height: 3rem;
+			.el-col{
+				// border: 0.0625rem solid blue;
+				height: 3rem;
+				padding: 0;
+				.el-input{
+					width: 100%;
+				}
+				span{
+					font-weight: bold;
+				}
+			}
+			
 		}
 	}
 </style>

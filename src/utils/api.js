@@ -1,4 +1,4 @@
-import {post,get} from './http.js'
+import {post,get,postJson} from './http.js'
 import { getToken, setToken, removeToken } from './token.js'   //引入auth.js
 import store from "../store";
 
@@ -7,7 +7,7 @@ export default {
 		return new Promise((resolve, reject) => {
 			get('/api/category/getConfig',data).then((response)=>{
 				let {data} = response;
-				 resolve(response);
+				 resolve(data);
 			}).catch((err)=>{
 				 reject(err);
 			})
@@ -46,7 +46,7 @@ export default {
 		return get('/api/exchange/getCurrencyList',data)
 	},
 	apply:(data)=>{
-		return get('/api/user/apply',data)
+		return post('/api/user/apply',data)
 	},
 	remitList:(data)=>{
 		return get('/api/remit/index',data)

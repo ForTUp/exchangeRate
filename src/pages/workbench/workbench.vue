@@ -107,7 +107,7 @@
 					    <el-pagination
 					      @size-change="handleSizeChange"
 					      @current-change="handleCurrentChange"
-					      :current-page="currentPage"
+					      :current-page="ruleForm.currentPage"
 					      :page-sizes="[5,10,15,20]"
 					      :page-size="5"
 					      layout="total, sizes, prev, pager, next, jumper"
@@ -136,14 +136,13 @@
 					startDate: '',
 					endDate: '',
 					state: 'all',
-					offset:0,
-					limit:5
+					current_page:1,
+					per_page:5
 				},
 				rules:{},
 				imageUrl: require('../../static/image/u95.png'),
 				fit: '',
 				tableData:[],
-				currentPage:0,
 				total:0
 				
 			}
@@ -191,12 +190,13 @@
 				
 			},
 			handleSizeChange(val) {
-				this.ruleForm.limit=val;
+				console.log(val,'per_page')
+				this.ruleForm.per_page=val;
 				this.onSubmit();
 			},
 			handleCurrentChange(val) {
-				console.log(val)
-				this.ruleForm.offset = val-1;
+				console.log(val,'current_page')
+				this.ruleForm.current_page = val;
 				this.onSubmit();
 			},
 			tableRowClassName({row, rowIndex}){
