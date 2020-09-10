@@ -1,4 +1,4 @@
-import {post,get,postJson} from './http.js'
+import {post,get,postJson,postFile} from './http.js'
 import { getToken, setToken, removeToken } from './token.js'   //引入auth.js
 import store from "../store";
 
@@ -53,6 +53,9 @@ export default {
 	},
 	getExchangeInfo:(data)=>{
 		return get('/api/exchange/getExchangeInfo',data)
+	},
+	upload:(data)=>{
+		return postFile('/api/common/upload',data)
 	}
 	
 }

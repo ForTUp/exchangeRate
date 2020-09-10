@@ -123,3 +123,21 @@ export function get(url, params={}, headers={}){
   export function postJson(url, data ){   return new Promise((resolve, reject) => {      axios.request({
 		 url, 		method : 'post',		headers:{			'Content-Type': 'text/plain'		},
 		data:JSON.stringify(data)	  })      .then(response => {        resolve(response.data);      }, err => {        reject(err)      })   }) }
+ 
+ export function postFile(url, data ){
+   return new Promise((resolve, reject) => {
+      axios.request({
+ 		url, 
+ 		method : 'post',
+ 		headers:{
+ 			'Content-Type': 'multipart/form-data'
+ 		},
+ 		data
+ 	  })
+      .then(response => {
+        resolve(response.data);
+      }, err => {
+        reject(err)
+      })
+   })
+ }

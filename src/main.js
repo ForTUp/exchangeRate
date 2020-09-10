@@ -8,7 +8,7 @@ import routers from './routers'
 import "@/static/css/common.scss";
 import vueEsign from 'vue-esign'
 import store from "./store";
-import {post,get,postJson} from "./utils/http.js"
+import {post,get,postJson,postFile} from "./utils/http.js"
 import api from "./utils/api.js"
 import { getToken, setToken, removeToken } from './utils/token.js'   //引入auth.js
 import './assets/icon/iconfont.css';

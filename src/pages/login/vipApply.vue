@@ -178,12 +178,13 @@
 									<el-col :span="6">
 										<el-form-item label="护照/Passport："  class="labelName">
 										 <el-select v-model="form.certificate.passport.type" placeholder="请选择" class="formSelect">
-											<el-option
+											 <el-option value="passport">Passport</el-option>
+											<!-- <el-option
 											  v-for="item in nationality"
 											 :key="item.id"
 											 :label="item.name"
 											 :value="item.id">
-											</el-option>
+											</el-option> -->
 										  </el-select>
 										</el-form-item>
 									</el-col>
@@ -234,9 +235,9 @@
 										<el-form-item label=""  class="labelName">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="https://jsonplaceholder.typicode.com/posts/"
+											  action="/api/common/upload"
 											  :show-file-list="false"
-											  :on-success="handleAvatarSuccess"
+											  :on-success="handleAvatarSuccess2"
 											  :before-upload="beforeAvatarUpload">
 											  <img v-if="secondImage" :src="secondImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -248,9 +249,9 @@
 										<el-form-item label=""  class="labelName">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="https://jsonplaceholder.typicode.com/posts/"
+											  action="/api/common/upload"
 											  :show-file-list="false"
-											  :on-success="handleAvatarSuccess"
+											  :on-success="handleAvatarSuccess3"
 											  :before-upload="beforeAvatarUpload">
 											  
 											  <img v-if="thirdImage" :src="thirdImage" class="avatar">
@@ -313,9 +314,9 @@
 										<el-form-item label="*护照照片/Passport Photo："  class="labelName">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="https://jsonplaceholder.typicode.com/posts/"
+											  action="/api/common/upload"
 											  :show-file-list="false"
-											  :on-success="handleAvatarSuccess"
+											  :on-success="handleAvatarSuccess4"
 											  :before-upload="beforeAvatarUpload">
 											  
 											  <img v-if="fourImage" :src="fourImage" class="avatar">
@@ -328,9 +329,9 @@
 										<el-form-item label=""  class="labelName">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="https://jsonplaceholder.typicode.com/posts/"
+											  action="/api/common/upload"
 											  :show-file-list="false"
-											  :on-success="handleAvatarSuccess"
+											  :on-success="handleAvatarSuccess5"
 											  :before-upload="beforeAvatarUpload">
 											  
 											  <img v-if="fiveImage" :src="fiveImage" class="avatar">
@@ -402,6 +403,7 @@ export default{
 				area:'区',
 				address:'居住地址',
 				postcode:'邮编',
+				sign_url:'',
 				certificate:{
 					passport:{
 						type:'',
@@ -442,17 +444,29 @@ export default{
 			secondImage:'',
 			thirdImage:'',
 			fourImage:'',
-			fiveImage:''
+			fiveImage:'',
+			firstUrl:'',
+			secondUrl:'',
+			thirdUrl:'',
+			fourUrl:'',
+			fiveUrl:'',
 		}
 		
 	},
 	methods: {
 		onSubmit() {
-			console.log(JSON.stringify(this.form));
+			if(this.firstUrl=='' || this.secondUrl=='' || this.thirdUrl=='' ||this.fourUrl=='' ||this.fiveUrl==''){
+				this.$message({
+					message: '请上传图片！',
+					type: 'warning'
+				})
+				return;
+			}
+			this.form.certificate.passport.photos = this.firstUrl + "," + this.secondUrl + "," + this.thirdUrl;
+			this.form.certificate.idcard.photos = this.fourUrl + "," + this.fiveUrl;
 			let params = this.qs.stringify(this.form);
 			let packJson  = {"data":JSON.stringify(this.form)};
-			console.log(packJson)
-			this.$api.apply({data:JSON.stringify(this.form)}).then((response)=>{
+			this.$api.apply(this.qs.stringify(packJson)).then((response)=>{
 				console.log(response)
 			})
 		},
@@ -460,14 +474,27 @@ export default{
 			this.$router.push('/login');
 		},
 		handleAvatarSuccess(res, file) {
-			console.log(file)
 			this.firstImage = URL.createObjectURL(file.raw);
-			this.fiveImage = URL.createObjectURL(file.raw);
 			console.log(JSON.stringify(res))
-			this.form.certificate.passport.photos = this.form.certificate.idcard.photos + ','+res.data.url;
-			this.form.certificate.idcard.photos = this.form.certificate.idcard.photos + ','+res.data.url;
-			console.log(this.form.certificate.idcard.photos)
+			this.firstUrl = res.data.url;
+			// this.form.certificate.passport.photos = this.form.certificate.idcard.photos + ','+res.data.url;
 			
+		},
+		handleAvatarSuccess2(res, file) {
+			this.secondImage = URL.createObjectURL(file.raw);
+			this.secondUrl = res.data.url;
+		},
+		handleAvatarSuccess3(res, file) {
+			this.thirdImage = URL.createObjectURL(file.raw);
+			this.thirdUrl = res.data.url;
+		},
+		handleAvatarSuccess4(res, file) {
+			this.fourImage = URL.createObjectURL(file.raw);
+			this.fourUrl = res.data.url;
+		},
+		handleAvatarSuccess5(res, file) {
+			this.fiveImage = URL.createObjectURL(file.raw);
+			this.fiveUrl = res.data.url;
 		},
 		beforeAvatarUpload(file) {
 			const isJPG = file.type === 'image/jpeg';
@@ -495,8 +522,19 @@ export default{
 			  const formData = new FormData()
 			  formData.append('file', tofile, tofile.name)
 			  formData.append('fileType', 9)
-			  // ajax 请求
+			  this.$api.upload(formData).then((response)=>{
+				  console.log(response)
+				  if(response.code==1){
+					  this.form.sign_url=response.data.url;
+				  }else{
+					  this.$message({
+						  message: '请选择买入币种',
+						  type: 'warning'
+					  })
+				  }
+			  })
 			})
+			
 		  }).catch(err => {
 			_this.$toast(err) // 画布没有签字时会执行这里 'Not Signned'
 		  })
@@ -533,6 +571,7 @@ export default{
 		})
 		this.$api.getConfig({type:'issuer'}).then((response)=>{
 			that.issuer= response
+			console.log(JSON.stringify(response))
 		})
 		this.$api.getConfig({type:'nationality'}).then((response)=>{
 			that.nationality = response
