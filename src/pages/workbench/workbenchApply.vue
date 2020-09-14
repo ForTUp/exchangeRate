@@ -49,20 +49,12 @@
 								<el-row  :gutter="24">
 									<el-col :span="6">
 										<el-form-item label="汇款人姓名/Name of Sender："  class="labelName">
-<<<<<<< HEAD
 											<el-input v-model="form.remit_info.realname" placeholder="请输入" ></el-input>
-=======
-											<el-input v-model="form.password" placeholder="请输入" ></el-input>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="请选择区号："  class="labelName">
-<<<<<<< HEAD
 										 <el-select v-model="form.remit_info.areacode_id" placeholder="请选择区号" class="formSelect">
-=======
-										 <el-select v-model="form.areacode2_id" placeholder="请选择区号" class="formSelect">
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 											<el-option
 											  v-for="item in areacode"
 											 :key="item.id"
@@ -75,31 +67,19 @@
 									<el-col :span="6">
 										<div class="formSpan">-</div>
 										<el-form-item label="手机号码/Phone Number："  class="labelName labelNameDown"> 
-<<<<<<< HEAD
 											<el-input v-model="form.remit_info.mobile" placeholder="请输入手机号码" ></el-input>
-=======
-											<el-input v-model="form.mobile2" placeholder="请输入手机号码" ></el-input>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="和本人关系/Relationship："  class="labelName">
-<<<<<<< HEAD
 											<el-input v-model="form.remit_info.relationship" placeholder="请输入" ></el-input>
-=======
-											<el-input v-model="form.password" placeholder="请输入" ></el-input>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
 										<el-form-item label="*居住国家/Residence Country："  class="labelName">
-<<<<<<< HEAD
 										 <el-select v-model="form.remit_info.country_id" placeholder="请选择" class="formSelect">
-=======
-										 <el-select v-model="form.country_id" placeholder="请选择" class="formSelect">
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 											<el-option
 											  v-for="item in nationality"
 											 :key="item.id"
@@ -111,60 +91,36 @@
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="省/State："  class="labelName">
-<<<<<<< HEAD
 											<el-input v-model="form.remit_info.province" placeholder="请输入" ></el-input>
-=======
-											<el-input v-model="form.province" placeholder="请输入" ></el-input>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="市/Suburb："  class="labelName">
-<<<<<<< HEAD
 											<el-input v-model="form.remit_info.city" placeholder="请输入" ></el-input>
-=======
-											<el-input v-model="form.city" placeholder="请输入" ></el-input>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="区县/Area："  class="labelName"> 
-<<<<<<< HEAD
 											<el-input v-model="form.remit_info.area" placeholder="请输入" ></el-input>
-=======
-											<el-input v-model="form.area" placeholder="请输入" ></el-input>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="12">
 										<el-form-item label="居住地址/Residence Address："  class="labelName">
-<<<<<<< HEAD
 											<el-input v-model="form.remit_info.address" placeholder="请输入您的常住地址，详细至街道，门牌号" class="formAddr"></el-input>
-=======
-											<el-input v-model="form.address" placeholder="请输入您的常住地址，详细至街道，门牌号" class="formAddr"></el-input>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 									<el-col :span="6" :push="6">
 										<el-form-item label="邮编/Postcode："  class="labelName">
-<<<<<<< HEAD
 											<el-input v-model="form.remit_info.postcode" placeholder="请输入邮编" ></el-input>
-=======
-											<el-input v-model="form.postcode" placeholder="请输入邮编" ></el-input>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
 										<el-form-item label="证件类型/ID Type："  class="labelName">
-<<<<<<< HEAD
 										 <el-select v-model="form.remit_info.certificate.idcard.type_id" placeholder="请选择" class="formSelect">
-=======
-										 <el-select v-model="form.certificate.idcard.type_id" placeholder="请选择" class="formSelect">
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 											<el-option
 											  v-for="item in idtype"
 											  :key="item.id"
@@ -176,21 +132,13 @@
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="证件号码/ID Number："  class="labelName">
-<<<<<<< HEAD
-											<el-input v-model="form.remit_info.certificate.idcard.number" placeholder="请输入" ></el-input>
-=======
 											<el-input v-model="form.certificate.idcard.number" placeholder="请输入" ></el-input>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="证件有效期/Date of expiration："  class="labelName"> 
 											<el-date-picker
-<<<<<<< HEAD
 											      v-model="form.remit_info.certificate.idcard.expiration"
-=======
-											      v-model="form.certificate.idcard.expiration"
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 											      type="date"
 											      placeholder="选择日期">
 											</el-date-picker>
@@ -258,20 +206,8 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-<<<<<<< HEAD
 										<el-form-item label="*汇款金额/Amount："  class="labelName">
 										 <el-input v-model="form.money" placeholder="请输入" ></el-input>
-=======
-										<el-form-item label="证件类型/ID Type："  class="labelName">
-										 <el-select v-model="form.idcard" placeholder="请选择" class="formSelect">
-											<el-option
-											  v-for="item in idtype"
-											  :key="item.value"
-											  :label="item.label"
-											  :value="item.value">
-											</el-option>
-										  </el-select>
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 										</el-form-item>
 									</el-col>
 								</el-row>
@@ -548,7 +484,6 @@ export default{
 	data() {
 		return {
 			form: {
-<<<<<<< HEAD
 				id:1,
 				remit_type:2,
 				remit_id:0,
@@ -597,43 +532,6 @@ export default{
 						out_remark:"备注"
 					}
 				]
-=======
-				firstname:'张',
-				lastname:'三',
-				gender:'1',
-				birthday:'1991-03-13', 
-				nationality_id: '', 
-				occupation_id: '',
-				email: 'enoch0418@163.com', 
-				areacode_id:'',
-				mobile:'13888888888',
-				areacode2_id:'',
-				mobile2:'13988888888',
-				country_id:'',
-				province:'省',
-				city:'市',
-				area:'区',
-				address:'居住地址',
-				postcode:'邮编',
-				sign_url:'',
-				certificate:{
-					passport:{
-						type:'',
-						issuer_id:'',
-						number:'护照号码',
-						expiration:'',
-						photos:'',
-					},
-					idcard:{
-						type_id:'',
-						issuer_id:'',
-						number:'证件号码',
-						expiration:'',
-						photos:'',
-					},
-				},
-				
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 			},
 			isradio:'1',
 			imageUrl:require('../../static/image/u95.png'),
@@ -647,10 +545,7 @@ export default{
 			account:[],
 			source:[],
 			purpose:[],
-<<<<<<< HEAD
 			currencyList:[],
-=======
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 			//图片blob
 			firstImage:'',
 			secondImage:'',
@@ -662,11 +557,8 @@ export default{
 			thirdUrl:'',
 			fourUrl:'',
 			fiveUrl:'',
-<<<<<<< HEAD
 			sourceList:[],
 			purposeList:[]
-=======
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 		}
 		
 	},
@@ -699,25 +591,7 @@ export default{
 		handleAvatarSuccess5(res, file) {
 			this.fiveImage = URL.createObjectURL(file.raw);
 			this.fiveUrl = res.data.url;
-		},
-<<<<<<< HEAD
-=======
-		// 将blob转换为file
-		blobToFile (theBlob, fileName) {
-		  theBlob.lastModifiedDate = new Date()
-		  theBlob.name = fileName
-		  return theBlob
-		},
-		
-		handleAvatarSuccess4(res, file) {
-			this.fourImage = URL.createObjectURL(file.raw);
-			this.fourUrl = res.data.url;
-		},
-		handleAvatarSuccess5(res, file) {
-			this.fiveImage = URL.createObjectURL(file.raw);
-			this.fiveUrl = res.data.url;
-		},
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
+		}
 	},
 	mounted() {
 		let that = this;
@@ -741,25 +615,16 @@ export default{
 			that.occupation = response
 		})
 		this.$api.getConfig({type:'purpose'}).then((response)=>{
-<<<<<<< HEAD
-			
 			that.purpose = response
 			console.log(that.purpose,'purpose')
-		})
-		this.$api.getConfig({type:'source'}).then((response)=>{
-			
-			that.source = response
-			console.log(that.source,'source')
 		})
 		//获取货币列表
 		this.$api.getCurrencyList().then((response) =>{
 			this.currencyList= response.data.rows;
-=======
 			that.purpose = response
 		})
 		this.$api.getConfig({type:'source'}).then((response)=>{
 			that.source = response
->>>>>>> dc2c31317851095d104aff7057ef674af702f7bc
 		})
 	}
 }	
