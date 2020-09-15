@@ -34,17 +34,34 @@
 								</div>
 								<el-row class="formRadioHead">
 									<el-col>
-										<el-radio v-model="isradio" label="1" value='1'>本人 </el-radio><span>默认汇款人</span>
+										<el-radio v-model="form.remit_type" label="0" value='0'>本人 </el-radio><span>默认汇款人</span>
+									</el-col>
+								</el-row >
+								<el-row class="formRadioHead" v-if="senderList">
+									<el-col>
+										<el-radio v-model="form.remit_type" label="1" value='1'>历史汇款人</el-radio>
+									</el-col>
+								</el-row >
+								<el-row class="formRadioHead"  v-if="senderList">
+									<el-col>
+										  <el-radio-group v-model="form.remit_id" size="mini" disabled>
+											  <el-radio label="1" border
+											  v-for="item in senderList"
+											  :label="item.id"
+											  :name="item.realname"
+											  >
+											  </el-radio>
+										  </el-radio-group>
 									</el-col>
 								</el-row >
 								<el-row  class="formRadioHead">
 									<el-col>
-										<el-radio v-model="isradio" label="2" value='2'>添加汇款人</el-radio>
+										<el-radio v-model="form.remit_type" label="2" value='2'>添加汇款人</el-radio>
 									</el-col>
 								</el-row>
 							</div>
 							<!-- 添加汇款人-->
-							<div v-if="isradio==2">
+							<div v-if="form.remit_type==2">
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
@@ -132,7 +149,7 @@
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="证件号码/ID Number："  class="labelName">
-											<el-input v-model="form.certificate.idcard.number" placeholder="请输入" ></el-input>
+											<el-input v-model="form.remit_info.certificate.idcard.number" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
@@ -229,7 +246,7 @@
 											<el-checkbox-group
 											    v-model="purposeList"
 												class="checkForm">
-											    <el-checkbox class="checkboxSpanNext" v-for="item in purpose" :label="item.id" :key="item.id">{{item.name}}</el-checkbox>
+											    <el-checkbox class="checkboxSpanNext" v-for="item in  purpose" :label="item.id" :key="item.id">{{item.name}}</el-checkbox>
 											  </el-checkbox-group>
 										</el-form-item>
 									</el-col>
@@ -242,232 +259,233 @@
 								<div class="headForm">
 									<span class="spanMsg">接收人 | Payee detail</span>
 								</div>
-								<div class="Payee">
+								<div class="Payee" v-if="isshow1">
 									<el-row :gutter="24">
-										<span>1号接收人基本信息</span>
-									</el-row>
-									<el-row  :gutter="24">
-										<el-col :span="6">
-											<el-form-item label="汇款人姓名/Name of Sender："  class="labelName">
-												<el-input v-model="form.remit_info.realname" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="请选择区号："  class="labelName">
-											 <el-select v-model="form.remit_info.areacode_id" placeholder="请选择区号" class="formSelect">
-												<el-option
-												  v-for="item in areacode"
-												 :key="item.id"
-												 :label="item.name"
-												 :value="item.id">
-												</el-option>
-											  </el-select>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<div class="formSpan">-</div>
-											<el-form-item label="手机号码/Phone Number："  class="labelName labelNameDown"> 
-												<el-input v-model="form.remit_info.mobile" placeholder="请输入手机号码" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="和本人关系/Relationship："  class="labelName">
-												<el-input v-model="form.remit_info.relationship" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-									<el-row  :gutter="24">
-										<el-col :span="6">
-											<el-form-item label="*居住国家/Residence Country："  class="labelName">
-											 <el-select v-model="form.remit_info.country_id" placeholder="请选择" class="formSelect">
-												<el-option
-												  v-for="item in nationality"
-												 :key="item.id"
-												 :label="item.name"
-												 :value="item.id">
-												</el-option>
-											  </el-select>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="省/State："  class="labelName">
-												<el-input v-model="form.remit_info.province" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="市/Suburb："  class="labelName">
-												<el-input v-model="form.remit_info.city" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="区县/Area："  class="labelName"> 
-												<el-input v-model="form.remit_info.area" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-									<el-row  :gutter="18">
-										<el-col :span="12">
-											<el-form-item label="居住地址/Residence Address："  class="labelName">
-												<el-input v-model="form.remit_info.address" placeholder="请输入您的常住地址，详细至街道，门牌号" class="formAddr"></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6" :push="6">
-											<el-form-item label="邮编/Postcode："  class="labelName">
-												<el-input v-model="form.remit_info.postcode" placeholder="请输入邮编" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-									<el-row :gutter="24">
-										<span>1号接收人银行信息</span>
-									</el-row>
-									<el-row :gutter="24">
-										<el-col :span="6">
-											<el-form-item label="*银行名称/Bank Name："  class="labelName">
-											 <el-input v-model="form.remit_info.province" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="*开户银行分支行/BSB："  class="labelName">
-												<el-input v-model="form.remit_info.province" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="*银行账号/ Account Number："  class="labelName">
-												<el-input v-model="form.remit_info.city" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="Swift Code："  class="labelName"> 
-												<el-input v-model="form.remit_info.area" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-									<el-row :gutter="24">
-										<el-col :span="6">
-											<el-form-item label="备注/Remarks："  class="labelName"> 
-												<el-input v-model="form.remit_info.area" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-								</div>
-								<div class="Payee">
-									<el-row :gutter="24">
-										<span>2号接收人基本信息</span>
-									</el-row>
-									<el-row  :gutter="24">
-										<el-col :span="6">
-											<el-form-item label="汇款人姓名/Name of Sender："  class="labelName">
-												<el-input v-model="form.remit_info.realname" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="请选择区号："  class="labelName">
-											 <el-select v-model="form.remit_info.areacode_id" placeholder="请选择区号" class="formSelect">
-												<el-option
-												  v-for="item in areacode"
-												 :key="item.id"
-												 :label="item.name"
-												 :value="item.id">
-												</el-option>
-											  </el-select>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<div class="formSpan">-</div>
-											<el-form-item label="手机号码/Phone Number："  class="labelName labelNameDown"> 
-												<el-input v-model="form.remit_info.mobile" placeholder="请输入手机号码" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="和本人关系/Relationship："  class="labelName">
-												<el-input v-model="form.remit_info.relationship" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-									<el-row  :gutter="24">
-										<el-col :span="6">
-											<el-form-item label="*居住国家/Residence Country："  class="labelName">
-											 <el-select v-model="form.remit_info.country_id" placeholder="请选择" class="formSelect">
-												<el-option
-												  v-for="item in nationality"
-												 :key="item.id"
-												 :label="item.name"
-												 :value="item.id">
-												</el-option>
-											  </el-select>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="省/State："  class="labelName">
-												<el-input v-model="form.remit_info.province" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="市/Suburb："  class="labelName">
-												<el-input v-model="form.remit_info.city" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="区县/Area："  class="labelName"> 
-												<el-input v-model="form.remit_info.area" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-									<el-row  :gutter="18">
-										<el-col :span="12">
-											<el-form-item label="居住地址/Residence Address："  class="labelName">
-												<el-input v-model="form.remit_info.address" placeholder="请输入您的常住地址，详细至街道，门牌号" class="formAddr"></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6" :push="6">
-											<el-form-item label="邮编/Postcode："  class="labelName">
-												<el-input v-model="form.remit_info.postcode" placeholder="请输入邮编" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-									<el-row :gutter="24">
-										<span>2号接收人银行信息</span>
-									</el-row>
-									<el-row :gutter="24">
-										<el-col :span="6">
-											<el-form-item label="*银行名称/Bank Name："  class="labelName">
-											 <el-input v-model="form.remit_info.province" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="*开户银行分支行/BSB："  class="labelName">
-												<el-input v-model="form.remit_info.province" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="*银行账号/ Account Number："  class="labelName">
-												<el-input v-model="form.remit_info.city" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :span="6">
-											<el-form-item label="Swift Code："  class="labelName"> 
-												<el-input v-model="form.remit_info.area" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-									<el-row :gutter="24">
-										<el-col :span="6">
-											<el-form-item label="备注/Remarks："  class="labelName"> 
-												<el-input v-model="form.remit_info.area" placeholder="请输入" ></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-								</div>
-								<el-row  :gutter="24">
-									<el-col :span="6">
-										<div class="textBtn" >
-											<el-link type="primary"  :underline="false">添加接收人</el-link>
+										<div class="PayeeDiv">
+											<span>1号接收人基本信息</span>
 										</div>
-									</el-col>
-								</el-row>
+									</el-row>
+									<el-row  :gutter="24">
+										<el-col :span="6">
+											<el-form-item label="汇款人姓名/Name of Sender："  class="labelName">
+												<el-input v-model="form.sender[0].realname" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="请选择区号："  class="labelName">
+											 <el-select v-model="form.sender[0].areacode_id" placeholder="请选择区号" class="formSelect">
+												<el-option
+												  v-for="item in areacode"
+												 :key="item.id"
+												 :label="item.name"
+												 :value="item.id">
+												</el-option>
+											  </el-select>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<div class="formSpan">-</div>
+											<el-form-item label="手机号码/Phone Number："  class="labelName labelNameDown"> 
+												<el-input v-model="form.sender[0].mobile" placeholder="请输入手机号码" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="和本人关系/Relationship："  class="labelName">
+												<el-input v-model="form.sender[0].relationship" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+									<el-row  :gutter="24">
+										<el-col :span="6">
+											<el-form-item label="*居住国家/Residence Country："  class="labelName">
+											 <el-select v-model="form.sender[0].country_id" placeholder="请选择" class="formSelect">
+												<el-option
+												  v-for="item in nationality"
+												 :key="item.id"
+												 :label="item.name"
+												 :value="item.id">
+												</el-option>
+											  </el-select>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="省/State："  class="labelName">
+												<el-input v-model="form.sender[0].province" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="市/Suburb："  class="labelName">
+												<el-input v-model="form.sender[0].city" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="区县/Area："  class="labelName"> 
+												<el-input v-model="form.sender[0].area" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+									<el-row  :gutter="18">
+										<el-col :span="12">
+											<el-form-item label="居住地址/Residence Address："  class="labelName">
+												<el-input v-model="form.sender[0].address" placeholder="请输入您的常住地址，详细至街道，门牌号" class="formAddr"></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6" :push="6">
+											<el-form-item label="邮编/Postcode："  class="labelName">
+												<el-input v-model="form.sender[0].postcode" placeholder="请输入邮编" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+									<el-row :gutter="24">
+										<div class="PayeeDiv">
+											<span>1号接收人银行信息</span>
+										</div>
+									</el-row>
+									<el-row :gutter="24">
+										<el-col :span="6">
+											<el-form-item label="*银行名称/Bank Name："  class="labelName">
+											 <el-input v-model="form.sender[0].bankname" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="*开户银行分支行/BSB："  class="labelName">
+												<el-input v-model="form.sender[0].bank" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="*银行账号/ Account Number："  class="labelName">
+												<el-input v-model="form.sender[0].account" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="Swift Code："  class="labelName"> 
+												<el-input v-model="form.sender[0].swift_code" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+									<el-row :gutter="24">
+										<el-col :span="6">
+											<el-form-item label="备注/Remarks："  class="labelName"> 
+												<el-input v-model="form.sender[0].out_remark" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+								</div>
+								<div class="Payee" v-if="isshow2">
+									<el-row :gutter="24">
+										<div class="PayeeDiv" style="background-color: blueviolet;">
+											<span>2号接收人基本信息</span>
+										</div>
+									</el-row>
+									<el-row  :gutter="24">
+										<el-col :span="6">
+											<el-form-item label="汇款人姓名/Name of Sender："  class="labelName">
+												<el-input v-model="form.sender[1].realname" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="请选择区号："  class="labelName">
+											 <el-select v-model="form.sender[1].areacode_id" placeholder="请选择区号" class="formSelect">
+												<el-option
+												  v-for="item in areacode"
+												 :key="item.id"
+												 :label="item.name"
+												 :value="item.id">
+												</el-option>
+											  </el-select>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<div class="formSpan">-</div>
+											<el-form-item label="手机号码/Phone Number："  class="labelName labelNameDown"> 
+												<el-input v-model="form.sender[1].mobile" placeholder="请输入手机号码" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="和本人关系/Relationship："  class="labelName">
+												<el-input v-model="form.sender[1].relationship" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+									<el-row  :gutter="24">
+										<el-col :span="6">
+											<el-form-item label="*居住国家/Residence Country："  class="labelName">
+											 <el-select v-model="form.sender[1].country_id" placeholder="请选择" class="formSelect">
+												<el-option
+												  v-for="item in nationality"
+												 :key="item.id"
+												 :label="item.name"
+												 :value="item.id">
+												</el-option>
+											  </el-select>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="省/State："  class="labelName">
+												<el-input v-model="form.sender[1].province" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="市/Suburb："  class="labelName">
+												<el-input v-model="form.sender[1].city" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="区县/Area："  class="labelName"> 
+												<el-input v-model="form.sender[1].area" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+									<el-row  :gutter="18">
+										<el-col :span="12">
+											<el-form-item label="居住地址/Residence Address："  class="labelName">
+												<el-input v-model="form.sender[1].address" placeholder="请输入您的常住地址，详细至街道，门牌号" class="formAddr"></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6" :push="6">
+											<el-form-item label="邮编/Postcode："  class="labelName">
+												<el-input v-model="form.sender[1].postcode" placeholder="请输入邮编" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+									<el-row :gutter="24">
+										<div class="PayeeDiv" style="background-color: blueviolet;">
+											<span>2号接收人银行信息</span>
+										</div>
+									</el-row>
+									<el-row :gutter="24">
+										<el-col :span="6">
+											<el-form-item label="*银行名称/Bank Name："  class="labelName">
+											 <el-input v-model="form.sender[1].bankname" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="*开户银行分支行/BSB："  class="labelName">
+												<el-input v-model="form.sender[1].bank" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="*银行账号/ Account Number："  class="labelName">
+												<el-input v-model="form.sender[1].account" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+										<el-col :span="6">
+											<el-form-item label="Swift Code："  class="labelName"> 
+												<el-input v-model="form.sender[1].swift_code" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+									<el-row :gutter="24">
+										<el-col :span="6">
+											<el-form-item label="备注/Remarks："  class="labelName"> 
+												<el-input v-model="form.sender[1].out_remark" placeholder="请输入" ></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+								</div>
 							</div>
 							<div class="formSubmitBtn">
-								<el-button  class="submitBtn" >提交</el-button>
+								<el-button  class="submitBtn" @click="onSubmit">提交</el-button>
 							</div>
 							
 						</el-form>
@@ -484,8 +502,8 @@ export default{
 	data() {
 		return {
 			form: {
-				id:1,
-				remit_type:2,
+				id:0,
+				remit_type:'0',
 				remit_id:0,
 				remit_info:{
 					realname:"张三",
@@ -503,17 +521,34 @@ export default{
 							type_id:"证件类型ID",
 							number:"证件号码",
 							expiration:"2023-09-01",
-							photos:"证件照片Url地址，多个以,隔开"
+							photos:""
 						}
 					}
 				},
 				type:'1',
 				currency:"BYR",
 				money:100,
-				source:"资金来源id，多个以英文逗号分隔，如109,112",
-				purpose:"资金用途id，多个以英文逗号分隔，如110,111",
+				source:"",
+				purpose:"",
 				sender_ids:"历史接收人id，多个以英文逗号分隔，如3,10",
 				sender:[
+					{
+						realname:"李四",
+						areacode_id:"65",
+						mobile:"13788888888",
+						relationship:"朋友",
+						country_id:23,
+						province:"省",
+						city:"市",
+						area:"区县",
+						address:"地址",
+						postcode:"邮编",
+						bankname:"银行名称",
+						bank:"开户银行分支行",
+						account:"银行账号",
+						swift_code:"afds",
+						out_remark:"备注"
+					},
 					{
 						realname:"李四",
 						areacode_id:"65",
@@ -533,7 +568,6 @@ export default{
 					}
 				]
 			},
-			isradio:'1',
 			imageUrl:require('../../static/image/u95.png'),
 			checkList:[],
 			fit:'',
@@ -547,24 +581,54 @@ export default{
 			purpose:[],
 			currencyList:[],
 			//图片blob
-			firstImage:'',
-			secondImage:'',
-			thirdImage:'',
 			fourImage:'',
 			fiveImage:'',
-			firstUrl:'',
-			secondUrl:'',
-			thirdUrl:'',
 			fourUrl:'',
 			fiveUrl:'',
 			sourceList:[],
-			purposeList:[]
+			purposeList:[],
+			//接收人显示影藏
+			isshow1:'1',
+			isshow2:'1',
+			//汇款人列表
+			senderList:[],
+			//接收人列表
+			PayeeList:[]
 		}
 		
 	},
 	methods: {
 		onSubmit() {
-			console.log(this.form);
+			if(this.form.remit_type=='2' && (this.fourUrl=='' ||this.fiveUrl=='')){
+				this.$message({ 
+					message: '请上传图片！',
+					type: 'warning'
+				})
+				return;
+			}
+			if(this.sourceList==null || this.sourceList=='' ){
+				this.$message({
+					message: '请选择资金来源！',
+					type: 'warning'
+				})
+				return;
+			}
+			if(this.purposeList==null || this.purposeList=='' ){
+				this.$message({
+					message: '请选择资金用途！',
+					type: 'warning'
+				})
+				return;
+			}
+			this.form.purpose = this.purposeList.join(',');
+			this.form.source = this.sourceList.join(',');
+			this.form.remit_info.certificate.photos = this.fourUrl + "," + this.fiveUrl;
+			let params = this.qs.stringify(this.form);
+			let packJson  = {"data":JSON.stringify(this.form)};
+			console.log(packJson)
+			this.$api.remit(this.qs.stringify(packJson)).then((response)=>{
+				console.log(response)
+			})
 		},
 		loadLogin(){
 			this.$router.push('/login');
@@ -606,7 +670,6 @@ export default{
 		})
 		this.$api.getConfig({type:'issuer'}).then((response)=>{
 			that.issuer= response
-			console.log(JSON.stringify(response))
 		})
 		this.$api.getConfig({type:'nationality'}).then((response)=>{
 			that.nationality = response
@@ -616,15 +679,18 @@ export default{
 		})
 		this.$api.getConfig({type:'purpose'}).then((response)=>{
 			that.purpose = response
-			console.log(that.purpose,'purpose')
 		})
 		//获取货币列表
 		this.$api.getCurrencyList().then((response) =>{
 			this.currencyList= response.data.rows;
-			that.purpose = response
 		})
 		this.$api.getConfig({type:'source'}).then((response)=>{
 			that.source = response
+		})
+		//获取汇款人
+		this.$api.getRemitUser({type:1}).then((response)=>{
+			console.log(response)
+			that.senderList=response.data;
 		})
 	}
 }	
@@ -634,13 +700,16 @@ export default{
 	@import "../../static/css/form-item.css";  //引入方式
 	body > .el-container {
 		width: 82rem;
+		// border: 0.0625rem  solid red;
 	}
 	.el-header, .el-footer {
 		width: 82rem;
+		border: 0.0625rem #02a7f0 solid;
 		
 	}
 	.el-main {
 		width: 82rem;
+		// border: 0.0625rem  solid red;
 	}
 	
 	.formDiv {
@@ -649,6 +718,7 @@ export default{
 		width:  78rem;
 		height: 135rem !important;
 		margin: 1rem  auto ;
+		// border: 0.0625rem  solid red;
 		
 	}
 	.headForm{
@@ -668,6 +738,7 @@ export default{
 		margin-top: 0.125rem;
 		background-color: #FFF;
 		margin-bottom: 0.125rem;
+		// border: 0.0625rem  solid red;
 	}
 	.bodyFormNext{
 		margin-top:1rem;
@@ -723,21 +794,6 @@ export default{
 		margin-left: 6rem;
 		margin-top: 2.5rem;
 	}
-	.vueEsign{
-		border: 0.0625rem solid #F7F7F7;
-		width: 30rem !important;
-		height: 20rem !important;
-		background-color: #F7F7F7 !important;
-		margin-left: 1rem;
-		margin-top: 1rem;
-	}
-	.esignBtn{
-		margin-top: 1rem;
-		margin-bottom: 1rem;
-	}
-	.esignFormDiv{
-		padding-bottom: 0.5rem;
-	}
 	.checkBtn{
 		color:  #02A7F0;
 	}
@@ -778,7 +834,8 @@ export default{
 	.checkForm{
 		text-align: left;
 		float: left;
-		width: 84rem;
+		width: 78rem;
+		// border: 0.0625rem  solid orange;
 	}
 	.checkboxSpan{
 		margin-left: -1rem;
@@ -795,5 +852,15 @@ export default{
 		text-align: left;
 		line-height: 4rem;
 		padding-left: 2rem;
+	}
+	.PayeeDiv{
+		width: 10rem;
+		height: 2rem;
+		line-height: 2rem;
+		border: 0.0625rem solid ;
+		margin: 1rem 2rem;
+		background-color: orange;
+		color: #FFF;
+		border-radius: 3rem;
 	}
 </style>
