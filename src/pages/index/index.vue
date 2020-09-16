@@ -14,14 +14,14 @@
 							<el-link :underline="false"  type="primary">首页</el-link>
 						</div>
 						<div class="topLinkDiv">
-							<el-link :underline="false" >为什么选择我们</el-link>
+							<el-link :underline="false" @click="goRegister">为什么选择我们</el-link>
 						</div>
 						<div class="topLinkDiv">
-							<el-link :underline="false" >联系我们</el-link>
+							<el-link :underline="false" @click="goContact">联系我们</el-link>
 						</div>
 					</div>
 				</el-col>
-				  <el-col :span="4" :push="4" class="headerColLast">
+				  <el-col :span="4" :push="4" class="headerColLast" style="margin-top: 0.5rem;">
 					<div class="grid-content bg-purple loginout" v-if="userInfo!=null">
 						<span  class="userName">{{userInfo.username}}</span>
 						<el-button  class="loginButton loginoutButton" @click="loginout">退出登录</el-button>
@@ -173,7 +173,7 @@
 						</div>
 					</div>
 					
-					<div class="coreContent chanceDiv">
+					<div class="coreContent chanceDiv form-wrap-app">
 						<div class="coreHead ">
 						<h1>为什么选我们</h1>
 						<p>
@@ -184,7 +184,7 @@
 						</p>
 					</div>
 					</div>
-					<div class="coreHead">
+					<div class="coreHead contact">
 						<h1>联系我们</h1>
 					</div>
 					<div class="coreContent" style="height: 30rem !important;">
@@ -475,7 +475,15 @@ export default {
 				
 			})
 			
-		}
+		},
+		// 跳到注册
+		    goRegister() {
+		      // 注册表单盒子的类名为 form-wrap-app
+		      this.$el.querySelector('.form-wrap-app').scrollIntoView();
+		    },
+			goContact(){
+				this.$el.querySelector('.contact').scrollIntoView();
+			}
 		
 	  },
 	  mounted() {

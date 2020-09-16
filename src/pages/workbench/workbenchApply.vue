@@ -25,7 +25,7 @@
 					<div class="formDiv">
 						<el-form ref="form" :model="form" label-width="19rem">
 							<div class="returnDiv">
-								<el-button class="returnBtn">返回</el-button>
+								<el-button class="returnBtn" @click="$router.back(-1)">返回</el-button>
 							</div>
 							
 							<div class="bodyForm">
@@ -258,6 +258,23 @@
 							<div class="bodyForm bodyFormNext">
 								<div class="headForm">
 									<span class="spanMsg">接收人 | Payee detail</span>
+								</div>
+								<div v-if="PayeeList">
+									<el-row style="width: 30rem;height: 3rem; line-height: 3rem;margin-top: 2rem;margin-left: 1rem;">
+										<span>历史汇款人</span><span style="color: orange;">（最多可以勾选2位收款人，总收款人人数不超过2人）</span>
+									</el-row >
+									<el-row class="formRadioHead" >
+										<el-col>
+											  <el-checkbox-group
+											      v-model="sender_ids"
+											  	class="checkForm">
+											      <el-checkbox class="checkboxSpanNext" v-for="item in PayeeList" :label="item.id" :key="item.id">{{item.realname}}</el-checkbox>
+											    </el-checkbox-group>
+										</el-col>
+									</el-row >
+								</div>
+								<div class="headForm">
+									<el-link type="primary" :underline="false" @click="showPayee" style="margin-left: 1rem;">添加接收人</el-link>
 								</div>
 								<div class="Payee" v-if="isshow1">
 									<el-row :gutter="24">
@@ -588,12 +605,13 @@ export default{
 			sourceList:[],
 			purposeList:[],
 			//接收人显示影藏
-			isshow1:'1',
-			isshow2:'1',
+			isshow1:false,
+			isshow2:false,
 			//汇款人列表
 			senderList:[],
 			//接收人列表
-			PayeeList:[]
+			PayeeList:[],
+			sender_ids:[]
 		}
 		
 	},
@@ -620,13 +638,19 @@ export default{
 				})
 				return;
 			}
+			//资金用途和资金来源
 			this.form.purpose = this.purposeList.join(',');
 			this.form.source = this.sourceList.join(',');
+			//图片
 			this.form.remit_info.certificate.photos = this.fourUrl + "," + this.fiveUrl;
-			let params = this.qs.stringify(this.form);
+			//
+			if(this.sender_ids){
+				this.form.sender_ids=this.sender_ids.join(',');
+			}
+			// let params = this.qs.stringify(this.form);
 			let packJson  = {"data":JSON.stringify(this.form)};
 			console.log(packJson)
-			this.$api.remit(this.qs.stringify(packJson)).then((response)=>{
+			this.$api.remit(packJson).then((response)=>{
 				console.log(response)
 			})
 		},
@@ -655,6 +679,16 @@ export default{
 		handleAvatarSuccess5(res, file) {
 			this.fiveImage = URL.createObjectURL(file.raw);
 			this.fiveUrl = res.data.url;
+		},
+		showPayee(){
+			if(!this.isshow1){
+				this.isshow1=true;
+				return;
+			}
+			if(!this.isshow2){
+				this.isshow2=true;
+				return;
+			}
 		}
 	},
 	mounted() {
@@ -692,6 +726,12 @@ export default{
 			console.log(response)
 			that.senderList=response.data;
 		})
+		
+		//获取收款人
+		this.$api.getRemitUser({type:2}).then((response)=>{
+			console.log(response)
+			that.PayeeList=response.data;
+		})
 	}
 }	
 </script>
@@ -716,7 +756,7 @@ export default{
 		border-radius: 1px;
 		background-color: #F7F7F7;
 		width:  78rem;
-		height: 135rem !important;
+		// height: 135rem !important;
 		margin: 1rem  auto ;
 		// border: 0.0625rem  solid red;
 		

@@ -11,12 +11,12 @@
 							</div>
 						</div>
 					</el-col>
-					<el-col :span="2">
+					<el-col :span="2" style="margin-top: 0.5rem;">
 						<div class="grid-content bg-purple">
 							<span  class="loginSpan">{{userInfo.username}}</span> &nbsp;&nbsp;
 						</div>
 					</el-col>
-					<el-col :span="2">
+					<el-col :span="2" style="margin-top: 0.5rem;">
 						<div class="grid-content bg-purple">
 							<el-button class="exitBtn" @click="loginout" style="margin-right: 1rem;">退出</el-button>
 						</div>

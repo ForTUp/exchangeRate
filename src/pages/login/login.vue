@@ -2,7 +2,7 @@
 		<div id="index">
 			<el-container>
 				<el-header>
-					<el-row :gutter="20">
+					<el-row :gutter="20" style="">
 					<el-col :span="18">
 						<div class="grid-content bg-purple ">
 							<div class="logoDiv">
@@ -13,7 +13,7 @@
 							</div>
 						</div>
 					</el-col>
-					  <el-col :span="4">
+					  <el-col :span="4" style="margin-top: 0.5rem;">
 						<div class="grid-content bg-purple">
 							<el-button  class="vipButton" @click="vipApply">会员申请</el-button>
 						</div>

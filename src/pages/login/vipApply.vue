@@ -13,7 +13,7 @@
 								</div>
 							</div>
 						</el-col>
-						  <el-col :span="4">
+						  <el-col :span="4" style="margin-top: 0.5rem;">
 						<div class="grid-content bg-purple">
 							<el-button  class="loginButton loginButtonTop" @click="loadLogin">登录</el-button>
 						</div>
