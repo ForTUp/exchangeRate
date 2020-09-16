@@ -650,7 +650,7 @@ export default{
 			// let params = this.qs.stringify(this.form);
 			let packJson  = {"data":JSON.stringify(this.form)};
 			console.log(packJson)
-			this.$api.remit(packJson).then((response)=>{
+			this.$api.remit(this.qs.stringify(packJson)).then((response)=>{
 				console.log(response)
 			})
 		},
