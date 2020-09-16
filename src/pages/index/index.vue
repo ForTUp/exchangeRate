@@ -212,7 +212,7 @@
 									<li class="mapHeadText"><span>周一至周五 9:30-5:30 营业，周六周日休息</span></li>
 								</ul>
 							</div>
-							<baidu-map class="map"  :center="center" :zoom="zoom" @read="handler">
+							<baidu-map class="map"  :center="center1" :zoom="zoom" @read="handler1">
 							</baidu-map>
 							<div class="mapButtom">
 								<ul>
@@ -229,7 +229,7 @@
 									<li class="mapHeadText"><span>周一至周五 9:30-5:30 营业，周六周日休息</span></li>
 								</ul>
 							</div>
-							<baidu-map class="map"  :center="center" :zoom="zoom" @read="handler">
+							<baidu-map class="map"  :center="center2" :zoom="zoom" @read="handler2">
 							</baidu-map>
 							<div class="mapButtom">
 								<ul>
@@ -302,10 +302,7 @@ export default {
 			  // 图片地址数组
 			imgList: [
 			    {
-				  url: require('../../static/image/banner1.png')
-				},
-				{
-				  url: require('../../static/image/u95.png')
+				  url: require('../../static/image/banner.png')
 				},
 			  ],
 			  // 图片父容器高度
@@ -329,7 +326,10 @@ export default {
 			  formLabelWidth:'100px',
 			  currencyList:[],
 			  //百度地图数据
-			  center: {lng: 116.404, lat: 39.915},
+			  // -33.795084, 151.185378
+			  center: {lng: 151.185378, lat: -33.795084},
+			  center1: {lng: 151.101350, lat: -33.703887},
+			  center2: {lng: 151.032826, lat: -33.849612},
 			  zoom:15,
 			  //实时汇率
 			  nowForm:{
@@ -343,7 +343,7 @@ export default {
 	  methods: {
 	    setSize: function() {
 	      // 通过浏览器宽度(图片宽度)计算高度
-	      this.bannerHeight = (400 / 1920) * this.screenWidth;
+	      this.bannerHeight = (500 / 1920) * this.screenWidth;
 	    },
 		loadLogin(){
 			this.$router.push('/login');
@@ -394,10 +394,23 @@ export default {
 		},
 		handler({BMap,map}){
 			console.log(BMap,map);
-			this.center.lng= 116.404;
-			this.center.lat=39.915;
+			// this.center.lng= 151.184048;
+			// this.center.lat=-33.797626;
 			this.zoom = 15;
 		},
+		handler1({BMap,map}){
+			console.log(BMap,map);
+			// this.center1.lng= 116.404;
+			// this.center1.lat=39.915;
+			this.zoom = 15;
+		},
+		handler2({BMap,map}){
+			console.log(BMap,map);
+			// this.center2.lng= 116.404;
+			// this.center2.lat=39.915;
+			this.zoom = 15;
+		},
+		
 		getExchangeInfo(){
 			
 			if(this.form.from==null || this.form.from == '' ){
