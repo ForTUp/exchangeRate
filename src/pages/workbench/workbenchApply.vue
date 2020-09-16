@@ -647,10 +647,10 @@ export default{
 			if(this.sender_ids){
 				this.form.sender_ids=this.sender_ids.join(',');
 			}
-			// let params = this.qs.stringify(this.form);
+			let params = this.qs.stringify(this.form);
 			let packJson  = {"data":JSON.stringify(this.form)};
 			console.log(packJson)
-			this.$api.remit(this.qs.stringify(packJson)).then((response)=>{
+			this.$api.remit({data:JSON.stringify(this.form)}).then((response)=>{
 				console.log(response)
 			})
 		},
