@@ -23,7 +23,8 @@
 				</el-col>
 				  <el-col :span="4" :push="4" class="headerColLast" style="margin-top: 0.5rem;">
 					<div class="grid-content bg-purple loginout" v-if="userInfo!=null">
-						<span  class="userName">{{userInfo.username}}</span>
+						<!-- <span  class="userName" @click="goToWork">{{userInfo.username}}</span> -->
+						<el-link class="userName" :underline="false" @click="goToWork">{{userInfo.username}}</el-link>
 						<el-button  class="loginButton loginoutButton" @click="loginout">退出登录</el-button>
 					</div>
 					<div v-if="userInfo==null" class="loginDiv">
@@ -43,7 +44,7 @@
 					 </el-carousel>
 				</div>
 				<!--货币兑换 -->
-				<div id="showCurrencyDiv" class="iocnDiv currency" @click="dialogFormVisible = true">
+				<div id="showCurrencyDiv" class="iocnDiv currency" @click="dialogFormVisible = true" style="cursor:pointer">
 					<i class="iconfont iconhuobiduihuan1"></i><br>
 					<span>货币兑换</span>
 				</div>
@@ -59,7 +60,7 @@
 					<div class="coreHead">
 						<h1>三大核心服务项目</h1>
 					</div>
-					<div class="coreContent">
+					<div class="coreContent" style="height: 22rem;">
 						<div class="coreContentList coreContentListFirst">
 							<h1>双向汇款</h1>
 							<ul class="coreUl">
@@ -86,8 +87,8 @@
 					<div class="coreHead">
 						<h1>实时汇率</h1>
 					</div>
-					<div class="coreContent">
-						<div class="tableHeader" style="margin-bottom: 2rem;">
+					<div class="coreContent" >
+						<div class="tableHeader" style="margin-bottom: 2rem;padding-bottom: 2rem;padding-left: 1rem;">
 							<el-form ref="nowForm" :model="nowForm" >
 								<el-row :span="20">
 									<el-col :span="4">
@@ -173,21 +174,31 @@
 						</div>
 					</div>
 					
-					<div class="coreContent chanceDiv form-wrap-app">
+					<div class="coreContent chanceDiv form-wrap-app" >
 						<div class="coreHead ">
-						<h1>为什么选我们</h1>
-						<p>
-							温州集团旗下Blue Rate Finance始建于澳大利亚悉尼 (澳洲金融牌照号AUSTRAC Registration Number：IND100583009-001)，作为一家提供多元化金融产品及服务的综合性金融机构，立足于房地产金融并稳步发展，目前已成为集地产投资、房屋贷款、个人及商业贷款、风险投资及其他金融业务在内的综合性金融集团。
-							Blue Rate Finance 拥有具二十多年中澳金融行业经验，贯通中西高度专业化，多元文化的资深管理团队 。凭借其对澳中两国金融、地产、经济及相关行业政策的深入了解，深耕于悉尼市场，在严格遵循金融行业法规的基础上，辅以严密的风险控制框架。
-							Blue Rate Finance与温州速汇（Blue Rate Remittance）共同为华侨同胞提供移民、留学、工作、置业的汇兑及投资服务，实现资产的保值增值。
-							Blue Rate Finance愿与您精诚合作，携手同进，共绘蓝图。
-						</p>
+							<h1>为什么选我们</h1>
+						</div>
+						<div class="textDiv">
+							<p>
+								温州集团旗下Blue Rate Finance始建于澳大利亚悉尼 (澳洲金融牌照号AUSTRAC Registration Number：IND100583009-001)，作为一家提供多元化金融产品及服务的综合性金融机构，立足于房地产金融并稳步发展，目前已成为集地产投资、房屋贷款、个人及商业贷款、风险投资及其他金融业务在内的综合性金融集团。
+							</p>
+							<p>
+								Blue Rate Finance 拥有具二十多年中澳金融行业经验，贯通中西高度专业化，多元文化的资深管理团队 。凭借其对澳中两国金融、地产、经济及相关行业政策的深入了解，深耕于悉尼市场，在严格遵循金融行业法规的基础上，辅以严密的风险控制框架。
+							</p>
+							<p>
+								Blue Rate Finance与温州速汇（Blue Rate Remittance）共同为华侨同胞提供移民、留学、工作、置业的汇兑及投资服务，实现资产的保值增值。
+								
+							</p>
+							
+						</div>
+						<div><h3>Blue Rate Finance愿与您精诚合作，携手同进，共绘蓝图。</h3></div>
 					</div>
-					</div>
+					
+					
 					<div class="coreHead contact">
 						<h1>联系我们</h1>
 					</div>
-					<div class="coreContent" style="height: 30rem !important;">
+					<div class="coreContent" >
 						<div class="mapDiv" style="margin-left: 0 !important;">
 							<div class="mapHead">
 								<ul>
@@ -350,6 +361,9 @@ export default {
 		},
 		vipApply(){
 			this.$router.push('/vipApply');
+		},
+		goToWork(){
+			this.$router.push('/workbench');
 		},
 		loginout(){
 			let that = this;
@@ -551,7 +565,7 @@ export default {
 	}
 	.el-main {
 		 width: 100rem;
-		 background-color: #FFF;
+		 background-color: #F7F7F7;
 		 color: #333;
 		 text-align: center;
 		 margin: 0 auto !important;
@@ -603,7 +617,7 @@ export default {
 		
 	}
 	.coreContent{
-		height: 22rem;
+		// height: 22rem;
 		// border: 0.0625rem solid blue;
 		margin-top: 2rem;
 	}
@@ -742,9 +756,10 @@ export default {
 	}
 	
 	.chanceDiv{
-		border: 0.0625rem solid red;
+		// border: 0.0625rem solid red;
 		border-radius: 2rem;
 		background-color: #EEE;
+		padding: 2rem 0 6rem 0;
 	}
 	.block{
 		margin-top: 1rem;
@@ -772,6 +787,15 @@ export default {
 				}
 			}
 			
+		}
+	}
+	.textDiv{
+		text-align: left;
+		// border: 0.0625rem solid red;
+		padding: 2rem;
+		p{
+			font-size: 1rem;
+			line-height: 1.5rem;
 		}
 	}
 </style>

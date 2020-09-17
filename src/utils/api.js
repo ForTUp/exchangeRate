@@ -72,5 +72,10 @@ export default {
 	remit:(data)=>{
 		return post('/api/remit/add',data)
 	},
-	
+	remitDel:(data)=>{
+		return get('/api/remit/del',data)
+	},
+	remitInfo:(data)=>{
+		return get('/api/remit/info',data)
+	},
 }

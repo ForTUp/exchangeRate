@@ -13,7 +13,8 @@
 					</el-col>
 					<el-col :span="2" style="margin-top: 0.5rem;">
 						<div class="grid-content bg-purple">
-							<span  class="loginSpan">{{userInfo.username}}</span> &nbsp;&nbsp;
+							<!-- <span  class="loginSpan">{{userInfo.username}}</span> &nbsp;&nbsp; -->
+							<el-link class="loginSpan" :underline="false" @click="goToIndex">{{userInfo.username}}</el-link>
 						</div>
 					</el-col>
 					<el-col :span="2" style="margin-top: 0.5rem;">
@@ -69,9 +70,9 @@
 						<el-table :data="tableData" style="width: 100%" border  :row-class-name="tableRowClassName">
 							<el-table-column prop="id" label="序号" width="50">
 							</el-table-column>
-							<el-table-column prop="sendername" label="汇款人" width="100">
+							<el-table-column prop="remit_name" label="汇款人" width="100">
 							</el-table-column>
-							<el-table-column prop="type" label="类型" width="50" :formatter = "stateFormat">
+							<el-table-column prop="type" label="类型" width="50" :formatter = "stateFormatType">
 							</el-table-column>
 							<el-table-column prop="currency" label="币种" width="100">
 							</el-table-column>
@@ -81,24 +82,26 @@
 							</el-table-column>
 							<el-table-column prop="source_text" label="资金用途" width="140">
 							</el-table-column>
-							<el-table-column prop="sender[0].out_bankname" label="收款人1" width="80">
+							<el-table-column prop="sender_name1" label="收款人1" width="80">
 							</el-table-column>
-							<el-table-column prop="sender[1].out_bankname" label="收款人2" width="80">
+							<el-table-column prop="sender_name2" label="收款人2" width="80">
 							</el-table-column>
 							<el-table-column prop="createtime" label="申请日期" width="160">
 							    <template slot-scope="scope">{{scope.row.createtime| dateYMDHMSFormat}}</template>
 							</el-table-column>
-							<el-table-column prop="state" label="状态" width="100" :formatter = "stateFormat">
+							<el-table-column prop="state" label="状态" width="100" :formatter = "stateFormatState">
 							</el-table-column>
 							<el-table-column label="操作"  fixed="right" >
 							      <template slot-scope="scope">
-							        <el-button
-							          size="mini"
-							          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+							       
 							        <el-button
 							          size="mini"
 							          type="danger"
-							          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+							          @click="handleDelete(scope.row)">删除</el-button>
+									  <el-button
+									   v-if="scope.row.state!='1'"
+									    size="mini"
+									    @click="handleEdit(scope.row)">编辑</el-button>
 							      </template>
 							</el-table-column>
 						</el-table>
@@ -163,29 +166,29 @@
 					let {data} =response;
 					this.total=data.total
 					this.tableData= data.rows;
+					console.log(this.tableData,'tableData');
 				})
 			},
 			loadLogin() {
 				this.$router.push('/login');
 			},
-			stateFormat(row, column) {
-				if(column.property=='type'){
-					if (row.type === '0') {
-					  return ''
-					} else if (row.type ==='1') {
-					  return '买入'
-					} else if (row.type === '2') {
-					  return '卖出'
-					}
+			stateFormatType(row) {
+				if (row.type === '0') {
+				  return ''
+				} else if (row.type ==='1') {
+				  return '买入'
+				} else if (row.type === '2') {
+				  return '卖出'
 				}
-				if(column.property=='state'){
-					if (row.type == '0') {
-					  return '待审核'
-					} else if (row.type =='1') {
-					  return '已通过'
-					} else if (row.type == '2') {
-					  return '被驳回'
-					}
+				
+			},
+			stateFormatState(row) {
+				if (row.state ==='0') {
+				  return '待审核'
+				} else if (row.state ==='1') {
+				  return '已通过'
+				} else if (row.state === '2') {
+				  return '被驳回'
 				}
 				
 			},
@@ -209,6 +212,43 @@
 				} else if (state == '2') {
 				  return ''
 				}
+			},
+			handleEdit(row){
+				console.log(row)
+				let id = row.id;
+				this.$router.push({name:'workbenchApply',params:{id:id}});
+			},
+			handleDelete(row){
+				console.log(row)
+				let id = row.id;
+				 this.$confirm('此操作将删除汇款信息, 是否继续?', '提示', {
+				  confirmButtonText: '确定',
+				  cancelButtonText: '取消',
+				  type: 'warning'
+				}).then(() => {
+				  this.$api.remitDel({id:id}).then((response)=>{
+				  	console.log(response);
+				  	if(response.code=='1'){
+				  		this.$notify({
+				  		  title: '成功',
+				  		  message: '删除汇款信息',
+				  		  type: 'success'
+				  		});
+				  		this.onSubmit();
+				  	}else{
+				  		this.$notify({
+				  		  title: '失败',
+				  		  message: '删除汇款信息',
+				  		  type: 'warning'
+				  		});
+				  	}
+				  })
+				}).catch(() => {
+				  this.$message({
+					type: 'info',
+					message: '已取消删除'
+				  });          
+				});
 			},
 			loadApply(){
 				this.$router.push('/workbenchApply');
@@ -243,9 +283,20 @@
 				}).catch(() => {
 				});
 			},
-	
+			goToIndex(){
+				this.$router.push('/index');
+			},
+			
 		},
 		mounted() {
+			if(this.userInfo==null || this.userInfo=={}){
+				this.$message({
+					message: '请登录！',
+					type: 'warning'
+				})
+				this.$router.push('/login');
+				return;
+			}
 			this.onSubmit()
 		}
 	}

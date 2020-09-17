@@ -423,104 +423,104 @@ export default{
 			},
 			rules: {
 				firstname:[
-					{required: true, message: '请输入名/First Name', trigger: 'blur' }
+					{required: true, message: '请输入名/First Name', trigger: 'change' }
 				],
 				lastname:[
-					{required: true, message: '请输入姓/Last Name', trigger: 'blur' }
+					{required: true, message: '请输入姓/Last Name', trigger: 'change' }
 				],
 				birthday:[
-					{required: true, message: '请输入出生年月/Date of birth', trigger: 'blur'}
+					{required: true, message: '请输入出生年月/Date of birth', trigger: 'change'}
 				], 
 				nationality_id: [
-					{required: true, message: '请选择国籍/Nationality', trigger: 'blur'}
+					{required: true, message: '请选择国籍/Nationality', trigger: 'change'}
 				], 
 				occupation_id:[
-					{required: true, message: '请选择职业/Occupation', trigger: 'blur'}
+					{required: true, message: '请选择职业/Occupation', trigger: 'change'}
 				], 
 				email: [
-					{required: true, message: '请输入邮箱地址/Email Address', trigger: 'blur'}
+					{required: true, message: '请输入邮箱地址/Email Address', trigger: 'change'}
 				], 
 				areacode_id:[
-					{required: true, message: '请输入手机/Phone', trigger: 'blur'}
+					{required: true, message: '请输入手机/Phone', trigger: 'change'}
 				],
 				mobile:[
-					{required: true, message: '请输入手机/Phone', trigger: 'blur'}
+					{required: true, message: '请输入手机/Phone', trigger: 'change'}
 				],
 				areacode2_id:[
-					{required: true, message: '请输入备用手机/Spare Phone', trigger: 'blur'}
+					{required: true, message: '请输入备用手机/Spare Phone', trigger: 'change'}
 				],
 				mobile2:[
-					{required: true, message: '请输入备用手机/Spare Phone', trigger: 'blur'}
+					{required: true, message: '请输入备用手机/Spare Phone', trigger: 'change'}
 				],
 				country_id:[
-					{required: true, message: '请输入居住国家/Residence Country', trigger: 'blur'}
+					{required: true, message: '请输入居住国家/Residence Country', trigger: 'change'}
 				],
 				province:[
-					{required: true, message: '请输入省/State', trigger: 'blur'}
+					{required: true, message: '请输入省/State', trigger: 'change'}
 				],
 				city:[
-					{required: true, message: '请输入市/Suburb', trigger: 'blur'}
+					{required: true, message: '请输入市/Suburb', trigger: 'change'}
 				],
 				area:[
-					{required: true, message: '请输入区县/Area', trigger: 'blur'}
+					{required: true, message: '请输入区县/Area', trigger: 'change'}
 				],
 				address:[
-					{required: true, message: '请输入居住地址/Residence Address', trigger: 'blur'}
+					{required: true, message: '请输入居住地址/Residence Address', trigger: 'change'}
 				],
 				sign_url:[
-					{required: true, message: '请输入客户签名 | Customer sign', trigger: 'blur'}
+					{required: true, message: '请输入客户签名 | Customer sign', trigger: 'change'}
 				],
 				certificate:{
 					passport:{
 						type:[
-							{required: true, message: '请输入客户签名 | Customer sign', trigger: 'blur'}
+							{required: true, message: '请输入客户签名 | Customer sign', trigger: 'change'}
 						],
 						issuer_id:[
-							{required: true, message: '请输入护照发证机构/Passport Issuer', trigger: 'blur'}
+							{required: true, message: '请输入护照发证机构/Passport Issuer', trigger: 'change'}
 						],
 						number:[
-							{required: true, message: '请输入护照发证机构/Passport Issuer', trigger: 'blur'}
+							{required: true, message: '请输入护照发证机构/Passport Issuer', trigger: 'change'}
 						],
 						expiration:[
-							{required: true, message: '请输入护照有效期/Date of expiration', trigger: 'blur'}
+							{required: true, message: '请输入护照有效期/Date of expiration', trigger: 'change'}
 						],
 						photos:[
-							{required: true, message: '请输入护照照片/Passport Photo', trigger: 'blur'}
+							{required: true, message: '请输入护照照片/Passport Photo', trigger: 'change'}
 						],
 					},
 					idcard:{
 						type_id:[
-							{required: true, message: '请输入证件类型/ID Type', trigger: 'blur'}
+							{required: true, message: '请输入证件类型/ID Type', trigger: 'change'}
 						],
 						issuer_id:[
-							{required: true, message: '请输入发证机构/Issuer', trigger: 'blur'}
+							{required: true, message: '请输入发证机构/Issuer', trigger: 'change'}
 						],
 						number:[
-							{required: true, message: '请输入证件号码/ID Number', trigger: 'blur'}
+							{required: true, message: '请输入证件号码/ID Number', trigger: 'change'}
 						],
 						expiration:[
-							{required: true, message: '请输入证件有效期/Date of expiration', trigger: 'blur'}
+							{required: true, message: '请输入证件有效期/Date of expiration', trigger: 'change'}
 						],
 						photos:[
-							{required: true, message: '请输入护照照片/Passport Photo', trigger: 'blur'}
+							{required: true, message: '请输入护照照片/Passport Photo', trigger: 'change'}
 						],
 					},
 				},
-				firstUrl:[
-					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				],
-				secondUrl:[
-					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				],
-				thirdUrl:[
-					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				],
-				fourUrl:[
-					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				],
-				fiveUrl:[
-					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				],
+				// firstUrl:[
+				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				// ],
+				// secondUrl:[
+				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				// ],
+				// thirdUrl:[
+				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				// ],
+				// fourUrl:[
+				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				// ],
+				// fiveUrl:[
+				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				// ],
 			},
 			options: [
 				],
@@ -557,38 +557,44 @@ export default{
 	methods: {
 		submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
-			  if (valid) {
-				  if(this.firstUrl=='' || this.secondUrl=='' || this.thirdUrl=='' ||this.fourUrl=='' ||this.fiveUrl==''){
-				  	this.$message({
-				  		message: '请上传图片！',
-				  		type: 'warning'
-				  	})
-				  	return;
-				  }
-				
-				this.form.certificate.passport.photos = this.firstUrl + "," + this.secondUrl + "," + this.thirdUrl;
-				this.form.certificate.idcard.photos = this.fourUrl + "," + this.fiveUrl;
-				let params = this.qs.stringify(this.form);
-				let packJson  = {"data":JSON.stringify(this.form)};
-				this.$api.apply(this.qs.stringify(packJson)).then((response)=>{
-					console.log(response)
-					let {data,code} = response;
-					if(code=='1'){
+				if (valid) {
+					if(this.firstUrl=='' || this.secondUrl=='' || this.thirdUrl=='' ||this.fourUrl=='' ||this.fiveUrl==''){
 						this.$message({
-							message: response.msg,
+							message: '请上传图片！',
 							type: 'warning'
 						})
-						this.loadLogin();
-					}else{
-						this.$message({
-							message: response.msg,
-							type: 'warning'
-						})
+						return;
 					}
-				})
-			  } else {
-				return false;
-			  }
+					if(this.checked==null || this.checked==''){
+						this.$message({
+							message: '请勾选隐私保护政策条款！',
+							type: 'warning'
+						})
+						return;
+					}
+					this.form.certificate.passport.photos = this.firstUrl + "," + this.secondUrl + "," + this.thirdUrl;
+					this.form.certificate.idcard.photos = this.fourUrl + "," + this.fiveUrl;
+					let params = this.qs.stringify(this.form);
+					let packJson  = {"data":JSON.stringify(this.form)};
+					this.$api.apply(this.qs.stringify(packJson)).then((response)=>{
+						console.log(response)
+						let {data,code} = response;
+						if(code=='1'){
+							this.$message({
+								message: response.msg,
+								type: 'warning'
+							})
+							this.loadLogin();
+						}else{
+							this.$message({
+								message: response.msg,
+								type: 'warning'
+							})
+						}
+					})
+				} else {
+					return false;
+				}
 			});
 		},
 		loadLogin(){
