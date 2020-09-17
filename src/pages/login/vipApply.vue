@@ -22,7 +22,7 @@
 				</el-header>
 				<el-main>
 					<div class="formDiv">
-						<el-form ref="form" :model="form" label-width="19rem">
+						<el-form :rules="rules" ref="form" :model="form" label-width="19rem">
 							<div class="bodyForm">
 								<div class="headForm">
 									<span class="spanMsg">客户资料 | Customer detail</span>
@@ -30,17 +30,17 @@
 								<el-row></el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
-										<el-form-item class="labelName" label="名/First Name：：" >
+										<el-form-item class="labelName" label="名/First Name：" prop="firstname">
 											<el-input v-model="form.firstname" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="姓/Last Name："  class="labelName">
+										<el-form-item label="姓/Last Name："  class="labelName" prop="lastname">
 											<el-input v-model="form.lastname" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="性别/Gender："  class="labelName">
+										<el-form-item label="性别/Gender："  class="labelName" prop="gender">
 											<div class="formRadio">
 											<el-radio v-model="form.gender" label="1">男</el-radio>
 											<el-radio v-model="form.gender" label="2">女</el-radio>
@@ -48,7 +48,7 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="*出生年月/Date of birth："  class="labelName"> 
+										<el-form-item label="出生年月/Date of birth："  class="labelName" prop="birthday"> 
 											<el-date-picker
 												  v-model="form.birthday"
 												  type="date"
@@ -60,7 +60,7 @@
 								</el-row>
 								<el-row :gutter="24">
 									<el-col :span="6">
-										<el-form-item class="labelName" label="*国籍/Nationality：" >
+										<el-form-item class="labelName" label="国籍/Nationality："  prop="nationality_id">
 											<el-select v-model="form.nationality_id" placeholder="请选择" class="formSelect">
 												<el-option
 												  v-for="item in nationality"
@@ -72,7 +72,7 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="职业/Occupation："  class="labelName">
+										<el-form-item label="职业/Occupation："  class="labelName" prop="occupation_id">
 											<el-select v-model="form.occupation_id" placeholder="请选择" class="formSelect">
 												<el-option
 												  v-for="item in occupation"
@@ -84,14 +84,14 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="邮箱地址/Email Address：："  class="labelName">
+										<el-form-item label="邮箱地址/Email Address："  class="labelName" prop="email">
 											<el-input v-model="form.email" placeholder="请输入密码" ></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
-										<el-form-item label="手机/Phone："  class="labelName">
+										<el-form-item label="手机/Phone："  class="labelName" prop="areacode_id">
 										 <el-select v-model="form.areacode_id" placeholder="请选择区号" class="formSelect">
 											<el-option
 											  v-for="item in areacode"
@@ -104,12 +104,12 @@
 									</el-col>
 									<el-col :span="6" >
 										<div class="formSpan">-</div>
-										<el-form-item label=""  class="labelName labelNameDown">
+										<el-form-item label=""  class="labelName labelNameDown" prop="mobile">
 											<el-input v-model="form.mobile" placeholder="请输入您的手机号码" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="备用手机/Spare Phone："  class="labelName">
+										<el-form-item label="备用手机/Spare Phone："  class="labelName" prop="areacode2_id">
 										 <el-select v-model="form.areacode2_id" placeholder="请选择区号" class="formSelect">
 											<el-option
 											  v-for="item in areacode"
@@ -122,14 +122,14 @@
 									</el-col>
 									<el-col :span="6">
 										<div class="formSpan">-</div>
-										<el-form-item label=""  class="labelName labelNameDown"> 
+										<el-form-item label=""  class="labelName labelNameDown" prop="mobile2"> 
 											<el-input v-model="form.mobile2" placeholder="请输入您的手机号码" ></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
-										<el-form-item label="*居住国家/Residence Country："  class="labelName">
+										<el-form-item label="居住国家/Residence Country："  class="labelName" prop="country_id">
 										 <el-select v-model="form.country_id" placeholder="请选择" class="formSelect">
 											<el-option
 											  v-for="item in nationality"
@@ -141,29 +141,29 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="省/State："  class="labelName">
+										<el-form-item label="省/State："  class="labelName" prop="province">
 											<el-input v-model="form.province" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="市/Suburb："  class="labelName">
+										<el-form-item label="市/Suburb："  class="labelName" prop="city">
 											<el-input v-model="form.city" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="区县/Area："  class="labelName"> 
+										<el-form-item label="区县/Area："  class="labelName" prop="area"> 
 											<el-input v-model="form.area" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="12">
-										<el-form-item label="居住地址/Residence Address："  class="labelName">
+										<el-form-item label="居住地址/Residence Address："  class="labelName" prop="address">
 											<el-input v-model="form.address" placeholder="请输入您的常住地址，详细至街道，门牌号" class="formAddr"></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6" :push="6">
-										<el-form-item label="邮编/Postcode："  class="labelName">
+										<el-form-item label="邮编/Postcode："  class="labelName" prop="postcode">
 											<el-input v-model="form.postcode" placeholder="请输入邮编" ></el-input>
 										</el-form-item>
 									</el-col>
@@ -176,7 +176,7 @@
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
-										<el-form-item label="护照/Passport："  class="labelName">
+										<el-form-item label="护照/Passport："  class="labelName" prop="certificate.passport.type">
 										 <el-select v-model="form.certificate.passport.type" placeholder="请选择" class="formSelect">
 											 <el-option value="passport">Passport</el-option>
 											<!-- <el-option
@@ -189,7 +189,7 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="护照发证机构/Passport Issuer："  class="labelName">
+										<el-form-item label="护照发证机构/Passport Issuer："  class="labelName" prop="certificate.passport.issuer_id">
 											<el-select v-model="form.certificate.passport.issuer_id" placeholder="请选择" class="formSelect">
 												<el-option
 												  v-for="item in issuer"
@@ -201,12 +201,12 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="护照号码/Passport Number："  class="labelName">
+										<el-form-item label="护照号码/Passport Number："  class="labelName" prop="certificate.passport.number">
 										  <el-input v-model="form.certificate.passport.number" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="护照有效期/Date of expiration："  class="labelName"> 
+										<el-form-item label="护照有效期/Date of expiration："  class="labelName" prop="certificate.passport.expiration"> 
 											<el-date-picker
 											      v-model="form.certificate.passport.expiration"
 											      type="date"
@@ -217,7 +217,7 @@
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="6">
-										<el-form-item label="*护照照片/Passport Photo："  class="labelName">
+										<el-form-item label="护照照片/Passport Photo："  class="labelName" prop="firstUrl">
 											<el-upload 
 											  class="avatar-uploader "
 											  action="/api/common/upload"
@@ -232,7 +232,7 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6" class="imgUpload">
-										<el-form-item label=""  class="labelName">
+										<el-form-item label=""  class="labelName" prop="secondUrl">
 											<el-upload 
 											  class="avatar-uploader "
 											  action="/api/common/upload"
@@ -246,7 +246,7 @@
 											</el-form-item>
 									</el-col>
 									<el-col :span="6" class="imgUpload">
-										<el-form-item label=""  class="labelName">
+										<el-form-item label=""  class="labelName" prop="thirdUrl">
 											<el-upload 
 											  class="avatar-uploader "
 											  action="/api/common/upload"
@@ -270,7 +270,7 @@
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
-										<el-form-item label="证件类型/ID Type："  class="labelName">
+										<el-form-item label="证件类型/ID Type："  class="labelName" prop="certificate.idcard.type_id">
 										 <el-select v-model="form.certificate.idcard.type_id" placeholder="请选择" class="formSelect">
 											<el-option
 											  v-for="item in idtype"
@@ -282,7 +282,7 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="发证机构/Issuer："  class="labelName">
+										<el-form-item label="发证机构/Issuer："  class="labelName" prop="certificate.idcard.issuer_id">
 											<el-select v-model="form.certificate.idcard.issuer_id" placeholder="请选择" class="formSelect">
 												<el-option
 												  v-for="item in issuer"
@@ -294,12 +294,12 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="证件号码/ID Number："  class="labelName">
+										<el-form-item label="证件号码/ID Number："  class="labelName" prop="certificate.idcard.number">
 											<el-input v-model="form.certificate.idcard.number" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="证件有效期/Date of expiration："  class="labelName"> 
+										<el-form-item label="证件有效期/Date of expiration："  class="labelName" prop="certificate.idcard.expiration"> 
 											<el-date-picker
 											      v-model="form.certificate.idcard.expiration"
 											      type="date"
@@ -311,7 +311,7 @@
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="6">
-										<el-form-item label="*护照照片/Passport Photo："  class="labelName">
+										<el-form-item label="护照照片/Passport Photo："  class="labelName" prop="fourUrl">
 											<el-upload 
 											  class="avatar-uploader "
 											  action="/api/common/upload"
@@ -326,7 +326,7 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6" class="imgUpload">
-										<el-form-item label=""  class="labelName">
+										<el-form-item label=""  class="labelName" prop="fiveUrl">
 											<el-upload 
 											  class="avatar-uploader "
 											  action="/api/common/upload"
@@ -369,7 +369,7 @@
 								<el-checkbox v-model="checked">我已阅读并同意<span class="checkBtn">《隐私保护政策条款》</span>，并确认上述信息和提供的文件真实无误。</el-checkbox>
 							</div>
 							<div class="formSubmitBtn">
-								<el-button  class="submitBtn" @click="onSubmit" >提交</el-button>
+								<el-button  class="submitBtn" @click="submitForm('form')" >提交</el-button>
 							</div>
 							
 						</el-form>
@@ -421,6 +421,107 @@ export default{
 					},
 				},
 			},
+			rules: {
+				firstname:[
+					{required: true, message: '请输入名/First Name', trigger: 'blur' }
+				],
+				lastname:[
+					{required: true, message: '请输入姓/Last Name', trigger: 'blur' }
+				],
+				birthday:[
+					{required: true, message: '请输入出生年月/Date of birth', trigger: 'blur'}
+				], 
+				nationality_id: [
+					{required: true, message: '请选择国籍/Nationality', trigger: 'blur'}
+				], 
+				occupation_id:[
+					{required: true, message: '请选择职业/Occupation', trigger: 'blur'}
+				], 
+				email: [
+					{required: true, message: '请输入邮箱地址/Email Address', trigger: 'blur'}
+				], 
+				areacode_id:[
+					{required: true, message: '请输入手机/Phone', trigger: 'blur'}
+				],
+				mobile:[
+					{required: true, message: '请输入手机/Phone', trigger: 'blur'}
+				],
+				areacode2_id:[
+					{required: true, message: '请输入备用手机/Spare Phone', trigger: 'blur'}
+				],
+				mobile2:[
+					{required: true, message: '请输入备用手机/Spare Phone', trigger: 'blur'}
+				],
+				country_id:[
+					{required: true, message: '请输入居住国家/Residence Country', trigger: 'blur'}
+				],
+				province:[
+					{required: true, message: '请输入省/State', trigger: 'blur'}
+				],
+				city:[
+					{required: true, message: '请输入市/Suburb', trigger: 'blur'}
+				],
+				area:[
+					{required: true, message: '请输入区县/Area', trigger: 'blur'}
+				],
+				address:[
+					{required: true, message: '请输入居住地址/Residence Address', trigger: 'blur'}
+				],
+				sign_url:[
+					{required: true, message: '请输入客户签名 | Customer sign', trigger: 'blur'}
+				],
+				certificate:{
+					passport:{
+						type:[
+							{required: true, message: '请输入客户签名 | Customer sign', trigger: 'blur'}
+						],
+						issuer_id:[
+							{required: true, message: '请输入护照发证机构/Passport Issuer', trigger: 'blur'}
+						],
+						number:[
+							{required: true, message: '请输入护照发证机构/Passport Issuer', trigger: 'blur'}
+						],
+						expiration:[
+							{required: true, message: '请输入护照有效期/Date of expiration', trigger: 'blur'}
+						],
+						photos:[
+							{required: true, message: '请输入护照照片/Passport Photo', trigger: 'blur'}
+						],
+					},
+					idcard:{
+						type_id:[
+							{required: true, message: '请输入证件类型/ID Type', trigger: 'blur'}
+						],
+						issuer_id:[
+							{required: true, message: '请输入发证机构/Issuer', trigger: 'blur'}
+						],
+						number:[
+							{required: true, message: '请输入证件号码/ID Number', trigger: 'blur'}
+						],
+						expiration:[
+							{required: true, message: '请输入证件有效期/Date of expiration', trigger: 'blur'}
+						],
+						photos:[
+							{required: true, message: '请输入护照照片/Passport Photo', trigger: 'blur'}
+						],
+					},
+				},
+				firstUrl:[
+					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				],
+				secondUrl:[
+					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				],
+				thirdUrl:[
+					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				],
+				fourUrl:[
+					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				],
+				fiveUrl:[
+					{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
+				],
+			},
 			options: [
 				],
 			imageUrl:require('../../static/image/u95.png'),
@@ -454,21 +555,41 @@ export default{
 		
 	},
 	methods: {
-		onSubmit() {
-			if(this.firstUrl=='' || this.secondUrl=='' || this.thirdUrl=='' ||this.fourUrl=='' ||this.fiveUrl==''){
-				this.$message({
-					message: '请上传图片！',
-					type: 'warning'
+		submitForm(formName) {
+			this.$refs[formName].validate((valid) => {
+			  if (valid) {
+				  if(this.firstUrl=='' || this.secondUrl=='' || this.thirdUrl=='' ||this.fourUrl=='' ||this.fiveUrl==''){
+				  	this.$message({
+				  		message: '请上传图片！',
+				  		type: 'warning'
+				  	})
+				  	return;
+				  }
+				
+				this.form.certificate.passport.photos = this.firstUrl + "," + this.secondUrl + "," + this.thirdUrl;
+				this.form.certificate.idcard.photos = this.fourUrl + "," + this.fiveUrl;
+				let params = this.qs.stringify(this.form);
+				let packJson  = {"data":JSON.stringify(this.form)};
+				this.$api.apply(this.qs.stringify(packJson)).then((response)=>{
+					console.log(response)
+					let {data,code} = response;
+					if(code=='1'){
+						this.$message({
+							message: response.msg,
+							type: 'warning'
+						})
+						this.loadLogin();
+					}else{
+						this.$message({
+							message: response.msg,
+							type: 'warning'
+						})
+					}
 				})
-				return;
-			}
-			this.form.certificate.passport.photos = this.firstUrl + "," + this.secondUrl + "," + this.thirdUrl;
-			this.form.certificate.idcard.photos = this.fourUrl + "," + this.fiveUrl;
-			let params = this.qs.stringify(this.form);
-			let packJson  = {"data":JSON.stringify(this.form)};
-			this.$api.apply(this.qs.stringify(packJson)).then((response)=>{
-				console.log(response)
-			})
+			  } else {
+				return false;
+			  }
+			});
 		},
 		loadLogin(){
 			this.$router.push('/login');

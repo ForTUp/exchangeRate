@@ -15,7 +15,7 @@
 						</el-col>
 						  <el-col :span="4">
 						<div class="grid-content bg-purple">
-							<span class="loginSpan">曹操</span>
+							<span class="loginSpan">{{userInfo.username}}</span>
 							<el-button  class="exitBtn" @click="loginout">退出</el-button>
 						</div>
 					  </el-col>
@@ -514,7 +514,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+	
 export default{
+	computed:{...mapGetters(['userId','userInfo'])},
 	name:"workbenchApply",
 	data() {
 		return {
@@ -649,8 +652,7 @@ export default{
 			}
 			let params = this.qs.stringify(this.form);
 			let packJson  = {"data":JSON.stringify(this.form)};
-			console.log(packJson)
-			this.$api.remit({data:JSON.stringify(this.form)}).then((response)=>{
+			this.$api.remit(this.qs.stringify(packJson)).then((response)=>{
 				console.log(response)
 			})
 		},
