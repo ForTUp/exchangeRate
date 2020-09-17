@@ -2,7 +2,7 @@
 		<div id="retrievePwd">
 			<el-container>
 				<el-header>
-					<el-row :gutter="20">
+					<el-row :gutter="20"  style="margin-left: 9rem;">
 					<el-col :span="16">
 						<div class="grid-content bg-purple ">
 							<div class="logoDiv">

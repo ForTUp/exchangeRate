@@ -2,7 +2,7 @@
 		<div id="index">
 			<el-container>
 				<el-header>
-					<el-row :gutter="20" style="">
+					<el-row :gutter="20" style="margin-left: 9rem;">
 					<el-col :span="18">
 						<div class="grid-content bg-purple ">
 							<div class="logoDiv">
@@ -70,7 +70,6 @@ export default{
 		onSubmit() {
 			let params = this.qs.stringify(this.form)
 			let that = this;
-			localStorage.clear();
 			this.$api.login(params).then((response) => {
 				const {data} = response;
 				if(response.code>0){
@@ -106,7 +105,6 @@ export default{
 		border-radius: 1px;
 		background-color: #F7F7F7;
 		width:  28rem;
-		height: 28rem;
 		margin: 1rem   auto;
 		
 	}

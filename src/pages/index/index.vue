@@ -363,7 +363,6 @@ export default {
 					const {data} = response;
 					console.log(data)
 					if(response.code>0){
-						sessionStorage.clear()
 						that.$message({
 						  message: response.msg,
 						  type: 'success'

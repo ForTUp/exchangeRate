@@ -31,7 +31,16 @@ export default {
 		})
 	},
 	logout:(data)=>{
-		return get('/api/user/logout',data)
+		return new Promise((resolve, reject) => {
+			get('/api/user/logout',data).then((response)=>{
+				if(response.code>0){
+					sessionStorage.clear();
+				}
+				resolve(response);
+			}).catch((err)=>{
+				reject(err);
+			})
+		})
 	},
 	forgetpwd:(data)=>{
 		return post('/api/user/forgetpwd',data)

@@ -2,19 +2,19 @@
 		<div id="vipApply">
 			<el-container>
 				<el-header>
-					<el-row >
-						<el-col :span="20">
+					<el-row  style="margin-left: 9rem;">
+						<el-col :span="20" >
 							<div class="grid-content bg-purple ">
 								<div class="logoDiv">
 									<el-image class="topImage"
 									      :src="imageUrl"
 									      :fit="fit"></el-image>
-									<el-link :underline="false" class="topLink">会员申请</el-link>
+									<el-link :underline="false" class="topLink" >会员申请</el-link>
 								</div>
 							</div>
 						</el-col>
 						  <el-col :span="4" style="margin-top: 0.5rem;">
-						<div class="grid-content bg-purple">
+						<div class="grid-content bg-purple" >
 							<el-button  class="loginButton loginButtonTop" @click="loadLogin">登录</el-button>
 						</div>
 					  </el-col>
@@ -592,14 +592,13 @@ export default{
 <style scoped lang="scss">
 	@import "../../static/css/form-item.css";  //引入方式
 	body > .el-container {
-		width: 82rem;
+		width: 100rem;
 	}
 	.el-header, .el-footer {
-		width: 82rem;
-		
+		width: 100rem;
 	}
 	.el-main {
-		width: 82rem;
+		width: 100rem;
 	}
 	
 	.formDiv {

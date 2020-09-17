@@ -16,7 +16,7 @@
 						  <el-col :span="4">
 						<div class="grid-content bg-purple">
 							<span class="loginSpan">曹操</span>
-							<el-button  class="exitBtn" click="loadLogin">退出</el-button>
+							<el-button  class="exitBtn" @click="loginout">退出</el-button>
 						</div>
 					  </el-col>
 					</el-row>
@@ -689,7 +689,36 @@ export default{
 				this.isshow2=true;
 				return;
 			}
-		}
+		},
+		loginout(){
+			let that = this;
+			this.$confirm('是否退出登录?', '提示', {
+			  confirmButtonText: '确定',
+			  cancelButtonText: '取消',
+			  type: 'warning'
+			}).then(() => {
+				this.$api.logout().then((response) => {
+					console.log(response.data)
+					const {data} = response;
+					console.log(data)
+					if(response.code>0){
+						that.$message({
+						  message: response.msg,
+						  type: 'success'
+						});
+						that.$router.push('/login');
+					}else{
+						 this.$message({
+						  message: response.msg,
+						  type: 'warning'
+						});
+					}
+				}).catch(function(err){
+					console.log(err)
+				})
+			}).catch(() => {
+			});
+		},
 	},
 	mounted() {
 		let that = this;
