@@ -34,7 +34,7 @@
 								</div>
 								<el-row class="formRadioHead">
 									<el-col>
-										<el-radio v-model="form.remit_type" :label="0" >本人 </el-radio><span>默认汇款人</span>
+										<el-radio v-model="form.remit_type" :label="0" >本人 </el-radio><span  v-if="isDefault" class="textSpan">默认汇款人</span>
 									</el-col>
 								</el-row >
 								<el-row class="formRadioHead" v-if="senderList">
@@ -44,18 +44,21 @@
 								</el-row >
 								<el-row class="formRadioHead"  v-if="form.remit_type=='1'" >
 									<el-col>
-										  <el-radio-group v-model="form.remit_id" border='false' size="mini" >
-											  <el-radio label="1" border
+										  <el-radio-group v-model="form.remit_id" size="mini" >
+											  <el-radio 
 											  v-for="item in senderList"
 											  :label="item.id"
 											  :name="item.realname"
+											  style="display:block; margin:1rem"
 											  >
-											  {{item.realname}}
+											  {{item.realname }} ( {{item.mobile}} ) 
+											  <span @click="setDefault(item.id)" class="setTextSpan" v-if="form.remit_id==item.id && item.default=='0'">设为默认汇款人</span>
+											  <span class="textSpan" v-if="item.default=='1'">默认汇款人</span>
 											  </el-radio>
 										  </el-radio-group>
 									</el-col>
 								</el-row >
-								<el-row  class="formRadioHead">
+								<el-row  class="formRadioHead" style="padding-bottom: 2rem;">
 									<el-col>
 										<el-radio v-model="form.remit_type" :label="2" >添加汇款人</el-radio>
 									</el-col>
@@ -269,7 +272,7 @@
 											  <el-checkbox-group
 											      v-model="sender_ids"
 											  	class="checkForm">
-											      <el-checkbox class="checkboxSpanNext" v-for="item in PayeeList" :label="item.id" :key="item.id">{{item.realname}}</el-checkbox>
+											      <el-checkbox style="display:block;" class="checkboxSpanNext" v-for="item in PayeeList" :label="item.id" :key="item.id">{{item.realname}}</el-checkbox>
 											    </el-checkbox-group>
 										</el-col>
 									</el-row >
@@ -652,7 +655,9 @@ export default{
 					swift_code:"",
 					out_remark:""
 				}
-			]
+			],
+			//默认人是本人的标记
+			isDefault:''
 		}
 		
 	},
@@ -786,6 +791,53 @@ export default{
 			}).catch(() => {
 			});
 		},
+		setDefault(id){
+			let that = this;
+			console.log(id)
+			const formData = new FormData();
+			formData.append('id',id);
+			this.$api.remitSetDefault(formData).then((response)=>{
+				console.log(response);
+				const {data,code}=response;
+				if(code=='1'){
+					this.$message({
+						message: response.msg,
+						type: 'success'
+					})
+					that.getSenderList(null);
+					
+				}else{
+					this.$message({
+						message: response.msg,
+						type: 'success'
+					})
+				}
+			})
+		},
+		getSenderList(id){
+			let that = this;
+			this.$api.getRemitUser({type:1}).then((response)=>{
+				this.senderList=response.data;
+				console.log(this.senderList)
+				if(this.senderList){
+					this.senderList.forEach(function(value,i){
+						console.log(value,'value')
+						if(value.default=='1'){
+							that.isDefault='1';
+							if(id){
+								
+							}else{
+								that.form.remit_type=1;
+								that.form.remit_id=value.id;
+							}
+							
+							return;
+						}
+					})
+					that.isDefault='';
+				}
+			})
+		}
 	},
 	mounted() {
 		if(this.userInfo==null || this.userInfo=={}){
@@ -817,7 +869,6 @@ export default{
 		})
 		this.$api.getConfig({type:'purpose'}).then((response)=>{
 			that.purpose = response
-			console.log(that.purpose,'purpose')
 		})
 		//获取货币列表
 		this.$api.getCurrencyList().then((response) =>{
@@ -827,17 +878,15 @@ export default{
 			that.source = response
 		})
 		//获取汇款人
-		this.$api.getRemitUser({type:1}).then((response)=>{
-			console.log(response)
-			that.senderList=response.data;
-		})
+		// this.$api.getRemitUser({type:1}).then((response)=>{
+		// 	that.senderList=response.data;
+		// })
+		this.getSenderList(this.$route.params.id)
 		
 		//获取收款人
 		this.$api.getRemitUser({type:2}).then((response)=>{
-			console.log(response,'PayeeList')
 			that.PayeeList=response.data;
 		})
-		console.log(this.$route.params.id,'id')
 		//编辑
 		if(this.$route.params.id){
 			this.form.id=this.$route.params.id;
@@ -872,9 +921,6 @@ export default{
 					sourceList.forEach(function(value,i){
 						that.sourceList.push(parseInt(value));
 					})
-					
-					console.log(this.purposeList,'purposeList')
-					console.log(this.sourceList,'sourceList')
 				}
 				
 			})
@@ -1015,7 +1061,7 @@ export default{
 	
 	.formRadioHead{
 		width: 20rem;
-		height: 2rem;
+		// height: 2rem;
 		text-align: left;
 		margin-left: 2rem;
 		margin-top: 1rem;
@@ -1051,5 +1097,28 @@ export default{
 		background-color: orange;
 		color: #FFF;
 		border-radius: 3rem;
+	}
+	.textSpan{
+		display:inline-block;
+		font-size: 0.8rem;
+		border-radius: 1rem;
+		background-color: orange;
+		color: #fff;
+		height: 1rem;
+		width: 5rem;
+		text-align: center;
+	}
+	.setTextSpan{
+		display:inline-block;
+		font-size: 0.8rem;
+		background-color: #02a7f0;
+		color: #fff;
+		height: 1rem;
+		width: 6rem;
+		text-align: center;
+		line-height: 1rem;
+		border-radius: 0.3rem;
+		margin-left: 1rem;
+		cursor: pointer;
 	}
 </style>

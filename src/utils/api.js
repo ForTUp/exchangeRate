@@ -78,4 +78,7 @@ export default {
 	remitInfo:(data)=>{
 		return get('/api/remit/info',data)
 	},
+	remitSetDefault:(data)=>{
+		return post('/api/remit/set_default',data)
+	},
 }
