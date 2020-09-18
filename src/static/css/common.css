@@ -1,0 +1,153 @@
+body {
+  width: 100%;
+  margin: 0 auto !important;
+  font-family: 'ArialMT', 'Arial', sans-serif;
+  border-radius: 0rem;
+}
+
+.el-header, .el-footer {
+  color: #333;
+  text-align: center;
+  line-height: 3.75rem;
+  width: 100rem;
+  margin: 0 auto !important;
+  border: 0.0625rem solid #F7F7F7;
+  height: 5rem !important;
+}
+
+.el-main {
+  width: 100rem;
+  background-color: #F7F7F7;
+  color: #333;
+  text-align: center;
+  margin: 0 auto !important;
+  border: 0.0625rem solid #F7F7F7;
+}
+
+body > .el-container {
+  width: 100rem;
+  margin: 0 auto !important;
+  border: 0.0625rem solid #F7F7F7;
+  font-family: 'ArialMT', 'Arial', sans-serif;
+  border-radius: 0rem;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 16.25rem;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 20rem;
+}
+
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 18.75rem;
+  margin: 0;
+}
+
+.formDiv {
+  border-radius: 1px;
+  background-color: #F7F7F7;
+  width: 28rem;
+  margin: 1rem   auto;
+}
+
+.headForm {
+  background-color: #FFF;
+  width: 28rem;
+  height: 3.75rem;
+  margin: 0 auto;
+  border: 0.0625rem none #695D69;
+  text-align: left;
+  line-height: 3.75rem;
+}
+
+.spanMsg {
+  margin-left: 0.5rem;
+  font-weight: 800;
+}
+
+.bodyForm {
+  margin-top: 0.125rem;
+  background-color: #FFF;
+  margin-bottom: 0.125rem;
+}
+
+.bottomForm {
+  height: 5rem;
+  text-align: center;
+}
+
+.sumbitButton {
+  background-color: #169bd5 !important;
+  width: 25rem !important;
+  margin-left: -2rem;
+  color: #fff;
+  border-radius: 0.125rem !important;
+}
+
+.sumbitButton:hover {
+  color: #fff;
+}
+
+.vipButton {
+  border: 0.0625rem #02a7f0 solid;
+  color: #02a7f0;
+  margin-right: -1.5rem;
+  border-radius: 0.125rem !important;
+}
+
+.logoDiv {
+  margin-left: 1rem;
+  height: 3.75rem;
+  width: 3.75rem;
+}
+
+.avatar-uploader .el-upload {
+  border: 0.0625rem solid #d9d9d9 !important;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+  font-size: 1.75rem;
+  color: #8c939d;
+  width: 24rem;
+  height: 12rem;
+  line-height: 12rem;
+  text-align: center;
+}
+
+.avatar {
+  width: 24rem;
+  height: 12rem;
+  display: block;
+}
+
+.topImage {
+  width: 7.5rem;
+  height: 2.5rem;
+  margin-top: 1rem;
+}
+
+.topLink {
+  width: 10rem;
+  height: 2rem;
+  position: absolute;
+  top: 1.5rem;
+  left: 8rem;
+}
+
+ul {
+  list-style: none;
+}

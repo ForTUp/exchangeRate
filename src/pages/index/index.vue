@@ -2,7 +2,7 @@
 	<div id="index">
 		<el-container>
 			<el-header>
-				<el-row :gutter="20">
+				<el-row :gutter="20" style="margin-right: 4rem;">
 				<el-col :span="12" :push="4" class="headerCol">
 					<div class="grid-content bg-purple ">
 						<div class="logoDiv">
@@ -28,8 +28,8 @@
 						<el-button  class="loginButton loginoutButton" @click="loginout">退出登录</el-button>
 					</div>
 					<div v-if="userInfo==null" class="loginDiv">
-						<el-button type="primary" class="loginButton " @click="loadLogin"> 登录 </el-button>
 						<el-button  class="vipButton" @click="vipApply" >会员申请</el-button>
+						<el-button type="primary" class="loginButton " @click="loadLogin" style="margin-left: 3rem;"> 登录 </el-button>
 					</div>
 				  </el-col>
 				</el-row>
@@ -44,7 +44,7 @@
 					 </el-carousel>
 				</div>
 				<!--货币兑换 -->
-				<div id="showCurrencyDiv" class="iocnDiv currency" @click="dialogFormVisible = true" style="cursor:pointer">
+				<div id="showCurrencyDiv" class="iocnDiv currency" @click="dialogFormVisible = true" style="cursor:pointer; marign-left: 0;">
 					<i class="iconfont iconhuobiduihuan1"></i><br>
 					<span>货币兑换</span>
 				</div>
@@ -116,7 +116,7 @@
 										<el-button style="border: 0.0625rem solid #0080FF;" @click="changeFiex"><i style="color: #0080FF;" class="iconfont iconjiaohuan"></i></el-button>
 									</el-col>
 									<el-col :span="4">
-										<el-select v-model="nowForm.to" placeholder="请选择" clearable filterable >
+										<el-select v-model="nowForm.to" placeholder="请选择" clearable filterable style="padding-right: 0;">
 											<el-option
 											  v-for="item in currencyList"
 											 :key="item.code"
@@ -541,10 +541,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.el-input--suffix .el-input__inner {
+	padding-right: 0;
+}
+/deep/.el-select .el-input__inner {
+	padding-right: 0;
+}
 	img {
 	  /*设置图片宽度和浏览器宽度一致*/
 	  width: 100%;
 	  height: inherit;
+	  object-fit:cover;
 	}
 	body > .el-container {
 		width: 100rem;
@@ -597,7 +604,7 @@ export default {
 	.vipButton{
 		border: 0.0625rem #02a7f0 solid;
 		color: #02a7f0;
-		margin-right: -10rem;
+		// margin-right: -10rem;
 		border-radius:0.125rem !important;
 	}
 	.coreService{
@@ -605,13 +612,14 @@ export default {
 		// border: 0.0625rem solid red;
 		height: 120rem;
 		width: 70rem;
-		margin: 0 auto;
+		margin: 0 80px;
+		// margin: 0 auto;
 		margin-top: 2rem !important;
 	}
 	.coreHead{
-		margin: 0 auto;
+		// margin: 0 auto;
 		height: 3rem;
-		width: 30rem;
+		width: 100%;
 		// border: 0.0625rem solid blue;
 		padding: 0;
 		
@@ -656,7 +664,12 @@ export default {
 
 	.coreContentListFirst{
 		margin-left:0rem !important;
+
 		
+	}。
+	.coreContentList:hover {
+		color: #02a7f0;
+		font-weight: 500;
 	}
 	.el-footer{
 		 background-color: #F7F7F7;
@@ -693,6 +706,7 @@ export default {
 	.el-dialog{
 		.el-input{
 			width: 50%;
+			padding-right: 0;
 		}
 		.el-select{
 			width: 50%;
