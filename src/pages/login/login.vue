@@ -27,17 +27,17 @@
 							<span class="spanMsg">登录 | Login</span>
 						</div>
 						<div class="bodyForm">
-							<el-form ref="form" :model="form" label-width="28rem">
+							<el-form :rules="rules" ref="form" :model="form" label-width="28rem">
 								<el-form-item >
 								</el-form-item>
-							  <el-form-item label="账号/User ID：">
+							  <el-form-item label="账号/User ID：" prop="account">
 									<el-input v-model="form.account" placeholder="请输入ID" ></el-input>
 							  </el-form-item>
-							  <el-form-item label="密码/Password：">
+							  <el-form-item label="密码/Password：" prop="password">
 									<el-input v-model="form.password" placeholder="请输入密码" show-password></el-input>
 							  </el-form-item>
 							  <el-form-item>
-								<el-button class="sumbitButton" @click="onSubmit">登录/Login</el-button>
+								<el-button class="sumbitButton" @click="onSubmit('form')">登录/Login</el-button>
 							  </el-form-item>
 							  <el-form-item >
 							  </el-form-item>
@@ -61,31 +61,43 @@ export default{
 				account: '',
 				password: '',
 			},
+			rules:{
+				account:[
+					{required: true, message: '请输入账号/User ID', trigger: 'change'}
+				],
+				password:[
+					{required: true, message: '请输入密码/Password', trigger: 'change'}
+				]
+			},
 			imageUrl:require('../../static/image/u95.png'),
 			fit:'',
 			userInfo:{}
 		}
 	},
 	methods: {
-		onSubmit() {
-			let params = this.qs.stringify(this.form)
-			let that = this;
-			this.$api.login(params).then((response) => {
-				const {data} = response;
-				if(response.code>0){
-					that.$message({
-					  message: response.msg,
-					  type: 'success'
-					});
-					that.$router.push('/Workbench');
-				}else{
-					 this.$message({
-					  message: response.msg,
-					  type: 'warning'
-					});
+		onSubmit(form) {
+			this.$refs[form].validate((valid) => {
+				if (valid) {
+					let params = this.qs.stringify(this.form)
+					let that = this;
+					this.$api.login(params).then((response) => {
+						const {data} = response;
+						if(response.code>0){
+							that.$message({
+							  message: response.msg,
+							  type: 'success'
+							});
+							that.$router.push('/Workbench');
+						}else{
+							 this.$message({
+							  message: response.msg,
+							  type: 'warning'
+							});
+						}
+					}).catch(function(err){
+						console.log(err)
+					})
 				}
-			}).catch(function(err){
-				console.log(err)
 			})
 		},
 		vipApply(){
