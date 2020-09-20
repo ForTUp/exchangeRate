@@ -21,25 +21,27 @@
 						</div>
 					</div>
 				</el-col>
-				  <el-col :span="4" :push="4" class="headerColLast" style="margin-top: 0.5rem;">
-					<div class="grid-content bg-purple loginout" v-if="userInfo!=null">
-						<!-- <span  class="userName" @click="goToWork">{{userInfo.username}}</span> -->
-						<el-link class="userName" :underline="false" @click="goToWork">{{userInfo.username}}</el-link>
-						<el-button  class="loginButton loginoutButton" @click="loginout">退出登录</el-button>
-					</div>
+				  <el-col :span="4" :push="4" class="headerColLast" style="margin-top: 0.5rem;" v-if="userInfo==null" >
 					<div v-if="userInfo==null" class="loginDiv">
 						<el-button  class="vipButton" @click="vipApply" >会员申请</el-button>
 						<el-button type="primary" class="loginButton " @click="loadLogin" style="margin-left: 3rem;"> 登录 </el-button>
 					</div>
 				  </el-col>
+				  <el-col :span="4" :push="4" class="headerColLast1" style="margin-top: 0.5rem;"  v-if="userInfo!=null">
+						<div class="grid-content bg-purple loginout" v-if="userInfo!=null">
+							<!-- <span  class="userName" @click="goToWork">{{userInfo.username}}</span> -->
+							<el-link class="userName" :underline="false" @click="goToWork">{{userInfo.username}}</el-link>
+							<el-button  class="loginButton loginoutButton" @click="loginout">退出登录</el-button>
+						</div>
+				  </el-col>
 				</el-row>
 			</el-header>
 			<el-main>
 				<div id="banner">
-				    <!--动态将图片轮播图的容器高度设置成与图片一致-->
-					 <el-carousel class="lun_imgs" ref="carousel" @click.native="linkTo">
+				    <!--动态将图片轮播图的容器高度设置成与图片一致--><!-- @click.native="linkTo" -->
+					 <el-carousel class="lun_imgs" ref="carousel" >
 					   <el-carousel-item class="lun_img" v-for="item in imgList" v-bind:key="item.url" >
-						 <img :src="item.url"/>
+						 <img :src="item.url" ref="bannerHeight" @load="imgLoad"/>
 					   </el-carousel-item>
 					 </el-carousel>
 				</div>
@@ -313,7 +315,7 @@ export default {
 			  // 图片地址数组
 			imgList: [
 			    {
-				  url: require('../../static/image/banner.png')
+				  url: require('../../static/image/banner.png'),
 				},
 			  ],
 			  // 图片父容器高度
@@ -352,10 +354,16 @@ export default {
 	    };
 	  },
 	  methods: {
-	    setSize: function() {
-	      // 通过浏览器宽度(图片宽度)计算高度
-	      this.bannerHeight = (500 / 1920) * this.screenWidth;
-	    },
+		imgLoad(){
+			 this.$nextTick(()=>{
+				 this.bannerHeight=this.$refs.bannerHeight[0].height;
+				 console.log(this.$refs.bannerHeight[0].height,'this.$refs.bannerHeight[0].height')
+			 })
+		},
+	    // setSize: function() {
+	    //   // 通过浏览器宽度(图片宽度)计算高度
+	    //   this.bannerHeight = (500 / 1920) * this.screenWidth;
+	    // },
 		loadLogin(){
 			this.$router.push('/login');
 		},
@@ -514,12 +522,16 @@ export default {
 	  },
 	  mounted() {
 	    this.screenWidth = window.innerWidth;
-	    this.setSize();
+	    // this.setSize();
+		this.imgLoad()
 	    // 窗口大小发生改变时,调用一次
 	    window.onresize = () => {
 	      this.screenWidth = window.innerWidth;
-	      this.setSize();
+		  this.bannerHeight=this.$refs.bannerHeight[0].height;
+		  this.imgLoad();
+	      // this.setSize();
 	    };
+		
 		
 		//获取费率列表
 		this.$api.getExchangeList({offset:this.offset,limit:this.limit}).then((response) =>{
@@ -591,6 +603,10 @@ export default {
 		margin-left: -4rem !important;
 	}
 	.headerColLast{
+		width: 20rem;
+		margin-left: 12rem;
+	}
+	.headerColLast1{
 		width: 20rem;
 		margin-left: 8rem;
 	}
