@@ -6,6 +6,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import routers from './routers'
 import "@/static/css/common.scss";
+import "@/static/css/response.scss"
 import vueEsign from 'vue-esign'
 import store from "./store";
 import {post,get,postJson,postFile} from "./utils/http.js"

@@ -264,7 +264,7 @@
 									<span class="spanMsg">接收人 | Payee detail</span>
 								</div>
 								<div v-if="PayeeList">
-									<el-row style="width: 30rem;height: 3rem; line-height: 3rem;margin-top: 2rem;margin-left: 1rem;">
+									<el-row style="width: 100%;height: 3rem; line-height: 3rem;margin-top: 2rem;text-align: left; padding-left: 1rem; ">
 										<span>历史汇款人</span><span style="color: orange;">（最多可以勾选2位收款人，总收款人人数不超过2人）</span>
 									</el-row >
 									<el-row class="formRadioHead" style="height: auto;padding-bottom: 2rem;">
@@ -272,7 +272,7 @@
 											  <el-checkbox-group
 											      v-model="sender_ids"
 											  	class="checkForm">
-											      <el-checkbox style="display:block;" class="checkboxSpanNext" v-for="item in PayeeList" :label="item.id" :key="item.id">{{item.realname}}</el-checkbox>
+											      <el-checkbox style="display:block;padding-bottom: 0.8rem;" class="checkboxSpanNext" v-for="item in PayeeList" :label="item.id" :key="item.id">{{item.realname}}</el-checkbox>
 											    </el-checkbox-group>
 										</el-col>
 									</el-row >
@@ -934,16 +934,16 @@ export default{
 <style scoped lang="scss">
 	@import "../../static/css/form-item.css";  //引入方式
 	body > .el-container {
-		width: 82rem;
+		width: 84rem;
 		// border: 0.0625rem  solid red;
 	}
 	.el-header, .el-footer {
-		width: 82rem;
-		border: 0.0625rem #02a7f0 solid;
+		width: 84rem;
+		// border: 0.0625rem #02a7f0 solid;
 		
 	}
 	.el-main {
-		width: 82rem;
+		width: 84rem;
 		// border: 0.0625rem  solid red;
 	}
 	
@@ -1013,7 +1013,11 @@ export default{
 		
 	}
 	.formRadio{
-		margin-left: -6rem;
+		// margin-left: -4rem;
+		padding: 0 !important;
+		text-align: left;
+		// margin: 0;
+		// border: 0.0625rem solid red;
 	}
 	.formSpan {
 		position: absolute;

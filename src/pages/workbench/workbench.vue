@@ -67,8 +67,8 @@
 						</el-form>
 					</div>
 					<div class="tableBody">
-						<el-table :data="tableData" style="width: 100%" border  :row-class-name="tableRowClassName">
-							<el-table-column prop="id" label="序号" width="50">
+						<el-table :data="tableData" style="width: 100%" border  :row-class-name="tableRowClassName" highlight-current-row>
+							<el-table-column prop="id" label="序号" width="50" >
 							</el-table-column>
 							<el-table-column prop="remit_name" label="汇款人" width="100">
 							</el-table-column>
@@ -316,6 +316,7 @@
 		width: 82rem;
 	}
 	.el-table {
+		// border: 0.0625rem solid red;
 		.warning-row {
 		    color: red !important;
 		  }

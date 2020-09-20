@@ -227,7 +227,7 @@
 											  
 											  <img v-if="firstImage" :src="firstImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
 											</el-upload>
 										</el-form-item>
 									</el-col>
@@ -241,7 +241,7 @@
 											  :before-upload="beforeAvatarUpload">
 											  <img v-if="secondImage" :src="secondImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
 											</el-upload>
 											</el-form-item>
 									</el-col>
@@ -256,7 +256,7 @@
 											  
 											  <img v-if="thirdImage" :src="thirdImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
 											</el-upload>
 											</el-form-item>
 									</el-col>
@@ -321,7 +321,7 @@
 											  
 											  <img v-if="fourImage" :src="fourImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
 											</el-upload>
 										</el-form-item>
 									</el-col>
@@ -336,7 +336,7 @@
 											  
 											  <img v-if="fiveImage" :src="fiveImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
 											</el-upload>
 											</el-form-item>
 									</el-col>
@@ -358,8 +358,8 @@
 								<el-row  :gutter="24" class="esignBtn">
 									<el-col :span="6" :pull="12">
 										<div class="btn">
-											<el-button  class="vipButton" @click="handleReset">重置</el-button>
-											<el-button  class="loginButton vipButton" @click="handleGenerate">确定</el-button>
+											<el-button  class="vipButton buttonEsign" @click="handleReset">重置</el-button>
+											<el-button  class="loginButton vipButton buttonEsign" @click="handleGenerate">确定</el-button>
 										</div>
 									</el-col>
 								</el-row>	
@@ -386,36 +386,36 @@ export default{
 	data() {
 		return {
 			form: {
-				firstname:'张',
-				lastname:'三',
+				firstname:'',
+				lastname:'',
 				gender:'1',
-				birthday:'1991-03-13', 
+				birthday:'', 
 				nationality_id: '', 
 				occupation_id: '',
-				email: 'enoch0418@163.com', 
+				email: '', 
 				areacode_id:'',
-				mobile:'13888888888',
+				mobile:'',
 				areacode2_id:'',
-				mobile2:'13988888888',
+				mobile2:'',
 				country_id:'',
-				province:'省',
-				city:'市',
-				area:'区',
-				address:'居住地址',
-				postcode:'邮编',
+				province:'',
+				city:'',
+				area:'',
+				address:'',
+				postcode:'',
 				sign_url:'',
 				certificate:{
 					passport:{
 						type:'',
 						issuer_id:'',
-						number:'护照号码',
+						number:'',
 						expiration:'',
 						photos:'',
 					},
 					idcard:{
 						type_id:'',
 						issuer_id:'',
-						number:'证件号码',
+						number:'',
 						expiration:'',
 						photos:'',
 					},
@@ -437,21 +437,21 @@ export default{
 				occupation_id:[
 					{required: true, message: '请选择职业/Occupation', trigger: 'change'}
 				], 
-				email: [
-					{required: true, message: '请输入邮箱地址/Email Address', trigger: 'change'}
-				], 
+				// email: [
+				// 	{required: true, message: '请输入邮箱地址/Email Address', trigger: 'change'}
+				// ], 
 				areacode_id:[
 					{required: true, message: '请输入手机/Phone', trigger: 'change'}
 				],
 				mobile:[
 					{required: true, message: '请输入手机/Phone', trigger: 'change'}
 				],
-				areacode2_id:[
-					{required: true, message: '请输入备用手机/Spare Phone', trigger: 'change'}
-				],
-				mobile2:[
-					{required: true, message: '请输入备用手机/Spare Phone', trigger: 'change'}
-				],
+				// areacode2_id:[
+				// 	{required: true, message: '请输入备用手机/Spare Phone', trigger: 'change'}
+				// ],
+				// mobile2:[
+				// 	{required: true, message: '请输入备用手机/Spare Phone', trigger: 'change'}
+				// ],
 				country_id:[
 					{required: true, message: '请输入居住国家/Residence Country', trigger: 'change'}
 				],
@@ -506,21 +506,6 @@ export default{
 						],
 					},
 				},
-				// firstUrl:[
-				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				// ],
-				// secondUrl:[
-				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				// ],
-				// thirdUrl:[
-				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				// ],
-				// fourUrl:[
-				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				// ],
-				// fiveUrl:[
-				// 	{required: true, message: '请上传护照照片/Passport Photo', trigger: 'blur'}
-				// ],
 			},
 			options: [
 				],
@@ -852,5 +837,8 @@ export default{
 		width: 10rem;
 		background-color: #169bd5 !important;
 		color: #fff;
+	}
+	.buttonEsign{
+		margin-left: 2rem;
 	}
 </style>

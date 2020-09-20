@@ -1,25 +1,8 @@
-// @media screen and (max-width: 1280px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
-//    html{
-// 	font-size:4px;
-//    }
-// }
-// @media screen and (max-width: 1366px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
-//    html{
-// 	font-size:6px;
-//    }
-// }
-
 body{
 		width:100%;
 		margin: 0 auto !important;
-		
 		font-family: 'ArialMT', 'Arial', sans-serif;
 		border-radius:0rem;
-		// overflow-x:hidden;
-		// @media screen and (max-width: 1280px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
-		//    font-size:4px;
-		// }
-		
 }
 .el-header, .el-footer {
 	color: #333;

@@ -46,13 +46,13 @@
 				<!--货币兑换 -->
 				<div id="showCurrencyDiv" class="iocnDiv currency" @click="dialogFormVisible = true" style="cursor:pointer; marign-left: 0;">
 					<i class="iconfont iconhuobiduihuan1"></i><br>
-					<span>货币兑换</span>
+					<span >货币兑换</span>
 				</div>
 				
 				<!--微信入口 -->
 				<div class="iocnDiv  weixin">
 					<i class="iconfont iconWeChat"></i><br>
-					<span>公众号</span>
+					<span >公众号</span>
 				</div>
 				
 				<!--中间件 -->
@@ -591,6 +591,7 @@ export default {
 		margin-left: -4rem !important;
 	}
 	.headerColLast{
+		width: 20rem;
 		margin-left: 8rem;
 	}
 	.topLinkDivFirst{
@@ -612,8 +613,8 @@ export default {
 		// border: 0.0625rem solid red;
 		height: 120rem;
 		width: 70rem;
-		margin: 0 80px;
-		// margin: 0 auto;
+		// margin: 0 80px;
+		margin: 0 auto;
 		margin-top: 2rem !important;
 	}
 	.coreHead{
@@ -682,11 +683,11 @@ export default {
 	}
 	.iocnDiv{
 		width: 3.2rem;
-		height: 3.2rem;
 		background-color: #fff;
 		border: 0.0625rem solid  #8F8F8F;
 		border-radius: 0.7rem 0rem 0rem 0.7rem;
 		position: absolute;
+		padding: 0.5rem;
 		right: 0;
 		span{
 			font-size: 0.3rem !important;
@@ -701,7 +702,7 @@ export default {
 		top:20rem;
 	}
 	.weixin{
-		top:24rem;
+		top:26rem;
 	}
 	.el-dialog{
 		.el-input{
@@ -728,13 +729,12 @@ export default {
 		}
 		.mapHead{
 			width: 100%;
-			height: 3rem;
 			// border: 0.0625rem solid blue;
-			padding: 0;
+			// padding: 0;
+			padding-bottom: 0.5rem;
 			ul{
 				padding: 0;
 				width: 100%;
-				height: 2rem;
 				margin: 0;
 			}
 			.mapHeadTitle{
@@ -747,7 +747,6 @@ export default {
 		}
 		.mapButtom{
 			width: 100%;
-			height: 8rem;
 			// border: 0.0625rem solid blue;
 			padding: 0;
 			ul{
@@ -785,7 +784,6 @@ export default {
 		background-color: #fff;
 		.el-row{
 			// border: 0.0625rem solid red;
-			height: 3rem;
 			padding: 0;
 			text-align: left;
 			line-height: 3rem;
