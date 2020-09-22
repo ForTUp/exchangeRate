@@ -53,6 +53,7 @@ export default {
 	},
 	getCurrencyList:(data)=>{
 		return get('/api/exchange/getCurrencyList',data)
+		console.log('222')
 	},
 	apply:(data)=>{
 		return post('/api/user/apply',data)

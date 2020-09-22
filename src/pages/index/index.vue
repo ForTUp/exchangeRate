@@ -138,12 +138,12 @@
 							      :data="tableData"
 							      style="width: 100%">
 							      <el-table-column
-							        prop="currencyF_Name"
+							        prop="currency_Label"
 							        label="Code"
 							        width="180">
 							      </el-table-column>
 							      <el-table-column
-							        prop="currencyT"
+							        prop="currency_Label"
 							        label="Currency"
 							        width="180">
 							      </el-table-column>
@@ -168,8 +168,8 @@
 						<div class="block">
 						  <el-pagination
 							@current-change="handleCurrentChange"
-							:current-page.sync="offset"
-							:page-size="limit"
+							:current-page.sync="current_page"
+							:page-size="per_page"
 						    layout="prev, pager, next"
 						    :total="total">
 						  </el-pagination>
@@ -266,7 +266,7 @@
 		  <el-form :model="form">
 		    <el-form-item label="卖出币种:" :label-width="formLabelWidth">
 			  
-			  <el-select v-model="form.from" placeholder="请选择" class="formSelect" clearable filterable >
+			  <el-select v-model="form.to" placeholder="请选择" class="formSelect" clearable filterable >
 			  	<el-option
 			  	  v-for="item in currencyList"
 			  	 :key="item.code"
@@ -276,7 +276,7 @@
 			   </el-select>
 		    </el-form-item>
 			<el-form-item label="买入币种:" :label-width="formLabelWidth">
-			  <el-select v-model="form.to" placeholder="请选择" class="formSelect" clearable filterable >
+			  <el-select v-model="form.from" placeholder="请选择" class="formSelect" clearable filterable >
 			  	<el-option
 			  	  v-for="item in currencyList"
 			  	 :key="item.code"
@@ -289,10 +289,10 @@
 			  <el-input v-model="form.money" autocomplete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="计算结果:" :label-width="formLabelWidth" >
-			  <el-input v-model="form.totalMoney" autocomplete="off"></el-input>
+			  <el-input v-model="form.totalMoney" readonly autocomplete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="费率:" :label-width="formLabelWidth" >
-			  <el-input v-model="form.currencyFD" autocomplete="off"></el-input>
+			  <el-input v-model="form.currencyRate" readonly autocomplete="off"></el-input>
 			</el-form-item>
 		  </el-form>
 		  <div slot="footer" class="dialog-footer">
@@ -324,8 +324,8 @@ export default {
 			  screenWidth: 0,
 			  fit:'',
 			  tableData:[],
-			  offset:0,
-			  limit:8,
+			  current_page:1,
+			  per_page:10,
 			  total:0,
 			  //货币计算表单
 			  form:{
@@ -333,7 +333,7 @@ export default {
 				  from:'',
 				  to:'',
 				  totalMoney:'',
-				  currencyFD:''
+				  currencyRate:''
 			  },
 			  dialogFormVisible:false,
 			  formLabelWidth:'100px',
@@ -403,12 +403,17 @@ export default {
 			});
 		},
 		handleCurrentChange(val){
-			this.offset=val;
-			this.$api.getExchangeList({offset:this.offset,limit:this.limit}).then((response) =>{
+			this.current_page=val;
+			this.$api.getExchangeList({current_page:this.current_page,per_page:this.per_page}).then((response) =>{
 				const {data} = response;
 				this.total=data.total;
 				if(response.code==1){
-					this.tableData= data.rows;
+					let List = []
+					data.rows.forEach((el)=>{
+						el.currency_Label = el.currencyF + el.currencyF_Name + " / " + el.currencyT + el.currencyT_Name
+						List.push(el)
+					})
+					this.tableData= List;
 				}
 			})
 			console.log(this.total,'total');
@@ -460,8 +465,8 @@ export default {
 				console.log(response)
 				let {data} = response;
 				if(response.code==1){
-					this.form.totalMoney=this.form.money*data.currencyFD;
-					this.form.currencyFD =data.currencyFD;
+					this.form.totalMoney=this.form.money*data.exchange21;
+					this.form.currencyRate =data.exchange21;
 					console.log(this.form.totalMoney)
 				}else{
 					this.$message({
@@ -498,7 +503,7 @@ export default {
 				console.log(response)
 				let {data} = response;
 				if(response.code==1){
-					this.nowForm.totalMoney=this.nowForm.money*data.currencyFD;
+					this.nowForm.totalMoney=this.nowForm.money*data.exchange21;
 					console.log(this.nowForm.totalMoney)
 				}else{
 					this.$message({
@@ -534,17 +539,23 @@ export default {
 		
 		
 		//获取费率列表
-		this.$api.getExchangeList({offset:this.offset,limit:this.limit}).then((response) =>{
+		this.$api.getExchangeList({current_page:this.current_page,per_page:this.per_page}).then((response) =>{
 			const {data} = response;
 			console.log(response,'response');
 			this.total=data.total;
 			if(response.code==1){
-				this.tableData= data.rows;
+				let List = []
+				data.rows.forEach((el)=>{
+					el.currency_Label = el.currencyF + el.currencyF_Name + " / " + el.currencyT + el.currencyT_Name
+					List.push(el)
+				})
+				this.tableData= List;
 			}
 			console.log(this.tableData,'tabledata')
 		});
 		//获取货币列表
-		this.$api.getCurrencyList().then((response) =>{
+		this.$api.getCurrencyList({current_page:1,per_page:10000,status:"normal"}).then((response) =>{
+			console.log(response.data.rows)
 			this.currencyList= response.data.rows;
 		})
 	  }
@@ -553,12 +564,23 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.el-input--suffix .el-input__inner {
-	padding-right: 0;
-}
 /deep/.el-select .el-input__inner {
 	padding-right: 0;
 }
+.el-input--suffix .el-input__inner {
+	padding-right: 0;
+}
+.el-col-4 {
+	width: 20.66667%;
+}
+.tableHeader .el-row .el-col[data-v-1badc801] {
+	padding: 8px;
+}
+.coreContentList:hover {
+		color: #02a7f0 !important;
+		font-weight: bold;
+
+	}
 	img {
 	  /*设置图片宽度和浏览器宽度一致*/
 	  width: 100%;
@@ -593,7 +615,7 @@ export default {
 		 position: relative;
 	}
 	.topLinkDiv{
-		with:8rem;
+		width: 8rem;
 		height: 3.75rem;
 		float: left;
 		margin-left:2rem;
@@ -683,10 +705,6 @@ export default {
 		margin-left:0rem !important;
 
 		
-	}。
-	.coreContentList:hover {
-		color: #02a7f0;
-		font-weight: 500;
 	}
 	.el-footer{
 		 background-color: #F7F7F7;
