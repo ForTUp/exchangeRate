@@ -118,6 +118,10 @@ export default{
 
 <style scoped lang="scss">
 	@import "../../static/css/form-item.css";  //引入方式
+	html,body{
+		width: 100%;
+		height: 100%;    
+	}
 	.formDiv {
 		border-radius: 1px;
 		background-color: #F7F7F7;
@@ -133,5 +137,16 @@ export default{
 	.el-input__inner{
 		border-radius:0.125rem !important;
 		text-align: center;
+	}
+	
+	.el-container {
+		height: 100% !important;
+		position:fixed;
+		 left: 0; top: 0; right: 0; bottom: 0; 
+		margin: auto;  
+
+	}
+	.el-main{
+		height: 100% !important;
 	}
 </style>
