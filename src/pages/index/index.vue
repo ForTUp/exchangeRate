@@ -175,8 +175,8 @@
 						  </el-pagination>
 						</div>
 					</div>
-					
-					<div class="coreContent chanceDiv form-wrap-app" >
+					<div class="form-wrap-app" style="width: 100%;height: 2rem;"></div>
+					<div class="coreContent chanceDiv " >
 						<div class="coreHead ">
 							<h1>为什么选我们</h1>
 						</div>
