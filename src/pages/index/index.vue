@@ -52,7 +52,7 @@
 				</div>
 				
 				<!--微信入口 -->
-				<div class="iocnDiv  weixin">
+				<div class="iocnDiv  weixin" @click="dialogWeiXin = true">
 					<i class="iconfont iconWeChat"></i><br>
 					<span >公众号</span>
 				</div>
@@ -300,6 +300,14 @@
 		    <el-button type="primary" @click="getExchangeInfo">计 算</el-button>
 		  </div>
 		</el-dialog>
+		
+		<el-dialog title="微信公众号" :visible.sync="dialogWeiXin" width="30%" height="30%" class="weiXinDialog">
+			<el-image 
+			    :src="weiXinurl" 
+				:fit="fit"
+			    >
+			</el-image>
+		</el-dialog>
 	</div>
 </template>
 
@@ -350,7 +358,9 @@ export default {
 				  to:'',
 				  money:1,
 				  totalMoney:''
-			  }
+			  },
+			  dialogWeiXin:false,
+			  weiXinurl:require('../../static/image/qrcode_for_gh_cb5bd9556a2e_1280.jpg')
 	    };
 	  },
 	  methods: {
@@ -842,6 +852,22 @@ export default {
 		p{
 			font-size: 1rem;
 			line-height: 1.5rem;
+		}
+	}
+	.weiXinDialog{
+		.el-dialog__body{
+			width: 100% !important;
+			height: 100% !important;
+			text-align: center !important;
+			.el-image{
+				width: 100%;
+				height: 100%;
+				margin: 0 auto !important;
+				img{
+					width: 1280px !important;
+					height: 1280px !important;
+				}
+			}
 		}
 	}
 </style>
