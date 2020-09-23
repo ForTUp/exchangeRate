@@ -47,12 +47,13 @@
 								<el-row class="formRadioHead"  v-if="form.remit_type=='1'" >
 									<el-col>
 										  <el-radio-group v-model="form.remit_id" size="mini" >
-											  <el-radio 
+											  <el-radio
 											  v-for="item in senderList"
 											  :label="item.id"
 											  :name="item.realname"
 											  style="display:block; margin:1rem"
 											  >
+											   <!-- style="display:block; margin:1rem" -->
 											  {{item.realname }} ( {{item.mobile}} ) 
 											  <span @click="setDefault(item.id)" class="setTextSpan" v-if="form.remit_id==item.id && item.default=='0'">设为默认汇款人</span>
 											  <span class="textSpan" v-if="item.default=='1'">默认汇款人</span>
@@ -659,7 +660,8 @@ export default{
 				}
 			],
 			//默认人是本人的标记
-			isDefault:''
+			isDefault:'',
+			height:''
 		}
 		
 	},
@@ -839,6 +841,9 @@ export default{
 					that.isDefault='';
 				}
 			})
+		},
+		goToIndex(){
+			this.$router.push('/index')
 		}
 	},
 	mounted() {
@@ -936,16 +941,13 @@ export default{
 <style scoped lang="scss">
 	@import "../../static/css/form-item.css";  //引入方式
 	body > .el-container {
-		width: 84rem;
 		// border: 0.0625rem  solid red;
 	}
 	.el-header, .el-footer {
-		width: 84rem;
 		// border: 0.0625rem #02a7f0 solid;
 		
 	}
 	.el-main {
-		width: 84rem;
 		// border: 0.0625rem  solid red;
 	}
 	

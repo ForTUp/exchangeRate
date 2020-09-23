@@ -2,6 +2,7 @@
 	<div id="workbench">
 		<el-container>
 			<el-header>
+				<div class="headDiv">
 				<el-row>
 					<el-col :span="20">
 						<div class="grid-content bg-purple ">
@@ -25,12 +26,13 @@
 						</div>
 					</el-col>
 				</el-row>
+				</div>
 			</el-header>
 			<el-main>
 				<div class="tableDiv">
 					<div class="tableHeader">
 						<el-form ref="ruleForm" :model="ruleForm" :rules="rules"  >
-							<el-row :span="20">
+							<el-row :span="20" style="margin-left: -1rem;">
 								<el-col :span="2">
 									<el-select v-model="ruleForm.searchType" placeholder="搜索类型" style="width: 8rem;">
 										<el-option label="搜索类型" value=""></el-option>
@@ -306,16 +308,17 @@
 
 <style scoped lang="scss">
 	body>.el-container {
-		width: 82rem;
 	}
 
 	.el-header,
 	.el-footer {
-		width: 82rem;
 	}
 
 	.el-main {
+	}
+	.headDiv{
 		width: 82rem;
+		margin: 0 auto;
 	}
 	.el-table {
 		// border: 0.0625rem solid red;
@@ -355,10 +358,17 @@
 		}
 
 	}
-	
+	.tableBody{
+		margin-bottom: 2rem;
+	}
 	.block{
+		width: 100%;
+		position: fixed;
+		bottom: 0;
 		text-align: left;
-		margin-top: 1rem;
+		height: 2rem;
+		background-color: #F7F7F7;
+		
 	}
 	
 	

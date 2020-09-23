@@ -8,34 +8,37 @@ body{
 	color: #333;
 	text-align: center;
 	line-height: 3.75rem;
-	width: 100rem;
+	width: 100%;
 	margin: 0 auto !important;
 	border: 0.0625rem solid #F7F7F7;
 	height: 5rem !important;
 }
+.el-header{
+	position: fixed;
+	left: 0; top: 0; right: 0; bottom: 0;
+	margin: auto;  
+}
+
 .el-main {
-	 width: 100rem;
+	 width: 100%;
 	 background-color: #F7F7F7;
 	 color: #333;
 	 text-align: center;
 	 margin: 0 auto !important;
 	 border: 0.0625rem solid #F7F7F7;
 }
-body > .el-container {
-	width: 100rem;
+.el-container {
+	width: 100%;
 	margin: 0 auto !important;
 	border: 0.0625rem solid #F7F7F7;
 	font-family: 'ArialMT', 'Arial', sans-serif;
 	border-radius:0rem;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-	line-height: 16.25rem;
-}
-
-.el-container:nth-child(7) .el-aside {
-	line-height: 20rem;
+	position: fixed;
+	top: 5rem;
+	left: 0; right: 0; 
+	bottom: 0;
+	margin: auto;  
+	
 }
 .el-carousel__item h3 {
 	color: #475669;
@@ -44,8 +47,6 @@ body > .el-container {
 	line-height: 18.75rem;
 	margin: 0;
 }
-
-
 
 .formDiv {
 	border-radius: 1px;

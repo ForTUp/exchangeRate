@@ -2,7 +2,8 @@
 		<div id="vipApply">
 			<el-container>
 				<el-header>
-					<el-row  style="margin-left: 9rem;">
+					<div class="headDiv">
+					<el-row  style="margin-left: 2rem;">
 						<el-col :span="20" >
 							<div class="grid-content bg-purple ">
 								<div class="logoDiv">
@@ -21,6 +22,7 @@
 						</div>
 					  </el-col>
 					</el-row>
+					</div>
 				</el-header>
 				<el-main>
 					<div class="formDiv">
@@ -709,15 +711,16 @@ export default{
 <style scoped lang="scss">
 	@import "../../static/css/form-item.css";  //引入方式
 	body > .el-container {
-		width: 100rem;
 	}
 	.el-header, .el-footer {
-		width: 100rem;
 	}
 	.el-main {
-		width: 100rem;
 	}
 	
+	.headDiv{
+		width: 84rem;;
+		margin: 0 auto;
+	}
 	.formDiv {
 		border-radius: 1px;
 		background-color: #F7F7F7;

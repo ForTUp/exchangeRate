@@ -1,43 +1,45 @@
 <template>
 	<div id="index">
+		<el-header >
+			<div class="headDiv">
+			<el-row :gutter="20" style="margin-right: 4rem;">
+			<el-col :span="12" :push="4" class="headerCol">
+				<div class="grid-content bg-purple ">
+					<div class="logoDiv">
+						<el-image class="topImage"
+						      :src="imageUrl"
+						      :fit="fit"></el-image>
+					</div>
+					<div class="topLinkDiv topLinkDivFirst" >
+						<el-link :underline="false"  type="primary" @click="goTop">首页</el-link>
+					</div>
+					<div class="topLinkDiv">
+						<el-link :underline="false" @click="goRegister">为什么选择我们</el-link>
+					</div>
+					<div class="topLinkDiv">
+						<el-link :underline="false" @click="goContact">联系我们</el-link>
+					</div>
+				</div>
+			</el-col>
+			  <el-col :span="4" :push="4" class="headerColLast" style="margin-top: 0.5rem;" v-if="userInfo==null" >
+				<div v-if="userInfo==null" class="loginDiv">
+					<el-button  class="vipButton" @click="vipApply" >会员申请</el-button>
+					<el-button type="primary" class="loginButton " @click="loadLogin" style="margin-left: 3rem;"> 登录 </el-button>
+				</div>
+			  </el-col>
+			  <el-col :span="4" :push="4" class="headerColLast1" style="margin-top: 0.5rem;"  v-if="userInfo!=null">
+					<div class="grid-content bg-purple loginout" v-if="userInfo!=null">
+						<!-- <span  class="userName" @click="goToWork">{{userInfo.username}}</span> -->
+						<el-link class="userName" :underline="false" @click="goToWork">{{userInfo.username}}</el-link>
+						<el-button  class="loginButton loginoutButton" @click="loginout">退出登录</el-button>
+					</div>
+			  </el-col>
+			</el-row>
+			</div>
+		</el-header>
 		<el-container>
-			<el-header>
-				<el-row :gutter="20" style="margin-right: 4rem;">
-				<el-col :span="12" :push="4" class="headerCol">
-					<div class="grid-content bg-purple ">
-						<div class="logoDiv">
-							<el-image class="topImage"
-							      :src="imageUrl"
-							      :fit="fit"></el-image>
-						</div>
-						<div class="topLinkDiv topLinkDivFirst" >
-							<el-link :underline="false"  type="primary">首页</el-link>
-						</div>
-						<div class="topLinkDiv">
-							<el-link :underline="false" @click="goRegister">为什么选择我们</el-link>
-						</div>
-						<div class="topLinkDiv">
-							<el-link :underline="false" @click="goContact">联系我们</el-link>
-						</div>
-					</div>
-				</el-col>
-				  <el-col :span="4" :push="4" class="headerColLast" style="margin-top: 0.5rem;" v-if="userInfo==null" >
-					<div v-if="userInfo==null" class="loginDiv">
-						<el-button  class="vipButton" @click="vipApply" >会员申请</el-button>
-						<el-button type="primary" class="loginButton " @click="loadLogin" style="margin-left: 3rem;"> 登录 </el-button>
-					</div>
-				  </el-col>
-				  <el-col :span="4" :push="4" class="headerColLast1" style="margin-top: 0.5rem;"  v-if="userInfo!=null">
-						<div class="grid-content bg-purple loginout" v-if="userInfo!=null">
-							<!-- <span  class="userName" @click="goToWork">{{userInfo.username}}</span> -->
-							<el-link class="userName" :underline="false" @click="goToWork">{{userInfo.username}}</el-link>
-							<el-button  class="loginButton loginoutButton" @click="loginout">退出登录</el-button>
-						</div>
-				  </el-col>
-				</el-row>
-			</el-header>
 			<el-main>
-				<div id="banner">
+				<div id="banner" class="form-wrap-top">
 				    <!--动态将图片轮播图的容器高度设置成与图片一致--><!-- @click.native="linkTo" -->
 					 <el-carousel class="lun_imgs" ref="carousel" >
 					   <el-carousel-item class="lun_img" v-for="item in imgList" v-bind:key="item.url" >
@@ -96,7 +98,7 @@
 									<el-col :span="4">
 										<span>持有币种</span>
 									</el-col>
-									<el-col :span="4" :push="7" style="margin-left: -0.8rem;">
+									<el-col :span="4"  style="margin-left: 22rem;">
 										<span>兑换币种</span>
 									</el-col>
 								</el-row>
@@ -365,10 +367,10 @@ export default {
 	  },
 	  methods: {
 		imgLoad(){
-			 this.$nextTick(()=>{
-				 this.bannerHeight=this.$refs.bannerHeight[0].height;
-				 console.log(this.$refs.bannerHeight[0].height,'this.$refs.bannerHeight[0].height')
-			 })
+			 // this.$nextTick(()=>{
+				//  this.bannerHeight=this.$refs.bannerHeight[0].height;
+				//  console.log(this.$refs.bannerHeight[0].height,'this.$refs.bannerHeight[0].height')
+			 // })
 		},
 	    // setSize: function() {
 	    //   // 通过浏览器宽度(图片宽度)计算高度
@@ -446,7 +448,6 @@ export default {
 			// this.center2.lat=39.915;
 			this.zoom = 15;
 		},
-		
 		getExchangeInfo(){
 			
 			if(this.form.from==null || this.form.from == '' ){
@@ -526,26 +527,29 @@ export default {
 			
 		},
 		// 跳到注册
-		    goRegister() {
-		      // 注册表单盒子的类名为 form-wrap-app
-		      this.$el.querySelector('.form-wrap-app').scrollIntoView();
-		    },
-			goContact(){
-				this.$el.querySelector('.contact').scrollIntoView();
-			}
+		goRegister() {
+			// 注册表单盒子的类名为 form-wrap-app
+			this.$el.querySelector('.form-wrap-app').scrollIntoView();
+		},
+		goContact(){
+			this.$el.querySelector('.contact').scrollIntoView();
+		},
+		goTop(){
+			this.$el.querySelector('.form-wrap-top').scrollIntoView();
+		},
 		
 	  },
 	  mounted() {
-	    this.screenWidth = window.innerWidth;
-	    // this.setSize();
-		this.imgLoad()
-	    // 窗口大小发生改变时,调用一次
-	    window.onresize = () => {
-	      this.screenWidth = window.innerWidth;
-		  this.bannerHeight=this.$refs.bannerHeight[0].height;
-		  this.imgLoad();
-	      // this.setSize();
-	    };
+	 //    this.screenWidth = window.innerWidth;
+	 //    // this.setSize();
+		// this.imgLoad()
+	 //    // 窗口大小发生改变时,调用一次
+	 //    window.onresize = () => {
+	 //      this.screenWidth = window.innerWidth;
+		//   this.bannerHeight=this.$refs.bannerHeight[0].height;
+		//   this.imgLoad();
+	 //      // this.setSize();
+	 //    };
 		
 		
 		//获取费率列表
@@ -598,31 +602,32 @@ export default {
 	  object-fit:cover;
 	}
 	body > .el-container {
-		width: 100rem;
-		margin: 0 auto !important;
-		border: 0.0625rem solid #F7F7F7;
-		font-family: 'ArialMT', 'Arial', sans-serif;
-		border-radius:0rem;
+		// margin: 0 auto !important;
+		// border: 0.0625rem solid #F7F7F7;
+		// font-family: 'ArialMT', 'Arial', sans-serif;
+		// border-radius:0rem;
 	}
 	
 	.el-header, .el-footer {
 		color: #333;
 		text-align: center;
 		line-height: 3.75rem;
-		width: 100rem;
 		margin: 0 auto !important;
 		border: 0.0625rem solid #F7F7F7;
 		height: 5rem !important;
 	}
 	.el-main {
-		 width: 100rem;
 		 background-color: #F7F7F7;
 		 color: #333;
 		 text-align: center;
 		 margin: 0 auto !important;
 		 border: 0.0625rem solid #F7F7F7;
 		 padding: 0;
-		 position: relative;
+		 // position: relative;
+	}
+	.headDiv{
+		width: 100rem;
+		margin: 0 auto;
 	}
 	.topLinkDiv{
 		width: 8rem;
@@ -632,15 +637,15 @@ export default {
 		margin-top: -3rem;
 	}
 	.headerCol{
-		margin-left: -4rem !important;
+		margin-left: -3rem !important;
 	}
 	.headerColLast{
 		width: 20rem;
-		margin-left: 12rem;
+		margin-left: 10rem;
 	}
 	.headerColLast1{
 		width: 20rem;
-		margin-left: 8rem;
+		margin-left: 6.6rem;
 	}
 	.topLinkDivFirst{
 		margin-left:12rem !important;
@@ -743,10 +748,14 @@ export default {
 	}
 	
 	.currency{
-		top:20rem;
+		top:24rem;
+		position: fixed;
+		right: 1.1875rem;
 	}
 	.weixin{
-		top:26rem;
+		top:30rem;
+		right: 1.1875rem;
+		position: fixed;
 	}
 	.el-dialog{
 		.el-input{
