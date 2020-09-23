@@ -6,9 +6,11 @@
 					<el-col :span="16">
 						<div class="grid-content bg-purple ">
 							<div class="logoDiv">
+								<div @click="goToIndex" style="cursor: pointer;">
 								<el-image class="topImage"
 								      :src="imageUrl"
 								      :fit="fit"></el-image>
+								</div>
 								<el-link :underline="false" class="topLink">找回密码</el-link>
 							</div>
 						</div>
@@ -120,6 +122,9 @@ export default{
 		},
 		vipApply(){
 			this.$router.push('/vipApply');
+		},
+		goToIndex(){
+			this.$router.push('/index');
 		}
 		
 	},

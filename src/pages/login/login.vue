@@ -6,9 +6,11 @@
 					<el-col :span="18">
 						<div class="grid-content bg-purple ">
 							<div class="logoDiv">
+								<div @click="goToIndex" style="cursor: pointer;">
 								<el-image class="topImage"
 								      :src="imageUrl"
-								      :fit="fit"></el-image>
+								      :fit="fit" @click="goToIndex"></el-image>
+									  </div>
 								<el-link :underline="false" class="topLink">登录</el-link>
 							</div>
 						</div>
@@ -102,6 +104,9 @@ export default{
 		},
 		vipApply(){
 			this.$router.push('/vipApply');
+		},
+		goToIndex(){
+			this.$router.push('/index');
 		}
 		
 	},

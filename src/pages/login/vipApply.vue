@@ -6,9 +6,11 @@
 						<el-col :span="20" >
 							<div class="grid-content bg-purple ">
 								<div class="logoDiv">
+									<div @click="goToIndex" style="cursor: pointer;">
 									<el-image class="topImage"
 									      :src="imageUrl"
 									      :fit="fit"></el-image>
+									</div>
 									<el-link :underline="false" class="topLink" >会员申请</el-link>
 								</div>
 							</div>
@@ -669,6 +671,9 @@ export default{
 		  theBlob.name = fileName
 		  return theBlob
 		},
+		goToIndex(){
+			this.$router.push('/index');
+		}
 	},
 	mounted() {
 		let that = this;
