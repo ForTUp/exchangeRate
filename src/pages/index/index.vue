@@ -1,6 +1,6 @@
 <template>
 	<div id="index">
-		<el-header >
+		<div class="head">
 			<div class="headDiv">
 			<el-row :gutter="20" style="margin-right: 4rem;">
 			<el-col :span="12" :push="4" class="headerCol">
@@ -36,14 +36,14 @@
 			  </el-col>
 			</el-row>
 			</div>
-		</el-header>
+		</div>
 		<el-container>
 			<el-main>
 				<div id="banner" class="form-wrap-top">
 				    <!--动态将图片轮播图的容器高度设置成与图片一致--><!-- @click.native="linkTo" -->
 					 <el-carousel class="lun_imgs" ref="carousel" >
 					   <el-carousel-item class="lun_img" v-for="item in imgList" v-bind:key="item.url" >
-						 <img :src="item.url" ref="bannerHeight" @load="imgLoad"/>
+						 <img class="bannerImg" :src="item.url" ref="bannerHeight" @load="imgLoad"/>
 					   </el-carousel-item>
 					 </el-carousel>
 				</div>
@@ -256,12 +256,13 @@
 						</div>
 					</div>
 				</div>
-			</el-main>
-			<el-footer>
-				<div class="buttom">
-					<span>&copy; 2020 Wenzhou Finance Group Ltd by 3A IT Solutions. All rights reserved.  Privacy</span>
+				<div class="footer">
+					<div class="buttom">
+						<span>&copy; 2020 Wenzhou Finance Group Ltd by 3A IT Solutions. All rights reserved.  Privacy</span>
+					</div>
 				</div>
-			</el-footer>
+			</el-main>
+			
 		</el-container>
 		
 		<el-dialog title="货币兑换计算器" :visible.sync="dialogFormVisible" width="30%" >
@@ -578,22 +579,30 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-/deep/.el-select .el-input__inner {
-	padding-right: 0;
-}
-.el-input--suffix .el-input__inner {
-	padding-right: 0;
-}
-.el-col-4 {
-	width: 20.66667%;
-}
-.tableHeader .el-row .el-col[data-v-1badc801] {
-	padding: 8px;
-}
-.coreContentList:hover {
+	/deep/.el-select .el-input__inner {
+		padding-right: 0;
+	}
+	.el-input--suffix .el-input__inner {
+		padding-right: 0;
+	}
+	.el-col-4 {
+		width: 20.66667%;
+	}
+	.tableHeader .el-row .el-col[data-v-1badc801] {
+		padding: 8px;
+	}
+	.coreContentList:hover {
 		color: #02a7f0 !important;
 		font-weight: bold;
-
+	}
+	#banner{
+		height:31.25rem !important;
+	}
+	.lun_imgs {
+		height:31.25rem !important;
+	}
+	.lun_img{
+		height:31.25rem !important;
 	}
 	img {
 	  /*设置图片宽度和浏览器宽度一致*/
@@ -601,20 +610,35 @@ export default {
 	  height: inherit;
 	  object-fit:cover;
 	}
+	.bannerImg{
+		height:31.25rem !important;
+	}
 	body > .el-container {
 		// margin: 0 auto !important;
 		// border: 0.0625rem solid #F7F7F7;
 		// font-family: 'ArialMT', 'Arial', sans-serif;
 		// border-radius:0rem;
+		overflow-y: hidden;
 	}
 	
-	.el-header, .el-footer {
+	.head {
 		color: #333;
 		text-align: center;
 		line-height: 3.75rem;
 		margin: 0 auto !important;
 		border: 0.0625rem solid #F7F7F7;
 		height: 5rem !important;
+	}
+	.footer{
+		width: 99%;
+		color: #333;
+		text-align: center;
+		line-height: 3.75rem;
+		margin: 0 auto !important;
+		border: 0.0625rem solid #F7F7F7;
+		height: 5rem !important;
+		background-color: #F7F7F7;
+		clear:both;
 	}
 	.el-main {
 		 background-color: #F7F7F7;
@@ -624,6 +648,7 @@ export default {
 		 border: 0.0625rem solid #F7F7F7;
 		 padding: 0;
 		 // position: relative;
+		     visibility: inherit;
 	}
 	.headDiv{
 		width: 100rem;
@@ -691,11 +716,13 @@ export default {
 		margin-left: 1.73rem;
 		background-color: #fff;
 		text-align: center;
+		
 		.coreUl{
+			padding-inline-start:0 !important;
 			li{
 				margin-top: 1rem;
 				text-align: center !important;
-				margin-left: -4rem;
+				// margin-left: -4rem;
 				span{
 					margin-left: 0.5rem;
 					font-size: 1rem !important;
@@ -707,22 +734,18 @@ export default {
 			margin-top: 8rem;
 			font-size: 2rem !important;
 		}
-		.coreUlTe{
-			li{
-				text-align: left !important;
-				margin-left: 0rem;
-			}
-		}
+		// .coreUlTe{
+		// 	padding-inline-start:0 !important;
+		// 	li{
+		// 		text-align: center !important;
+		// 		// margin-left: 0rem;
+		// 	}
+		// }
 		
 	}
 
 	.coreContentListFirst{
 		margin-left:0rem !important;
-
-		
-	}
-	.el-footer{
-		 background-color: #F7F7F7;
 	}
 	.loginDiv{
 		margin-left: -7rem;
@@ -744,17 +767,17 @@ export default {
 		i{
 			font-size: 1.6rem;
 		}
-		
 	}
-	
 	.currency{
-		top:24rem;
+		top:40rem;
 		position: fixed;
-		right: 1.1875rem;
+		// left:0;
+		// right: 1.1875rem;
 	}
 	.weixin{
-		top:30rem;
-		right: 1.1875rem;
+		top:46rem;
+		// left:0;
+		// right: 1.1875rem;
 		position: fixed;
 	}
 	.el-dialog{
