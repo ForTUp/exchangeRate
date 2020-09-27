@@ -140,9 +140,13 @@
 							      :data="tableData"
 							      style="width: 100%">
 							      <el-table-column
-							        prop="currency_Label"
 							        label="Code"
 							        width="180">
+									<template slot-scope="scope">
+										<img class="curr_image" :src="scope.row.currurl1" width="50px" height="50px"/>
+										<img class="curr_image" :src="scope.row.currurl2" width="50px" height="50px"/>
+										<!-- {{scope.row.currurl}} -->
+									</template>
 							      </el-table-column>
 							      <el-table-column
 							        prop="currency_Label"
@@ -316,6 +320,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import {appConfig} from '../../../config.js'
+
 export default {
 	computed:{...mapGetters(['userId','userInfo'])},
 	name:'index',
@@ -363,7 +369,9 @@ export default {
 				  totalMoney:''
 			  },
 			  dialogWeiXin:false,
-			  weiXinurl:require('../../static/image/qrcode_for_gh_cb5bd9556a2e_1280.jpg')
+			  weiXinurl:require('../../static/image/qrcode_for_gh_cb5bd9556a2e_1280.jpg'),
+			  // apiUrl:appConfig
+			  
 	    };
 	  },
 	  methods: {
@@ -423,10 +431,13 @@ export default {
 				if(response.code==1){
 					let List = []
 					data.rows.forEach((el)=>{
-						el.currency_Label = el.currencyF + el.currencyF_Name + " / " + el.currencyT + el.currencyT_Name
+						el.currency_Label = el.currencyF + el.currencyF_Name + " / " + el.currencyT + el.currencyT_Name;
+						el.currurl1=appConfig.apiUrl+ '/uploads/20200907/8de96722152183e0e3bac86c756fd183.png';
+						el.currurl2=appConfig.apiUrl+ '/uploads/20200907/8de96722152183e0e3bac86c756fd183.png';
 						List.push(el)
 					})
 					this.tableData= List;
+					console.log(List,'List')
 				}
 			})
 			console.log(this.total,'total');
@@ -552,7 +563,6 @@ export default {
 	 //      // this.setSize();
 	 //    };
 		
-		
 		//获取费率列表
 		this.$api.getExchangeList({current_page:this.current_page,per_page:this.per_page}).then((response) =>{
 			const {data} = response;
@@ -561,12 +571,13 @@ export default {
 			if(response.code==1){
 				let List = []
 				data.rows.forEach((el)=>{
-					el.currency_Label = el.currencyF + el.currencyF_Name + " / " + el.currencyT + el.currencyT_Name
+					el.currency_Label = el.currencyF + el.currencyF_Name + " / " + el.currencyT + el.currencyT_Name;
+					el.currurl1=appConfig.apiUrl+ '/uploads/20200907/8de96722152183e0e3bac86c756fd183.png';
+					el.currurl2=appConfig.apiUrl+ '/uploads/20200907/8de96722152183e0e3bac86c756fd183.png';
 					List.push(el)
 				})
 				this.tableData= List;
 			}
-			console.log(this.tableData,'tabledata')
 		});
 		//获取货币列表
 		this.$api.getCurrencyList({current_page:1,per_page:10000,status:"normal"}).then((response) =>{
@@ -901,5 +912,9 @@ export default {
 				}
 			}
 		}
+	}
+	.curr_image{
+		width: 3.125rem;
+		height: 3.125rem;
 	}
 </style>
