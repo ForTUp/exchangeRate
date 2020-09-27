@@ -166,7 +166,7 @@
 								    label="Remittance buy">
 								  </el-table-column>
 								  <el-table-column
-								    prop="exchange21"
+								    prop="exchange22"
 								    label="Remittance Sale">
 								  </el-table-column>
 							</el-table>
@@ -432,8 +432,8 @@ export default {
 					let List = []
 					data.rows.forEach((el)=>{
 						el.currency_Label = el.currencyF + el.currencyF_Name + " / " + el.currencyT + el.currencyT_Name;
-						el.currurl1=appConfig.apiUrl+ '/uploads/20200907/8de96722152183e0e3bac86c756fd183.png';
-						el.currurl2=appConfig.apiUrl+ '/uploads/20200907/8de96722152183e0e3bac86c756fd183.png';
+						el.currurl1=appConfig.apiUrl+ el.currencyF_icon;
+						el.currurl2=appConfig.apiUrl+ el.currencyT_icon;
 						List.push(el)
 					})
 					this.tableData= List;
@@ -572,8 +572,8 @@ export default {
 				let List = []
 				data.rows.forEach((el)=>{
 					el.currency_Label = el.currencyF + el.currencyF_Name + " / " + el.currencyT + el.currencyT_Name;
-					el.currurl1=appConfig.apiUrl+ '/uploads/20200907/8de96722152183e0e3bac86c756fd183.png';
-					el.currurl2=appConfig.apiUrl+ '/uploads/20200907/8de96722152183e0e3bac86c756fd183.png';
+					el.currurl1=appConfig.apiUrl+ el.currencyF_icon;
+					el.currurl2=appConfig.apiUrl+ el.currencyT_icon;
 					List.push(el)
 				})
 				this.tableData= List;
