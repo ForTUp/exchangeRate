@@ -687,7 +687,7 @@ export default {
 		margin-left:2rem;
 		margin-top: -3rem;
 		a{
-			font-size: 1.25rem;
+			font-size: 1rem;
 			font-weight: 700 !important;
 		}
 	}
