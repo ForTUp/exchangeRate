@@ -182,13 +182,13 @@
 									<el-col :span="6">
 										<el-form-item label="护照/Passport："  class="labelName" prop="certificate.passport.type">
 										 <el-select v-model="form.certificate.passport.type" placeholder="请选择" class="formSelect">
-											 <el-option value="passport">Passport</el-option>
-											<!-- <el-option
-											  v-for="item in nationality"
+											 <!-- <el-option value="passport">Passport</el-option> -->
+											<el-option
+											  v-for="item in passport"
 											 :key="item.id"
 											 :label="item.name"
 											 :value="item.id">
-											</el-option> -->
+											</el-option> 
 										  </el-select>
 										</el-form-item>
 									</el-col>
@@ -522,6 +522,7 @@ export default{
 			imageUrl:require('../../static/image/u95.png'),
 			idtype: [],
 			nationality:[],
+			passport:[],
 			occupation:[],
 			areacode:[],
 			issuer:[],
@@ -768,6 +769,9 @@ export default{
 		})
 		this.$api.getConfig({type:'source'}).then((response)=>{
 			that.source = response
+		})
+		this.$api.getConfig({type:'passport'}).then((response)=>{
+			that.passport = response
 		})
 	}
 }	
