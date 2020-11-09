@@ -181,7 +181,7 @@
 								<el-row  :gutter="24">
 									<el-col :span="6">
 										<el-form-item label="护照/Passport："  class="labelName" prop="certificate.passport.type">
-										 <el-select v-model="form.certificate.passport.type" placeholder="请选择" class="formSelect">
+										 <el-select v-model="form.certificate.passport.type_id" placeholder="请选择" class="formSelect">
 											 <!-- <el-option value="passport">Passport</el-option> -->
 											<el-option
 											  v-for="item in passport"
@@ -416,7 +416,7 @@ export default{
 				sign_url:'',
 				certificate:{
 					passport:{
-						type:'',
+						type_id:'',
 						issuer_id:'',
 						number:'',
 						expiration:'',
