@@ -3,7 +3,7 @@
 		<div class="head">
 			<div class="headDiv">
 			<el-row :gutter="20" style="margin-right: 4rem;">
-			<el-col :span="12" :push="4" class="headerCol">
+			<el-col :span="13" :push="4" class="headerCol">
 				<div class="grid-content bg-purple ">
 					<div class="logoDiv">
 						<el-image class="topImage"
@@ -18,6 +18,9 @@
 					</div>
 					<div class="topLinkDiv">
 						<el-link :underline="false" @click="goContact">联系我们</el-link>
+					</div>
+					<div class="topLinkDiv">
+						<el-link :underline="false" @click="goRate">实时费率</el-link>
 					</div>
 				</div>
 			</el-col>
@@ -48,15 +51,24 @@
 					 </el-carousel>
 				</div>
 				<!--货币兑换 -->
-				<div id="showCurrencyDiv" class="iocnDiv currency" @click="dialogFormVisible = true" style="cursor:pointer; marign-left: 0;">
-					<i class="iconfont iconhuobiduihuan1"></i><br>
-					<span >货币兑换</span>
-				</div>
+				<!-- <div id="showCurrencyDiv" class="iocnDiv currency"  style="cursor:pointer; marign-left: 0;">
+					
+				</div> -->
 				
 				<!--微信入口 -->
-				<div class="iocnDiv  weixin" @click="dialogWeiXin = true">
-					<i class="iconfont iconWeChat"></i><br>
-					<span >公众号</span>
+				<div class="iocnDiv  weixin">
+					<div class="iocnClick" @click="dialogFormVisible = true">
+						<i class="iconfont iconhuobiduihuan1"></i><br>
+						<span >货币兑换</span>
+					</div>
+					<div class="iocnClick" @click="dialogWeiXin = true">
+						<i class="iconfont iconWeChat"></i><br>
+						<span >公众号</span>
+					</div>
+					<div class="iocnClick">
+						<i class="iconfont iconQQ"></i><br>
+						<span >在线客服</span>
+					</div>
 				</div>
 				
 				<!--中间件 -->
@@ -88,7 +100,7 @@
 						</div>
 					</div>
 					
-					<div class="coreHead">
+					<div class="coreHead rate"> 
 						<h1>实时汇率</h1>
 					</div>
 					<div class="coreContent" >
@@ -346,7 +358,7 @@ export default {
 			  total:0,
 			  //货币计算表单
 			  form:{
-				  money:1,
+				  money:'',
 				  from:'',
 				  to:'',
 				  totalMoney:'',
@@ -428,6 +440,7 @@ export default {
 			this.$api.getExchangeList({current_page:this.current_page,per_page:this.per_page}).then((response) =>{
 				const {data} = response;
 				this.total=data.total;
+				console.log(data)
 				if(response.code==1){
 					let List = []
 					data.rows.forEach((el)=>{
@@ -549,7 +562,9 @@ export default {
 		goTop(){
 			this.$el.querySelector('.form-wrap-top').scrollIntoView();
 		},
-		
+		goRate(){
+			this.$el.querySelector('.rate').scrollIntoView();
+		},
 	  },
 	  mounted() {
 	 //    this.screenWidth = window.innerWidth;
@@ -671,17 +686,21 @@ export default {
 		float: left;
 		margin-left:2rem;
 		margin-top: -3rem;
+		a{
+			font-size: 1.25rem;
+			font-weight: 700 !important;
+		}
 	}
 	.headerCol{
 		margin-left: -3rem !important;
 	}
 	.headerColLast{
 		width: 20rem;
-		margin-left: 10rem;
+		margin-left: 6rem;
 	}
 	.headerColLast1{
 		width: 20rem;
-		margin-left: 6.6rem;
+		margin-left: 2rem;
 	}
 	.topLinkDivFirst{
 		margin-left:12rem !important;
@@ -765,19 +784,32 @@ export default {
 		margin-left: 2rem;
 	}
 	.iocnDiv{
-		width: 3.2rem;
+		width: 5rem;
 		background-color: #fff;
-		border: 0.0625rem solid  #8F8F8F;
+		border: 0.0625rem solid  #CCCCCC;
 		border-radius: 0.7rem 0rem 0rem 0.7rem;
 		position: absolute;
-		padding: 0.5rem;
+		padding-bottom: 1rem;
 		right: 0;
-		span{
-			font-size: 0.3rem !important;
+		top:40%;
+		z-index: 999;
+		.iocnClick{
+			cursor: pointer;
+			width: 100%;
+			height: 4rem;
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+			border: 0.0625rem solid #CCCCCC;
+			margin-top: 1rem;
+			text-align: center;
+			span{
+				font-size: 1rem !important;
+			}
+			i{
+				font-size: 2rem;
+			}
 		}
-		i{
-			font-size: 1.6rem;
-		}
+		
 	}
 	.currency{
 		top:40rem;
@@ -786,7 +818,6 @@ export default {
 		// right: 1.1875rem;
 	}
 	.weixin{
-		top:46rem;
 		// left:0;
 		// right: 1.1875rem;
 		position: fixed;

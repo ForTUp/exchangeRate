@@ -6,7 +6,7 @@ import api from './api.js'
 import store from "../store";
 
 axios.defaults.timeout = 5000; //请求超时5秒
-axios.defaults.baseURL ='http://admin.bluerate.com.au';  //请求base url
+// axios.defaults.baseURL ='http://admin.bluerate.com.au';  //请求base url
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'; //设置
 
 

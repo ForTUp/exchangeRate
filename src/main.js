@@ -7,7 +7,7 @@ import VueRouter from 'vue-router'
 import routers from './routers'
 import "@/static/css/common.scss";
 import "@/static/css/response.scss"
-import vueEsign from 'vue-esign'
+//import vueEsign from 'vue-esign'
 import store from "./store";
 import {post,get,postJson,postFile} from "./utils/http.js"
 import api from "./utils/api.js"
@@ -15,7 +15,9 @@ import { getToken, setToken, removeToken } from './utils/token.js'   //引入aut
 import './assets/icon/iconfont.css';
 import BaiduMap from 'vue-baidu-map';
 import moment from 'moment'
- 
+import $ from 'jquery'
+import 'jq-signature'
+Vue.prototype.$ = $;
 Vue.use(require('vue-moment'));
 Vue.prototype.moment = moment;
 Vue.filter('dateYMDHMSFormat',function(dateStr,pattern='YYYY-MM-DD HH:mm:ss'){
@@ -39,7 +41,7 @@ Vue.use(ElementUI);
 									//如果写成Vue.prototype.$http = axios,那么要改成this.$http.post()...
 Vue.prototype.qs = qs;
 Vue.use(VueRouter)	;	 //使用路由1
-Vue.use(vueEsign) ; //vue 使用 canvas 实现手写电子签名功能
+//Vue.use(vueEsign) ; //vue 使用 canvas 实现手写电子签名功能
 const router = new VueRouter({
 	mode: 'history',
 	routes: routers

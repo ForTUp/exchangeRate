@@ -2,6 +2,7 @@
 		<div id="index">
 			<el-container>
 				<el-header>
+					<div class="headDiv">
 					<el-row :gutter="20" style="margin-left: 9rem;">
 					<el-col :span="18">
 						<div class="grid-content bg-purple ">
@@ -19,9 +20,12 @@
 						<div class="grid-content bg-purple">
 							<el-button  class="vipButton" @click="vipApply">会员申请</el-button>
 						</div>
+						<!-- <div class="grid-content bg-purple">
+							<el-button  class="vipButton" @click="getText">sign</el-button>
+						</div> -->
 					  </el-col>
 					</el-row>
-					
+					</div>
 				</el-header>
 				<el-main>
 					<div class="formDiv">
@@ -107,6 +111,9 @@ export default{
 		},
 		goToIndex(){
 			this.$router.push('/index');
+		},
+		getText(){
+			this.$router.push('/Text');
 		}
 		
 	},
@@ -128,6 +135,10 @@ export default{
 		width:  28rem;
 		margin: 1rem   auto;
 		
+	}
+	.headDiv{
+		width: 84rem;;
+		margin: 0 auto;
 	}
 	.el-input{
 		width: 25rem;

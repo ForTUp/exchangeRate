@@ -5,6 +5,7 @@ import RetrievePwd from './pages/login/retrievePwd.vue'
 import VipApply from './pages/login/vipApply.vue'
 import Workbench from './pages/workbench/workbench.vue'
 import WorkbenchApply from './pages/workbench/workbenchApply.vue'
+import Text from './pages/login/text.vue'
 
 const routers = [
 	{
@@ -40,6 +41,11 @@ const routers = [
 		path:'/workbenchApply',
 		name:'workbenchApply',
 		component:WorkbenchApply
+	},
+	{
+		path:'/Text',
+		name:'Text',
+		component:Text
 	}
 ]
 
