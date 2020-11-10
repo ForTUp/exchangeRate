@@ -368,7 +368,7 @@
 										</div>
 									</el-col>
 								</el-row>	 -->
-								<div id="signature" style="width:100%;height:300px;"></div><!-- 画布容器 -->
+								<div class="signature"  id="signature"></div><!-- 画布容器 -->
 								<el-button id="clearSignature" @click='clearSignature'>清除签名</el-button>
 								<el-button id="saveSignature" @click='saveSignature'>保存签名</el-button>
 								<!-- <div id="result"></div><!-- 预览容器 --> 
@@ -685,6 +685,7 @@ export default{
 		},
 		clearSignature(){
 		  //$('#result').html('')//清除预览img
+		  this.form.sign_url = '';
 		  $('#signature').jqSignature('clearCanvas')//清除canvas
 		},
 		saveSignature(){
@@ -917,5 +918,10 @@ export default{
 	}
 	.buttonEsign{
 		margin-left: 2rem;
+	}
+	
+	.signature{
+		width:100%;
+		height:18.75rem;
 	}
 </style>
