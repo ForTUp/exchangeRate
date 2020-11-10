@@ -2,42 +2,38 @@
 	<div id="index">
 		<div class="head">
 			<div class="headDiv">
-			<el-row :gutter="20" style="margin-right: 4rem;">
-			<el-col :span="13" :push="4" class="headerCol">
-				<div class="grid-content bg-purple ">
-					<div class="logoDiv">
-						<el-image class="topImage"
-						      :src="imageUrl"
-						      :fit="fit"></el-image>
-					</div>
-					<div class="topLinkDiv topLinkDivFirst" >
-						<el-link :underline="false"  type="primary" @click="goTop">首页</el-link>
-					</div>
-					<div class="topLinkDiv">
-						<el-link :underline="false" @click="goRegister">为什么选择我们</el-link>
-					</div>
-					<div class="topLinkDiv">
-						<el-link :underline="false" @click="goContact">联系我们</el-link>
-					</div>
-					<div class="topLinkDiv">
-						<el-link :underline="false" @click="goRate">实时费率</el-link>
-					</div>
+				<div class="topLinkDiv">
+					<el-image class="topImage  "
+					      :src="imageUrl"
+					      :fit="fit"></el-image>
 				</div>
-			</el-col>
-			  <el-col :span="4" :push="4" class="headerColLast" style="margin-top: 0.5rem;" v-if="userInfo==null" >
-				<div v-if="userInfo==null" class="loginDiv">
-					<el-button  class="vipButton" @click="vipApply" >会员申请</el-button>
-					<el-button type="primary" class="loginButton " @click="loadLogin" style="margin-left: 3rem;"> 登录 </el-button>
+				<div class="topLinkDiv" >
+					<el-link :underline="false"  type="primary" @click="goTop">首页</el-link>
 				</div>
-			  </el-col>
-			  <el-col :span="4" :push="4" class="headerColLast1" style="margin-top: 0.5rem;"  v-if="userInfo!=null">
-					<div class="grid-content bg-purple loginout" v-if="userInfo!=null">
-						<!-- <span  class="userName" @click="goToWork">{{userInfo.username}}</span> -->
-						<el-link class="userName" :underline="false" @click="goToWork">{{userInfo.username}}</el-link>
+				<div class="topLinkDiv" style="width: 15rem;">
+					<el-link :underline="false" @click="goRegister">为什么选择我们</el-link>
+				</div>
+				<div class="topLinkDiv">
+					<el-link :underline="false" @click="goContact">联系我们</el-link>
+				</div>
+				<div class="topLinkDiv">
+					<el-link :underline="false" @click="goRate">实时费率</el-link>
+				</div>
+				<div class="topLinkDiv topLinkDivFirst" >
+					<div v-if="userInfo==null" class="loginDiv">
+						<el-button  class="vipButton" @click="vipApply" >会员申请</el-button>
+					</div>
+					<div v-if="userInfo==null" class="loginDiv">
+						<el-button type="primary" class="loginButton " @click="loadLogin" > 登录 </el-button>
+					</div>
+					<div  v-if="userInfo!=null" class="loginDiv">
 						<el-button  class="loginButton loginoutButton" @click="loginout">退出登录</el-button>
 					</div>
-			  </el-col>
-			</el-row>
+					<div  v-if="userInfo!=null" class="loginDiv">
+						<el-link class="userName" :underline="false" @click="goToWork">{{userInfo.username}}</el-link>
+					</div>
+					
+				</div>
 			</div>
 		</div>
 		<el-container>
@@ -76,8 +72,8 @@
 					<div class="coreHead">
 						<h1>三大核心服务项目</h1>
 					</div>
-					<div class="coreContent" style="height: 22rem;">
-						<div class="coreContentList coreContentListFirst">
+					<div class="coreContent" style="height: 28rem;">
+						<div class="coreContentList ">
 							<h1>双向汇款</h1>
 							<ul class="coreUl">
 								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>资金安全</span></li>
@@ -107,15 +103,15 @@
 						<div class="tableHeader" style="margin-bottom: 2rem;padding-bottom: 2rem;padding-left: 1rem;">
 							<el-form ref="nowForm" :model="nowForm" >
 								<el-row :span="20">
-									<el-col :span="4">
+									<el-col :span="3">
 										<span>持有币种</span>
 									</el-col>
-									<el-col :span="4"  style="margin-left: 22rem;">
+									<el-col :span="3"  style="margin-left: 21rem;">
 										<span>兑换币种</span>
 									</el-col>
 								</el-row>
 								<el-row :span="20">
-									<el-col :span="4">
+									<el-col :span="3">
 										<el-select v-model="nowForm.from" placeholder="请选择" clearable filterable class="">
 											<el-option
 											  v-for="item in currencyList"
@@ -125,13 +121,13 @@
 											</el-option>
 										 </el-select>
 									</el-col>
-									<el-col :span="4" >
+									<el-col :span="3" >
 										<el-input v-model="nowForm.money" placeholder="" ></el-input>
 									</el-col>
 									<el-col :span="1" style="width: 8rem;text-align: center;">
 										<el-button style="border: 0.0625rem solid #0080FF;" @click="changeFiex"><i style="color: #0080FF;" class="iconfont iconjiaohuan"></i></el-button>
 									</el-col>
-									<el-col :span="4">
+									<el-col :span="3">
 										<el-select v-model="nowForm.to" placeholder="请选择" clearable filterable style="padding-right: 0;">
 											<el-option
 											  v-for="item in currencyList"
@@ -218,8 +214,8 @@
 					<div class="coreHead contact">
 						<h1>联系我们</h1>
 					</div>
-					<div class="coreContent" >
-						<div class="mapDiv" style="margin-left: 0 !important;">
+					<div class="coreContent" style="height: 32rem;">
+						<div class="mapDiv" >
 							<div class="mapHead">
 								<ul>
 									<li class="mapHeadTitle"><span>Chatswood</span></li>
@@ -617,10 +613,7 @@ export default {
 	.tableHeader .el-row .el-col[data-v-1badc801] {
 		padding: 8px;
 	}
-	.coreContentList:hover {
-		color: #02a7f0 !important;
-		font-weight: bold;
-	}
+	
 	#banner{
 		height:31.25rem !important;
 	}
@@ -639,32 +632,82 @@ export default {
 	.bannerImg{
 		height:31.25rem !important;
 	}
+	html{
+		// overflow-x: hidden !important;
+	}
+	body{
+		// overflow-x: hidden !important;
+	}
 	body > .el-container {
 		// margin: 0 auto !important;
-		// border: 0.0625rem solid #F7F7F7;
+		// border: 0.0625rem solid pink;
 		// font-family: 'ArialMT', 'Arial', sans-serif;
 		// border-radius:0rem;
 		overflow-y: hidden;
+		margin: 0 auto !important;
+		
 	}
-	
+	.index{
+		// width: 100%;
+	}
 	.head {
 		color: #333;
 		text-align: center;
-		line-height: 3.75rem;
+		line-height: 5rem;
+		width: 100%;
 		margin: 0 auto !important;
 		border: 0.0625rem solid #F7F7F7;
+		// border: 0.0625rem solid red;
 		height: 5rem !important;
+		padding: 0;
+		position: fixed;
+		// overflow: hidden;
+		.headDiv{
+			// border: 0.0625rem solid blue;
+			width: 100rem;
+			height: 5rem;
+			margin: 0 auto;
+			// overflow: hidden;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			position: inherit;
+			.topLinkDiv{
+				// overflow: hidden;
+				width: 10rem;
+				height: 5rem;
+				float: left;
+				a{
+					font-size: 1.5rem;
+					font-weight: 700 !important;
+				}
+			}
+			.loginDiv{
+				height: 5rem;
+				float: right;
+				margin-right: 2rem;
+			}
+			.topLinkDivFirst{
+				width:20rem;
+				position: absolute;
+				right: 0;
+			}
+		}
 	}
 	.footer{
 		width: 99%;
 		color: #333;
+		clear:both;
 		text-align: center;
-		line-height: 3.75rem;
+		line-height: 5rem;
 		margin: 0 auto !important;
 		border: 0.0625rem solid #F7F7F7;
+		// border: 0.0625rem solid red;
 		height: 5rem !important;
 		background-color: #F7F7F7;
-		clear:both;
+		font-size: 1.5rem;
+		
+		
 	}
 	.el-main {
 		 background-color: #F7F7F7;
@@ -672,39 +715,12 @@ export default {
 		 text-align: center;
 		 margin: 0 auto !important;
 		 border: 0.0625rem solid #F7F7F7;
+		 // border: 0.0625rem solid orangered;
 		 padding: 0;
 		 // position: relative;
-		     visibility: inherit;
+		 visibility: inherit;
 	}
-	.headDiv{
-		width: 100rem;
-		margin: 0 auto;
-	}
-	.topLinkDiv{
-		width: 8rem;
-		height: 3.75rem;
-		float: left;
-		margin-left:2rem;
-		margin-top: -3rem;
-		a{
-			font-size: 1rem;
-			font-weight: 700 !important;
-		}
-	}
-	.headerCol{
-		margin-left: -3rem !important;
-	}
-	.headerColLast{
-		width: 20rem;
-		margin-left: 6rem;
-	}
-	.headerColLast1{
-		width: 20rem;
-		margin-left: 2rem;
-	}
-	.topLinkDivFirst{
-		margin-left:12rem !important;
-	}
+	
 	.userName{
 		margin-right: 2rem;
 		margin-left: 1rem;
@@ -713,20 +729,16 @@ export default {
 	.vipButton{
 		border: 0.0625rem #02a7f0 solid;
 		color: #02a7f0;
-		// margin-right: -10rem;
 		border-radius:0.125rem !important;
 	}
 	.coreService{
-		
 		// border: 0.0625rem solid red;
 		height: 120rem;
-		width: 70rem;
-		// margin: 0 80px;
+		width: 100rem;
 		margin: 0 auto;
 		margin-top: 2rem !important;
 	}
 	.coreHead{
-		// margin: 0 auto;
 		height: 3rem;
 		width: 100%;
 		// border: 0.0625rem solid blue;
@@ -734,54 +746,97 @@ export default {
 		
 	}
 	.coreContent{
-		// height: 22rem;
 		// border: 0.0625rem solid blue;
 		margin-top: 2rem;
-	}
-	.coreContentList{
-		height: 22rem;
-		width: 22rem;
-		// border: 0.0625rem solid orange;
-		float: left;
-		margin-left: 1.73rem;
-		background-color: #fff;
-		text-align: center;
-		
-		.coreUl{
-			padding-inline-start:0 !important;
-			li{
-				margin-top: 1rem;
-				text-align: center !important;
-				// margin-left: -4rem;
-				span{
-					margin-left: 0.5rem;
-					font-size: 1rem !important;
+		width: 100%;
+		.coreContentList{
+			height: 22rem;
+			width: 30%;
+			// border: 0.0625rem solid orange;
+			float: left;
+			// margin-left: 1.73rem;
+			margin-top: 3% ;
+			margin-left: 2.5%;
+			background-color: #fff;
+			text-align: center;
+			
+			.coreUl{
+				padding-inline-start:0 !important;
+				li{
+					margin-top: 1rem;
+					text-align: center !important;
+					// margin-left: -4rem;
+					span{
+						margin-left: 0.5rem;
+						font-size: 1rem !important;
+						
+					}
+				}
+			}
+			h1{
+				margin-top: 8rem;
+				font-size: 2rem !important;
+			}
+		}
+		.coreContentList:hover {
+			color: #02a7f0 !important;
+			font-weight: bold;
+		}
+		.mapDiv{
+			width: 25%;
+			height: 28rem;
+			float: left;
+			// border: 0.0625rem solid red;
+			text-align: left;
+			// margin-left: 7.7rem;
+			// margin-top: 3% ;
+			margin-left: 6%;
+			.map {
+			  width: 100%;
+			  height: 18rem;
+			  // border: 0.0625rem solid #FFF;
+			  border-radius: 1rem 1rem 1rem 1rem;
+			}
+			.mapHead{
+				width: 100%;
+				// border: 0.0625rem solid blue;
+				// padding: 0;
+				padding-bottom: 0.5rem;
+				ul{
+					padding: 0;
+					width: 100%;
+					margin: 0;
+				}
+				.mapHeadTitle{
+					font-size: 1rem;
+					font-weight: bold;
+				}
+				.mapHeadText{
+					font-size: 0.5rem;
+				}
+			}
+			.mapButtom{
+				width: 100%;
+				// border: 0.0625rem solid blue;
+				padding: 0;
+				ul{
+					padding: 0;
+					width: 100%;
+					height: 2rem;
+					margin: 0;
+					font-weight: 600;
+					font-size: 1rem;
+					li{
+						span{
+							margin-left: 0.1rem;
+						}
+						margin-top: 0.5rem;
+					}
+					
 					
 				}
 			}
 		}
-		h1{
-			margin-top: 8rem;
-			font-size: 2rem !important;
-		}
-		// .coreUlTe{
-		// 	padding-inline-start:0 !important;
-		// 	li{
-		// 		text-align: center !important;
-		// 		// margin-left: 0rem;
-		// 	}
-		// }
-		
-	}
-
-	.coreContentListFirst{
-		margin-left:0rem !important;
-	}
-	.loginDiv{
-		margin-left: -7rem;
-	}
-	.loginout{
-		margin-left: 2rem;
 	}
 	.iocnDiv{
 		width: 5rem;
@@ -814,12 +869,8 @@ export default {
 	.currency{
 		top:40rem;
 		position: fixed;
-		// left:0;
-		// right: 1.1875rem;
 	}
 	.weixin{
-		// left:0;
-		// right: 1.1875rem;
 		position: fixed;
 	}
 	.el-dialog{
@@ -832,59 +883,7 @@ export default {
 		}
 		
 	}
-	.mapDiv{
-		width: 18rem;
-		height: 30rem;
-		float: left;
-		// border: 0.0625rem solid red;
-		text-align: left;
-		margin-left: 7.7rem;
-		.map {
-		  width: 18rem;
-		  height: 18rem;
-		  border: 0.0625rem solid #FFF;
-		  border-radius: 1rem 1rem 1rem 1rem;
-		}
-		.mapHead{
-			width: 100%;
-			// border: 0.0625rem solid blue;
-			// padding: 0;
-			padding-bottom: 0.5rem;
-			ul{
-				padding: 0;
-				width: 100%;
-				margin: 0;
-			}
-			.mapHeadTitle{
-				font-size: 1rem;
-				font-weight: bold;
-			}
-			.mapHeadText{
-				font-size: 0.5rem;
-			}
-		}
-		.mapButtom{
-			width: 100%;
-			// border: 0.0625rem solid blue;
-			padding: 0;
-			ul{
-				padding: 0;
-				width: 100%;
-				height: 2rem;
-				margin: 0;
-				font-weight: 600;
-				font-size: 1rem;
-				li{
-					span{
-						margin-left: 0.1rem;
-					}
-					margin-top: 0.5rem;
-				}
-				
-				
-			}
-		}
-	}
+	
 	
 	.chanceDiv{
 		// border: 0.0625rem solid red;
@@ -924,8 +923,8 @@ export default {
 		// border: 0.0625rem solid red;
 		padding: 2rem;
 		p{
-			font-size: 1rem;
-			line-height: 1.5rem;
+			font-size: 1.5rem;
+			line-height: 3rem;
 		}
 	}
 	.weiXinDialog{

@@ -315,7 +315,7 @@
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="6">
-										<el-form-item label="护照照片/Passport Photo："  class="labelName" prop="fourUrl">
+										<el-form-item label="证件照片/Passport Photo："  class="labelName" prop="fourUrl">
 											<el-upload 
 											  class="avatar-uploader "
 											  action="/api/common/upload"
