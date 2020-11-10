@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import Index from './pages/index/index.vue'
 import Login from './pages/login/login.vue'
 import RetrievePwd from './pages/login/retrievePwd.vue'
@@ -6,6 +7,11 @@ import VipApply from './pages/login/vipApply.vue'
 import Workbench from './pages/workbench/workbench.vue'
 import WorkbenchApply from './pages/workbench/workbenchApply.vue'
 import Text from './pages/login/text.vue'
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
 
 const routers = [
 	{
