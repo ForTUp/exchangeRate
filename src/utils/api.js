@@ -17,7 +17,7 @@ export default {
 	login:(param)=>{
 		return new Promise((resolve, reject) => {
 			post('/api/user/login',param).then((response)=>{
-				if(response.code>0){
+				if(response.code==1){
 					const {data} = response;
 					console.log(response)
 					store.commit("user/setUserId",data.userinfo.user_id);
@@ -33,7 +33,10 @@ export default {
 	logout:(data)=>{
 		return new Promise((resolve, reject) => {
 			get('/api/user/logout',data).then((response)=>{
-				if(response.code>0){
+				if(response.code==1){
+					store.commit("user/setUserId",null);
+					store.commit("user/setToken",null);
+					store.commit("user/setUserInfo",null);
 					sessionStorage.clear();
 				}
 				resolve(response);
