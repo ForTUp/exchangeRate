@@ -115,7 +115,7 @@
 					      @size-change="handleSizeChange"
 					      @current-change="handleCurrentChange"
 					      :current-page="ruleForm.currentPage"
-					      :page-sizes="[5,10,15,20]"
+					      :page-sizes="[10,15,20]"
 					      :page-size="5"
 					      layout="total, sizes, prev, pager, next, jumper"
 					      :total="total">
@@ -144,7 +144,7 @@
 					endDate: '',
 					state: 'all',
 					current_page:1,
-					per_page:5
+					per_page:10
 				},
 				rules:{},
 				imageUrl: require('../../static/image/u95.png'),

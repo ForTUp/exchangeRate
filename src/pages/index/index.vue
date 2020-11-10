@@ -413,7 +413,7 @@ export default {
 					console.log(response.data)
 					const {data} = response;
 					console.log(data)
-					if(response.code>0){
+					if(response.code==1){
 						that.$message({
 						  message: response.msg,
 						  type: 'success'
@@ -928,6 +928,7 @@ export default {
 		}
 	}
 	.weiXinDialog{
+		border: 0.0625rem solid red;
 		.el-dialog__body{
 			width: 100% !important;
 			height: 100% !important;
