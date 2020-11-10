@@ -10,37 +10,55 @@ import Text from './pages/login/text.vue'
 const routers = [
 	{
 		path:'/',
-		redirect:'/index'
+		redirect:'/index',
 	},
 	{
 		path: '/index',
 		name:'index',
 		component:Index,
+		meta: {
+			title: '首页'
+		}
 	},
 	{
 		path: '/login',
 		name: 'login',
-		component:Login
+		component:Login,
+		meta: {
+			title: '登录'
+		}
 	},
 	{
 		path:'/retrievePwd',
 		name:'retrievePwd',
-		component:RetrievePwd
+		component:RetrievePwd,
+		meta: {
+			title: '忘记密码'
+		}
 	},
 	{
 		path:'/vipApply',
 		name:'vipApply',
-		component:VipApply
+		component:VipApply,
+		meta: {
+			title: '会员申请'
+		}
 	},
 	{
 		path:'/workbench',
 		name:'workbench',
-		component:Workbench
+		component:Workbench,
+		meta: {
+			title: '工作台'
+		}
 	},
 	{
 		path:'/workbenchApply',
 		name:'workbenchApply',
-		component:WorkbenchApply
+		component:WorkbenchApply,
+		meta: {
+			title: '汇款申请'
+		}
 	},
 	{
 		path:'/Text',
