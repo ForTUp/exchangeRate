@@ -42,9 +42,18 @@ Vue.use(ElementUI);
 Vue.prototype.qs = qs;
 Vue.use(VueRouter)	;	 //使用路由1
 //Vue.use(vueEsign) ; //vue 使用 canvas 实现手写电子签名功能
+
+
 const router = new VueRouter({
 	mode: 'history',
 	routes: routers
+})
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
 })
 new Vue({
   router,
