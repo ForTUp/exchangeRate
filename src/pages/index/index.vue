@@ -222,8 +222,12 @@
 									<li class="mapHeadText"><span>周一至周五 9:30-5:30 营业，周六周日休息</span></li>
 								</ul>
 							</div>
-							<baidu-map class="map"  :center="center" :zoom="zoom" @read="handler">
-							</baidu-map>
+							<!-- <div id="map1" ref="map1"></div> -->
+							<gmap-map :center="center" :zoom="zoom" class="map">
+							    <gmap-marker :position="center"  :clickable="true" :draggable="true" />
+							</gmap-map>
+							<!-- <baidu-map class="map"  :center="center" :zoom="zoom" @read="handler">
+							</baidu-map> -->
 							<div class="mapButtom">
 								<ul>
 									<li ><i class="el-icon-mobile"></i><span>+61 2 9884 7388</span></li>
@@ -239,8 +243,11 @@
 									<li class="mapHeadText"><span>周一至周五 9:30-5:30 营业，周六周日休息</span></li>
 								</ul>
 							</div>
-							<baidu-map class="map"  :center="center1" :zoom="zoom" @read="handler1">
-							</baidu-map>
+							<!-- <baidu-map class="map"  :center="center1" :zoom="zoom" @read="handler1">
+							</baidu-map> -->
+							<gmap-map :center="center1" :zoom="zoom" class="map">
+							    <gmap-marker :position="center1"  :clickable="true" :draggable="true" />
+							</gmap-map>
 							<div class="mapButtom">
 								<ul>
 									<li ><i class="el-icon-mobile"></i><span>+61 2 9987 0090</span></li>
@@ -256,8 +263,11 @@
 									<li class="mapHeadText"><span>周一至周五 9:30-5:30 营业，周六周日休息</span></li>
 								</ul>
 							</div>
-							<baidu-map class="map"  :center="center2" :zoom="zoom" @read="handler2">
-							</baidu-map>
+							<!-- <baidu-map class="map"  :center="center2" :zoom="zoom" @read="handler2">
+							</baidu-map> -->
+							<gmap-map :center="center2" :zoom="zoom" class="map">
+							    <gmap-marker :position="center2"  :clickable="true" :draggable="true" />
+							</gmap-map>
 							<div class="mapButtom">
 								<ul>
 									<li ><i class="el-icon-mobile"></i><span>+61 2 8065 8700</span></li>
@@ -329,6 +339,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import {appConfig} from '../../../config.js'
+import { gmapApi } from 'vue2-google-maps'
 
 export default {
 	computed:{...mapGetters(['userId','userInfo'])},
@@ -365,9 +376,9 @@ export default {
 			  currencyList:[],
 			  //百度地图数据
 			  // -33.795084, 151.185378
-			  center: {lng: 151.185378, lat: -33.795084},
-			  center1: {lng: 151.101350, lat: -33.703887},
-			  center2: {lng: 151.032826, lat: -33.849612},
+			  center: {lng: 151.1831468, lat: -33.7952714},
+			  center1: {lng: 151.1002963, lat: -33.7049113},
+			  center2: {lng: 151.0306249, lat: -33.8500415},
 			  zoom:15,
 			  //实时汇率
 			  nowForm:{
@@ -470,7 +481,6 @@ export default {
 			this.zoom = 15;
 		},
 		getExchangeInfo(){
-			
 			if(this.form.from==null || this.form.from == '' ){
 				this.$message({
 					message: '请选择卖出币种',
@@ -492,7 +502,6 @@ export default {
 				})
 				return;
 			}
-			
 			this.$api.getExchangeInfo(this.form).then((response)=>{
 				console.log(response)
 				let {data} = response;
@@ -561,6 +570,45 @@ export default {
 		goRate(){
 			this.$el.querySelector('.rate').scrollIntoView();
 		},
+		// setPlace(place) {
+		// 	this.place = place
+		// },
+		// setDescription(description) {
+		// 	this.description = description;
+		// },
+		// usePlace(place) {
+		// 	if (this.place) {
+		// 		var newPostion = {
+		// 			lat: this.place.geometry.location.lat(),
+		// 			lng: this.place.geometry.location.lng(),
+		// 		};
+		// 		this.center = newPostion;
+		// 		this.position =  newPostion;
+		// 		this.place = null;
+		// 	}
+		// },
+		// updateMaker: function(event) {
+		// 	console.log('updateMaker, ', event.latLng.lat());
+		// 	this.position = {
+		// 		lat: event.latLng.lat(),
+		// 		lng: event.latLng.lng(),
+		// 	}
+		// },
+		// pushAddress(res) {
+		//       this.$emit('mark', res, this.position)
+		// },
+		// pointToAddress(lat, lng, backcall) {
+		//   // 实例化Geocoder服务用于解析地址
+		//   var geocoder = new this.google.maps.Geocoder();
+		//   // 地理反解析
+		//   geocoder.geocode({ location: new this.google.maps.LatLng(lat, lng) }, function geoResults(results, status) {
+		// 	if (status === this.google.maps.GeocoderStatus.OK) {
+		// 	  backcall(results[0].formatted_address);
+		// 	} else {
+		// 	  console.log('：error ' + status);
+		// 	}
+		//   });
+		// }
 	  },
 	  mounted() {
 	 //    this.screenWidth = window.innerWidth;
@@ -573,7 +621,6 @@ export default {
 		//   this.imgLoad();
 	 //      // this.setSize();
 	 //    };
-		
 		//获取费率列表
 		this.$api.getExchangeList({current_page:this.current_page,per_page:this.per_page}).then((response) =>{
 			const {data} = response;
