@@ -17,15 +17,31 @@ import BaiduMap from 'vue-baidu-map';
 import moment from 'moment'
 import $ from 'jquery'
 import 'jq-signature'
+
+// import 'vue-googlemaps/dist/vue-googlemaps.css'
+// import VueGoogleMaps from 'vue-googlemaps'
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+
 Vue.prototype.$ = $;
 Vue.use(require('vue-moment'));
 Vue.prototype.moment = moment;
 Vue.filter('dateYMDHMSFormat',function(dateStr,pattern='YYYY-MM-DD HH:mm:ss'){
   return moment(dateStr).format(pattern);
 })
-
+//百度地图
 Vue.use(BaiduMap, {
  ak: 'F47hrcVkdz2MW5aoDkXpt42dHtRqnieG'
+})
+//谷歌地图
+Vue.use(VueGoogleMaps, {
+  load: {
+//填入申请的apiKey账号
+    key: 'AIzaSyA-2FqKBFA4IZdEZHDGjv2-8HrSdUw7p8s',
+    libraries: ['places'],
+    // useBetaRenderer: false,
+  },
+   installComponents: true
 })
 //定义全局变量
 Vue.prototype.$post = post;
