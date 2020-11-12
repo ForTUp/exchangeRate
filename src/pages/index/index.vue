@@ -17,7 +17,7 @@
 					<el-link :underline="false" @click="goContact">联系我们</el-link>
 				</div>
 				<div class="topLinkDiv">
-					<el-link :underline="false" @click="goRate">实时费率</el-link>
+					<el-link :underline="false" @click="goRate">实时汇率</el-link>
 				</div>
 				<div class="topLinkDiv topLinkDivFirst" >
 					<div v-if="userInfo==null" class="loginDiv">
