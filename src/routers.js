@@ -23,7 +23,7 @@ const routers = [
 		name:'index',
 		component:Index,
 		meta: {
-			title: '首页'
+			title: '首页-温州速汇'
 		}
 	},
 	{
@@ -31,7 +31,7 @@ const routers = [
 		name: 'login',
 		component:Login,
 		meta: {
-			title: '登录'
+			title: '登录-温州速汇'
 		}
 	},
 	{
@@ -39,7 +39,7 @@ const routers = [
 		name:'retrievePwd',
 		component:RetrievePwd,
 		meta: {
-			title: '忘记密码'
+			title: '忘记密码-温州速汇'
 		}
 	},
 	{
@@ -47,7 +47,7 @@ const routers = [
 		name:'vipApply',
 		component:VipApply,
 		meta: {
-			title: '会员申请'
+			title: '会员申请-温州速汇'
 		}
 	},
 	{
@@ -55,7 +55,7 @@ const routers = [
 		name:'workbench',
 		component:Workbench,
 		meta: {
-			title: '工作台'
+			title: '工作台-温州速汇'
 		}
 	},
 	{
@@ -63,7 +63,7 @@ const routers = [
 		name:'workbenchApply',
 		component:WorkbenchApply,
 		meta: {
-			title: '汇款申请'
+			title: '汇款申请-温州速汇'
 		}
 	},
 	{
