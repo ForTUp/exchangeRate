@@ -89,7 +89,7 @@
 									</el-col>
 									<el-col :span="6">
 										<el-form-item label="邮箱地址/Email Address："  class="labelName" prop="email">
-											<el-input v-model="form.email" placeholder="请输入密码" ></el-input>
+											<el-input v-model="form.email" placeholder="请输入邮箱地址" ></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
@@ -154,11 +154,11 @@
 											<el-input v-model="form.city" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
-									<el-col :span="6">
+									<!-- <el-col :span="6">
 										<el-form-item label="区县/Area："  class="labelName" prop="area"> 
 											<el-input v-model="form.area" placeholder="请输入" ></el-input>
 										</el-form-item>
-									</el-col>
+									</el-col> -->
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="12">
@@ -180,7 +180,7 @@
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
-										<el-form-item label="护照/Passport："  class="labelName" prop="certificate.passport.type">
+										<el-form-item label="证件类型/ID Type："  class="labelName" prop="certificate.passport.type">
 										 <el-select v-model="form.certificate.passport.type_id" placeholder="请选择" class="formSelect">
 											 <!-- <el-option value="passport">Passport</el-option> -->
 											<el-option
@@ -193,7 +193,7 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="护照发证机构/Passport Issuer："  class="labelName" prop="certificate.passport.issuer_id">
+										<el-form-item label="发证机构/Issuer："  class="labelName" prop="certificate.passport.issuer_id">
 											<el-select v-model="form.certificate.passport.issuer_id" placeholder="请选择" class="formSelect">
 												<el-option
 												  v-for="item in issuer"
@@ -205,12 +205,12 @@
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="护照号码/Passport Number："  class="labelName" prop="certificate.passport.number">
+										<el-form-item label="证件号码/ID Number："  class="labelName" prop="certificate.passport.number">
 										  <el-input v-model="form.certificate.passport.number" placeholder="请输入" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
-										<el-form-item label="护照有效期/Date of expiration："  class="labelName" prop="certificate.passport.expiration"> 
+										<el-form-item label="证件有效期/Date of expiration："  class="labelName" prop="certificate.passport.expiration"> 
 											<el-date-picker
 											      v-model="form.certificate.passport.expiration"
 											      type="date"
@@ -221,7 +221,7 @@
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="6">
-										<el-form-item label="护照照片/Passport Photo："  class="labelName" prop="firstUrl">
+										<el-form-item label="证件照片/Passport Photo："  class="labelName" prop="firstUrl">
 											<el-upload 
 											  class="avatar-uploader "
 											  action="/api/common/upload"
@@ -369,8 +369,11 @@
 									</el-col>
 								</el-row>	 -->
 								<div class="signature"  id="signature"></div><!-- 画布容器 -->
-								<el-button id="clearSignature" @click='clearSignature'>清除签名</el-button>
-								<el-button id="saveSignature" @click='saveSignature'>保存签名</el-button>
+								<div class="sign-swrap">
+
+									<el-button id="clearSignature" @click='clearSignature'>清除签名</el-button>
+									<el-button id="saveSignature" @click='saveSignature'>保存签名</el-button>
+								</div>
 								<!-- <div id="result"></div><!-- 预览容器 --> 
 								<!-- <el-row :gutter="24"  class="esignBtn"></el-row> -->
 							</div>
@@ -433,86 +436,86 @@ export default{
 			},
 			rules: {
 				firstname:[
-					{required: true, message: '请输入名/First Name', trigger: 'change' }
+					{required: true, message: '请输入名', trigger: 'change' }
 				],
 				lastname:[
-					{required: true, message: '请输入姓/Last Name', trigger: 'change' }
+					{required: true, message: '请输入姓', trigger: 'change' }
 				],
 				birthday:[
-					{required: true, message: '请输入出生年月/Date of birth', trigger: 'change'}
+					{required: true, message: '请输入出生年月', trigger: 'change'}
 				], 
 				nationality_id: [
-					{required: true, message: '请选择国籍/Nationality', trigger: 'change'}
+					{required: true, message: '请选择国籍', trigger: 'change'}
 				], 
 				occupation_id:[
-					{required: true, message: '请选择职业/Occupation', trigger: 'change'}
+					{required: true, message: '请选择职业', trigger: 'change'}
 				], 
 				// email: [
-				// 	{required: true, message: '请输入邮箱地址/Email Address', trigger: 'change'}
+				// 	{required: true, message: '请输入邮箱地址', trigger: 'change'}
 				// ], 
 				areacode_id:[
-					{required: true, message: '请输入手机/Phone', trigger: 'change'}
+					{required: true, message: '请输入手机', trigger: 'change'}
 				],
 				mobile:[
-					{required: true, message: '请输入手机/Phone', trigger: 'change'}
+					{required: true, message: '请输入手机', trigger: 'change'}
 				],
 				// areacode2_id:[
-				// 	{required: true, message: '请输入备用手机/Spare Phone', trigger: 'change'}
+				// 	{required: true, message: '请输入备用手机', trigger: 'change'}
 				// ],
 				// mobile2:[
-				// 	{required: true, message: '请输入备用手机/Spare Phone', trigger: 'change'}
+				// 	{required: true, message: '请输入备用手机', trigger: 'change'}
 				// ],
 				country_id:[
-					{required: true, message: '请输入居住国家/Residence Country', trigger: 'change'}
+					{required: true, message: '请输入居住国家', trigger: 'change'}
 				],
 				province:[
-					{required: true, message: '请输入省/State', trigger: 'change'}
+					{required: true, message: '请输入省', trigger: 'change'}
 				],
 				city:[
-					{required: true, message: '请输入市/Suburb', trigger: 'change'}
+					{required: true, message: '请输入市', trigger: 'change'}
 				],
-				area:[
-					{required: true, message: '请输入区县/Area', trigger: 'change'}
-				],
+				// area:[
+				// 	{required: true, message: '请输入区县', trigger: 'change'}
+				// ],
 				address:[
-					{required: true, message: '请输入居住地址/Residence Address', trigger: 'change'}
+					{required: true, message: '请输入居住地址', trigger: 'change'}
 				],
 				sign_url:[
-					{required: true, message: '请输入客户签名 | Customer sign', trigger: 'change'}
+					{required: true, message: '请输入客户签名', trigger: 'change'}
 				],
 				certificate:{
 					passport:{
 						type:[
-							{required: true, message: '请输入客户签名 | Customer sign', trigger: 'change'}
+							{required: true, message: '请选择证件类型', trigger: 'change'}
 						],
 						issuer_id:[
-							{required: true, message: '请输入护照发证机构/Passport Issuer', trigger: 'change'}
+							{required: true, message: '请选择发证机构', trigger: 'change'}
 						],
 						number:[
-							{required: true, message: '请输入护照发证机构/Passport Issuer', trigger: 'change'}
+							{required: true, message: '请输入证件号码', trigger: 'change'}
 						],
 						expiration:[
-							{required: true, message: '请输入护照有效期/Date of expiration', trigger: 'change'}
+							{required: true, message: '请选择证件有效期', trigger: 'change'}
 						],
 						photos:[
-							{required: true, message: '请输入护照照片/Passport Photo', trigger: 'change'}
+							{required: true, message: '请上传证件照片', trigger: 'change'}
 						],
 					},
 					idcard:{
 						type_id:[
-							{required: true, message: '请输入证件类型/ID Type', trigger: 'change'}
+							{required: true, message: '请选择证件类型', trigger: 'change'}
 						],
 						issuer_id:[
-							{required: true, message: '请输入发证机构/Issuer', trigger: 'change'}
+							{required: true, message: '请选择发证机构', trigger: 'change'}
 						],
 						number:[
-							{required: true, message: '请输入证件号码/ID Number', trigger: 'change'}
+							{required: true, message: '请输入证件号码', trigger: 'change'}
 						],
 						expiration:[
-							{required: true, message: '请输入证件有效期/Date of expiration', trigger: 'change'}
+							{required: true, message: '请选择证件有效期', trigger: 'change'}
 						],
 						photos:[
-							{required: true, message: '请输入护照照片/Passport Photo', trigger: 'change'}
+							{required: true, message: '请上传证件照片', trigger: 'change'}
 						],
 					},
 				},
@@ -923,5 +926,8 @@ export default{
 	.signature{
 		width:100%;
 		height:18.75rem;
+	}
+	.sign-swrap {
+		padding-top:4.5rem;
 	}
 </style>
