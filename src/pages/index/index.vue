@@ -151,8 +151,9 @@
 							        label="Code"
 							        width="180">
 									<template slot-scope="scope">
-										<img class="curr_image" :src="scope.row.currurl1" width="50px" height="50px"/>
-										<img class="curr_image" :src="scope.row.currurl2" width="50px" height="50px"/>
+										<img class="curr_image" :src="scope.row.currurl1" />
+										&nbsp;
+										<img class="curr_image" :src="scope.row.currurl2" />
 										<!-- {{scope.row.currurl}} -->
 									</template>
 							      </el-table-column>
@@ -993,6 +994,6 @@ export default {
 	}
 	.curr_image{
 		width: 3.125rem;
-		height: 3.125rem;
+		height: 2rem;
 	}
 </style>
