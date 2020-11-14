@@ -184,7 +184,7 @@
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
-										<el-form-item label="证件类型/ID Type："  class="labelName" prop="certificate.passport.type">
+										<el-form-item label="证件类型/ID Type："  class="labelName" prop="certificate.passport.type_id">
 										 <el-select v-model="form.certificate.passport.type_id" placeholder="请选择" class="formSelect">
 											<el-option
 											  v-for="item in passport"
@@ -445,6 +445,9 @@ export default{
 				],
 				lastname:[
 					{required: true, message: '请输入姓', trigger: 'change' }
+				],
+				gender:[
+					{required: true, message: '请选择性别', trigger: 'change' }
 				],
 				birthday:[
 					{required: true, message: '请输入出生年月', trigger: 'change'}
