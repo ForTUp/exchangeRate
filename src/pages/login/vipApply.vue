@@ -56,7 +56,11 @@
 											<el-date-picker
 												  v-model="form.birthday"
 												  type="date"
-												  placeholder="选择日期">
+												  value-format="yyyy-MM-dd"
+												  placeholder="选择日期"
+												  :picker-options="pickerOptions" 
+												  >
+												 
 											</el-date-picker>
 										</el-form-item>
 									</el-col>
@@ -213,6 +217,7 @@
 											<el-date-picker
 											      v-model="form.certificate.passport.expiration"
 											      type="date"
+												  value-format="yyyy-MM-dd"
 											      placeholder="选择日期">
 											</el-date-picker>
 										</el-form-item>
@@ -223,7 +228,7 @@
 										<el-form-item label="证件照片/Photo："  class="labelName" prop="firstUrl">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="/api/common/upload"
+											  :action="imageApi"
 											  :show-file-list="false"
 											  :on-success="handleAvatarSuccess" 
 											  :before-upload="beforeAvatarUpload">
@@ -238,7 +243,7 @@
 										<el-form-item label=""  class="labelName" prop="secondUrl">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="/api/common/upload"
+											  :action="imageApi"
 											  :show-file-list="false"
 											  :on-success="handleAvatarSuccess2"
 											  :before-upload="beforeAvatarUpload">
@@ -252,7 +257,7 @@
 										<el-form-item label=""  class="labelName" prop="thirdUrl">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="/api/common/upload"
+											  :action="imageApi"
 											  :show-file-list="false"
 											  :on-success="handleAvatarSuccess3"
 											  :before-upload="beforeAvatarUpload">
@@ -306,6 +311,7 @@
 											<el-date-picker
 											      v-model="form.certificate.idcard.expiration"
 											      type="date"
+												  value-format="yyyy-MM-dd"
 											      placeholder="选择日期">
 											</el-date-picker>
 										</el-form-item>
@@ -317,7 +323,7 @@
 										<el-form-item label="证件照片/Photo："  class="labelName" prop="fourUrl">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="/api/common/upload"
+											  :action="imageApi"
 											  :show-file-list="false"
 											  :on-success="handleAvatarSuccess4"
 											  :before-upload="beforeAvatarUpload">
@@ -332,7 +338,7 @@
 										<el-form-item label=""  class="labelName" prop="fiveUrl">
 											<el-upload 
 											  class="avatar-uploader "
-											  action="/api/common/upload"
+											  :action="imageApi"
 											  :show-file-list="false"
 											  :on-success="handleAvatarSuccess5"
 											  :before-upload="beforeAvatarUpload">
@@ -388,10 +394,10 @@
 					
 				</el-main>
 			</el-container>
-		</div>
+	</div>
 </template>
-
 <script>
+import {appConfig} from '../../../config.js'
 
 export default{
 	name:"vipApply",
@@ -549,6 +555,12 @@ export default{
 			thirdUrl:'',
 			fourUrl:'',
 			fiveUrl:'',
+			imageApi:appConfig.apiUrl+'/api/common/upload',
+			pickerOptions: {
+				disabledDate(v) {
+					return v.getTime() >= Date.now() - 8.64e6;
+				}
+			},
 		}
 		
 	},
@@ -580,9 +592,9 @@ export default{
 						if(code=='1'){
 							this.$message({
 								message: response.msg,
-								type: 'warning'
+								type: 'success'
 							})
-							this.loadLogin();
+							this.loadVipApplySuccess(data);
 						}else{
 							this.$message({
 								message: response.msg,
@@ -597,6 +609,16 @@ export default{
 		},
 		loadLogin(){
 			this.$router.push('/login');
+		},
+		loadVipApplySuccess(data){
+			console.log(data.userinfo.username)
+			this.$router.push({
+				name:'vipApplySuccess',
+				params:{
+					username:data.userinfo.username,
+					password:data.userinfo.password
+				}
+			});
 		},
 		handleAvatarSuccess(res, file) {
 			this.firstImage = URL.createObjectURL(file.raw);

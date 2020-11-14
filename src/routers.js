@@ -7,6 +7,7 @@ import VipApply from './pages/login/vipApply.vue'
 import Workbench from './pages/workbench/workbench.vue'
 import WorkbenchApply from './pages/workbench/workbenchApply.vue'
 import Text from './pages/login/text.vue'
+import VipApplySuccess from './pages/login/vipApplySuccess.vue'
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
@@ -46,6 +47,14 @@ const routers = [
 		path:'/vipApply',
 		name:'vipApply',
 		component:VipApply,
+		meta: {
+			title: '会员申请-温州速汇'
+		}
+	},
+	{
+		path:'/vipApplySuccess',
+		name:'vipApplySuccess',
+		component:VipApplySuccess,
 		meta: {
 			title: '会员申请-温州速汇'
 		}

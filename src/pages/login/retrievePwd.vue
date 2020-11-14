@@ -100,7 +100,7 @@ export default{
 		onSubmit() {
 			let params = this.qs.stringify(this.form)
 			this.$api.forgetpwd(params).then((response)=>{
-				if(response.code>0){
+				if(response.code=='1'){
 					this.dialogVisible = true;
 					this.msg = '你密码已经成功重置为' + response.data.password +'请妥善保管';
 				}else{
