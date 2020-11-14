@@ -182,7 +182,6 @@
 									<el-col :span="6">
 										<el-form-item label="证件类型/ID Type："  class="labelName" prop="certificate.passport.type">
 										 <el-select v-model="form.certificate.passport.type_id" placeholder="请选择" class="formSelect">
-											 <!-- <el-option value="passport">Passport</el-option> -->
 											<el-option
 											  v-for="item in passport"
 											 :key="item.id"
@@ -221,7 +220,7 @@
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="6">
-										<el-form-item label="证件照片/Passport Photo："  class="labelName" prop="firstUrl">
+										<el-form-item label="证件照片/Photo："  class="labelName" prop="firstUrl">
 											<el-upload 
 											  class="avatar-uploader "
 											  action="/api/common/upload"
@@ -315,7 +314,7 @@
 								</el-row>
 								<el-row  :gutter="18">
 									<el-col :span="6">
-										<el-form-item label="证件照片/Passport Photo："  class="labelName" prop="fourUrl">
+										<el-form-item label="证件照片/Photo："  class="labelName" prop="fourUrl">
 											<el-upload 
 											  class="avatar-uploader "
 											  action="/api/common/upload"
@@ -485,7 +484,7 @@ export default{
 				],
 				certificate:{
 					passport:{
-						type:[
+						type_id:[
 							{required: true, message: '请选择证件类型', trigger: 'change'}
 						],
 						issuer_id:[
