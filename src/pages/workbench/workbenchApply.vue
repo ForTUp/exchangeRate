@@ -2,26 +2,28 @@
 		<div id="workbenchApply">
 			<el-container>
 				<el-header>
-					<el-row >
-						<el-col :span="20">
-							<div class="grid-content bg-purple ">
-								<div class="logoDiv">
-									<div @click="goToIndex" style="cursor: pointer;">
-									<el-image class="topImage"
-									      :src="imageUrl"
-									      :fit="fit"></el-image>
+					<div class="headDiv">
+						<el-row >
+							<el-col :span="20">
+								<div class="grid-content bg-purple ">
+									<div class="logoDiv">
+										<div @click="goToIndex" style="cursor: pointer;">
+										<el-image class="topImage"
+											  :src="imageUrl"
+											  :fit="fit"></el-image>
+										</div>
+										<el-link :underline="false" class="topLink">工作台</el-link>
 									</div>
-									<el-link :underline="false" class="topLink">工作台</el-link>
 								</div>
+							</el-col>
+							  <el-col :span="4">
+							<div class="grid-content bg-purple">
+								<span class="loginSpan">{{userInfo.username}}</span>
+								<el-button  class="exitBtn" @click="loginout">退出</el-button>
 							</div>
-						</el-col>
-						  <el-col :span="4">
-						<div class="grid-content bg-purple">
-							<span class="loginSpan">{{userInfo.username}}</span>
-							<el-button  class="exitBtn" @click="loginout">退出</el-button>
-						</div>
-					  </el-col>
-					</el-row>
+						  </el-col>
+						</el-row>
+					</div>
 				</el-header>
 				<el-main>
 					<div class="formDiv">
@@ -958,7 +960,6 @@ export default{
 		// height: 135rem !important;
 		margin: 1rem  auto ;
 		// border: 0.0625rem  solid red;
-		
 	}
 	.headForm{
 		background-color: #FFF;
@@ -968,6 +969,10 @@ export default{
 		border:0.0625rem solid #e9e9e9 ;
 		text-align:left;
 		line-height: 3.75rem;
+	}
+	.headDiv{
+		width: 82rem;
+		margin: 0 auto;
 	}
 	.spanMsg{
 		margin-left: 0.5rem;

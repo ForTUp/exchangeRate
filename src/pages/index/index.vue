@@ -160,7 +160,7 @@
 							      <el-table-column
 							        prop="currency_Label"
 							        label="Currency"
-							        width="180">
+							        width="280">
 							      </el-table-column>
 							      <el-table-column
 							        prop="exchange11"
