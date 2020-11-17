@@ -10,14 +10,14 @@
 				<div class="topLinkDiv" >
 					<el-link :underline="false"  type="primary" @click="goTop">首页</el-link>
 				</div>
+				<div class="topLinkDiv">
+					<el-link :underline="false" @click="goRate">实时汇率</el-link>
+				</div>
 				<div class="topLinkDiv" style="width: 15rem;">
 					<el-link :underline="false" @click="goRegister">为什么选择我们</el-link>
 				</div>
 				<div class="topLinkDiv">
 					<el-link :underline="false" @click="goContact">联系我们</el-link>
-				</div>
-				<div class="topLinkDiv">
-					<el-link :underline="false" @click="goRate">实时汇率</el-link>
 				</div>
 				<div class="topLinkDiv topLinkDivFirst" >
 					<div v-if="userInfo==null" class="loginDiv">
@@ -69,33 +69,6 @@
 				
 				<!--中间件 -->
 				<div class="coreService">
-					<div class="coreHead">
-						<h1>三大核心服务项目</h1>
-					</div>
-					<div class="coreContent" style="height: 28rem;">
-						<div class="coreContentList ">
-							<h1>双向汇款</h1>
-							<ul class="coreUl">
-								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>资金安全</span></li>
-								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>诚信可靠</span></li>
-							</ul>
-						</div>
-						<div class="coreContentList">
-							<h1>国际结算</h1>
-							<ul class="coreUl coreUlTe">
-								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>满足任何种类货币的兑换</span></li>
-								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>满足多种结算方式：现金，电汇，银行</span></li>
-							</ul>
-						</div>
-						<div class="coreContentList">
-							<h1>现金兑换</h1>
-							<ul class="coreUl">
-								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>无需手续费</span></li>
-								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>无金额限制</span></li>
-							</ul>
-						</div>
-					</div>
-					
 					<div class="coreHead rate"> 
 						<h1>实时汇率</h1>
 					</div>
@@ -188,6 +161,32 @@
 						    layout="prev, pager, next"
 						    :total="total">
 						  </el-pagination>
+						</div>
+					</div>
+					<div class="coreHead">
+						<h1>三大核心服务项目</h1>
+					</div>
+					<div class="coreContent" style="height: 28rem;">
+						<div class="coreContentList ">
+							<h1>双向汇款</h1>
+							<ul class="coreUl">
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>资金安全</span></li>
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>诚信可靠</span></li>
+							</ul>
+						</div>
+						<div class="coreContentList">
+							<h1>国际结算</h1>
+							<ul class="coreUl coreUlTe">
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>满足任何种类货币的兑换</span></li>
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>满足多种结算方式：现金，电汇，银行</span></li>
+							</ul>
+						</div>
+						<div class="coreContentList">
+							<h1>现金兑换</h1>
+							<ul class="coreUl">
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>无需手续费</span></li>
+								<li><i class="el-icon-check" style="color:cornflowerblue;"></i><span>无金额限制</span></li>
+							</ul>
 						</div>
 					</div>
 					<div class="form-wrap-app" style="width: 100%;height: 2rem;"></div>

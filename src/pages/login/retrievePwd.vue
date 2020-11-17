@@ -37,10 +37,10 @@
 									<el-input v-model="form.username" placeholder="请输入ID" ></el-input>
 							  </el-form-item>
 							  <el-form-item label="手机号码/Phone Number：">
-									<el-input v-model="form.password" placeholder="请输入密码" ></el-input>
+									<el-input v-model="form.mobile" placeholder="请输入手机号码" ></el-input>
 							  </el-form-item>
 							  <el-form-item label="证件类型/ID Type：">
-									 <el-select v-model="form.idcord" placeholder="请选择">
+									 <el-select v-model="form.idtype" placeholder="请选择">
 									    <el-option
 									      v-for="item in idtype"
 									      :key="item.id"
@@ -84,8 +84,8 @@ export default{
 		return {
 			form: {
 				username: '',
-				password: '',
-				idcord:'',
+				mobile: '',
+				idtype:'',
 				number:''
 			},
 			idtype: [],
@@ -129,7 +129,7 @@ export default{
 		
 	},
 	mounted() {
-		this.$api.getConfig({type:'idtype'}).then((response)=>{
+		this.$api.getConfig({type:'passport'}).then((response)=>{
 			console.log(response)
 			this.idtype = response;
 		})

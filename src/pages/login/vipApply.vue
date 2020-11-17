@@ -235,7 +235,7 @@
 											  
 											  <img v-if="firstImage" :src="firstImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式或PDF格式文件。</div>
 											</el-upload>
 										</el-form-item>
 									</el-col>
@@ -249,7 +249,7 @@
 											  :before-upload="beforeAvatarUpload">
 											  <img v-if="secondImage" :src="secondImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式或PDF格式文件。</div>
 											</el-upload>
 											</el-form-item>
 									</el-col>
@@ -264,7 +264,7 @@
 											  
 											  <img v-if="thirdImage" :src="thirdImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式或PDF格式文件。</div>
 											</el-upload>
 											</el-form-item>
 									</el-col>
@@ -330,7 +330,7 @@
 											  
 											  <img v-if="fourImage" :src="fourImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式或PDF格式文件。</div>
 											</el-upload>
 										</el-form-item>
 									</el-col>
@@ -345,7 +345,7 @@
 											  
 											  <img v-if="fiveImage" :src="fiveImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式。</div>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式或PDF格式文件。</div>
 											</el-upload>
 											</el-form-item>
 									</el-col>
@@ -647,16 +647,11 @@ export default{
 			this.fiveUrl = res.data.url;
 		},
 		beforeAvatarUpload(file) {
-			const isJPG = file.type === 'image/jpeg';
-			const isLt2M = file.size / 1024 / 1024 < 2;
-
-			if (!isJPG) {
-				this.$message.error('上传头像图片只能是 JPG 格式!');
+			if (file.type != 'image/jpeg' && file.type != 'image/png' && file.type != 'application/pdf') {
+				this.$message.error('上传图片只能是JPG、PNG、JPEG的图片格式或PDF格式文件!');
+				return false;
 			}
-			if (!isLt2M) {
-				this.$message.error('上传头像图片大小不能超过 2MB!');
-			}
-				return isJPG && isLt2M;
+			return true;
 		},
 		handleReset () { // 清除
 		  this.$refs.esign.reset()
