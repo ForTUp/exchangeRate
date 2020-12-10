@@ -86,9 +86,9 @@
 							</el-table-column>
 							<el-table-column prop="source_text" label="资金用途" width="140">
 							</el-table-column>
-							<el-table-column prop="sender_name1" label="收款人1" width="80">
+							<el-table-column prop="beneficiary_name1" label="收款人1" width="80">
 							</el-table-column>
-							<el-table-column prop="sender_name2" label="收款人2" width="80">
+							<el-table-column prop="beneficiary_name2" label="收款人2" width="80">
 							</el-table-column>
 							<el-table-column prop="createtime" label="申请日期" width="160">
 							    <template slot-scope="scope">{{scope.row.createtime| dateYMDHMSFormat}}</template>
@@ -99,6 +99,7 @@
 							      <template slot-scope="scope">
 							       
 							        <el-button
+									  v-if="scope.row.state!='1'"
 							          size="mini"
 							          type="danger"
 							          @click="handleDelete(scope.row)">删除</el-button>
