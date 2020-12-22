@@ -41,14 +41,14 @@
 									</el-select>
 								</el-col>
 								<el-col :span="4" style="width: 12rem;padding: 0;text-align: left;">
-									<el-input v-model="ruleForm.keyword" placeholder="请输入搜索的内容" style="width: 10rem;"></el-input>
+									<el-input v-model="ruleForm.keyword" placeholder="请输入搜索的内容" style="width: 12rem;"></el-input>
 								</el-col>
 								<el-col :span="2">
-									<el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.startDate" style="width: 100%;"></el-date-picker>
+									<el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.startDate" style="width: 9rem;"></el-date-picker>
 								</el-col>
-								<el-col class="line" :span="1" style="width: 1rem; margin: 0;line-height: 2rem;">-</el-col>
+								<el-col class="line" :span="1" style="width: 1rem; margin: 0;line-height: 2rem; margin-left: 1rem">-</el-col>
 								<el-col :span="2" style=" margin: 0;">
-									<el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.endDate" style="width: 100%;"></el-date-picker>
+									<el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.endDate" style="width: 9rem;"></el-date-picker>
 								</el-col>
 								<el-col :span="2">
 									<el-select v-model="ruleForm.state" placeholder="搜索类型" style="width: 8rem;">
@@ -61,7 +61,7 @@
 								<el-col class="line" :span="2">
 									<el-button type="primary" @click="onSubmit('ruleForm')">搜 索</el-button>
 								</el-col>
-								<el-col class="line" :span="2" style=" margin-left: -3rem;">
+								<el-col class="line" :span="2" style=" margin-left: -1.5rem;">
 									<el-button @click="resetForm('ruleForm')">重 置</el-button>
 								</el-col>
 								<el-col class="line" :span="2" :push="2">
@@ -72,41 +72,40 @@
 					</div>
 					<div class="tableBody">
 						<el-table :data="tableData" style="width: 100%" border  :row-class-name="tableRowClassName" highlight-current-row>
-							<el-table-column prop="id" label="序号" width="50" >
+							<el-table-column prop="id" label="序号" width="40" align="center" >
 							</el-table-column>
-							<el-table-column prop="remit_name" label="汇款人" width="100">
+							<el-table-column prop="remit_name" label="汇款人" width="70" align="center">
 							</el-table-column>
-							<el-table-column prop="type" label="类型" width="50" :formatter = "stateFormatType">
+							<el-table-column prop="type" label="类型" width="50" :formatter = "stateFormatType" align="center">
 							</el-table-column>
-							<el-table-column prop="currency" label="币种" width="100">
+							<el-table-column prop="currency" label="币种" width="70" align="center">
 							</el-table-column>
-							<el-table-column prop="money" label="金额" width="80">
+							<el-table-column prop="money" label="金额" width="70">
 							</el-table-column>
-							<el-table-column prop="purpose_text" label="资金来源" width="140">
+							<el-table-column prop="purpose_text" label="资金来源" width="130">
 							</el-table-column>
-							<el-table-column prop="source_text" label="资金用途" width="140">
+							<el-table-column prop="source_text" label="资金用途" width="130">
 							</el-table-column>
-							<el-table-column prop="beneficiary_name1" label="收款人1" width="80">
+							<el-table-column prop="beneficiary_name1" label="收款人1" width="70" align="center">
 							</el-table-column>
-							<el-table-column prop="beneficiary_name2" label="收款人2" width="80">
+							<el-table-column prop="beneficiary_name2" label="收款人2" width="70" align="center">
 							</el-table-column>
-							<el-table-column prop="createtime" label="申请日期" width="160">
-							    <template slot-scope="scope">{{scope.row.createtime| dateYMDHMSFormat}}</template>
+							<el-table-column prop="createtime" label="申请日期" width="130" align="center">
+							    <template slot-scope="scope">{{scope.row.createtime*1000| dateYMDHMSFormat}}</template>
 							</el-table-column>
-							<el-table-column prop="state" label="状态" width="100" :formatter = "stateFormatState">
+							<el-table-column prop="state" label="状态" width="80" :formatter = "stateFormatState" align="center">
 							</el-table-column>
-							<el-table-column label="操作"  fixed="right" >
+							<el-table-column label="操作"  fixed="right" width="120" align="center">
 							      <template slot-scope="scope">
-							       
-							        <el-button
-									  v-if="scope.row.state!='1'"
+									  <el-button
+									   v-if="scope.row.state == '2'"
+									    size="mini"
+									    @click="handleEdit(scope.row)">编辑</el-button>
+										<el-button
+									  v-if="scope.row.state != '1'"
 							          size="mini"
 							          type="danger"
 							          @click="handleDelete(scope.row)">删除</el-button>
-									  <el-button
-									   v-if="scope.row.state!='1'"
-									    size="mini"
-									    @click="handleEdit(scope.row)">编辑</el-button>
 							      </template>
 							</el-table-column>
 						</el-table>

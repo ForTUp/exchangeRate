@@ -69,8 +69,8 @@ export default {
 	upload:(data)=>{
 		return postFile('/api/common/upload',data)
 	},
-	getRemitUser:(data)=>{
-		return get('/api/remit/get_remit_user',data)
+	getUserRelation:(data)=>{
+		return get('/api/remit/get_user_relation',data)
 	},
 	remit:(data)=>{
 		return post('/api/remit/add',data)

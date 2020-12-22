@@ -179,7 +179,7 @@
 							</div>
 							<div class="bodyForm bodyFormNext">
 								<div class="headForm">
-									<span class="spanMsg">客户证件 | Customer identification（1）</span>
+									<span class="spanMsg">主要证件 | Customer identification </span>
 								</div>
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
@@ -273,7 +273,7 @@
 							
 							<div class="bodyForm bodyFormNext">
 								<div class="headForm">
-									<span class="spanMsg">客户证件 | Customer identification（2）</span>
+									<span class="spanMsg">其他证件 | Customer identification</span>
 								</div>
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
@@ -344,6 +344,21 @@
 											  :before-upload="beforeAvatarUpload">
 											  
 											  <img v-if="fiveImage" :src="fiveImage" class="avatar">
+											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式或PDF格式文件。</div>
+											</el-upload>
+											</el-form-item>
+									</el-col>
+									<el-col :span="6" class="imgUpload">
+										<el-form-item label=""  class="labelName" prop="sixUrl">
+											<el-upload 
+											  class="avatar-uploader "
+											  :action="imageApi"
+											  :show-file-list="false"
+											  :on-success="handleAvatarSuccess6"
+											  :before-upload="beforeAvatarUpload">
+											  
+											  <img v-if="sixImage" :src="sixImage" class="avatar">
 											  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											  <div class="el-upload__text">请上传清晰彩色的扫描件或者照片，支持JPG、PNG、JPEG的图片格式或PDF格式文件。</div>
 											</el-upload>
@@ -494,36 +509,36 @@ export default{
 				certificate:{
 					passport:{
 						type_id:[
-							{required: true, message: '请选择证件类型', trigger: 'change'}
+							{required: true, message: '请选择主要证件类型', trigger: 'change'}
 						],
 						issuer_id:[
-							{required: true, message: '请选择发证机构', trigger: 'change'}
+							{required: true, message: '请选择主要证件发证机构', trigger: 'change'}
 						],
 						number:[
-							{required: true, message: '请输入证件号码', trigger: 'change'}
+							{required: true, message: '请输入主要证件号码', trigger: 'change'}
 						],
 						expiration:[
-							{required: true, message: '请选择证件有效期', trigger: 'change'}
+							{required: true, message: '请选择主要证件有效期', trigger: 'change'}
 						],
 						photos:[
-							{required: true, message: '请上传证件照片', trigger: 'change'}
+							{required: true, message: '请上传主要证件照片', trigger: 'change'}
 						],
 					},
 					idcard:{
 						type_id:[
-							{required: true, message: '请选择证件类型', trigger: 'change'}
+							{required: true, message: '请选择其它证件类型', trigger: 'change'}
 						],
 						issuer_id:[
-							{required: true, message: '请选择发证机构', trigger: 'change'}
+							{required: true, message: '请选择其它证件发证机构', trigger: 'change'}
 						],
 						number:[
-							{required: true, message: '请输入证件号码', trigger: 'change'}
+							{required: true, message: '请输入其它证件号码', trigger: 'change'}
 						],
 						expiration:[
-							{required: true, message: '请选择证件有效期', trigger: 'change'}
+							{required: true, message: '请选择其它证件有效期', trigger: 'change'}
 						],
 						photos:[
-							{required: true, message: '请上传证件照片', trigger: 'change'}
+							{required: true, message: '请上传其它证件照片', trigger: 'change'}
 						],
 					},
 				},
@@ -553,11 +568,13 @@ export default{
 			thirdImage:'',
 			fourImage:'',
 			fiveImage:'',
+			sixImage:'',
 			firstUrl:'',
 			secondUrl:'',
 			thirdUrl:'',
 			fourUrl:'',
 			fiveUrl:'',
+			sixUrl:'',
 			imageApi:appConfig.apiUrl+'/api/common/upload',
 			pickerOptions: {
 				disabledDate(v) {
@@ -571,7 +588,7 @@ export default{
 		submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
-					if(this.firstUrl=='' || this.secondUrl=='' || this.thirdUrl=='' ||this.fourUrl=='' ||this.fiveUrl==''){
+					if(this.firstUrl=='' || this.secondUrl=='' || this.thirdUrl=='' || this.fourUrl=='' || this.fiveUrl=='' || this.sixUrl==''){
 						this.$message({
 							message: '请上传图片！',
 							type: 'warning'
@@ -586,7 +603,7 @@ export default{
 						return;
 					}
 					this.form.certificate.passport.photos = this.firstUrl + "," + this.secondUrl + "," + this.thirdUrl;
-					this.form.certificate.idcard.photos = this.fourUrl + "," + this.fiveUrl;
+					this.form.certificate.idcard.photos = this.fourUrl + "," + this.fiveUrl + "," + this.sixUrl;
 					let params = this.qs.stringify(this.form);
 					let packJson  = {"data":JSON.stringify(this.form)};
 					this.$api.apply(this.qs.stringify(packJson)).then((response)=>{
@@ -645,6 +662,10 @@ export default{
 		handleAvatarSuccess5(res, file) {
 			this.fiveImage = URL.createObjectURL(file.raw);
 			this.fiveUrl = res.data.url;
+		},
+		handleAvatarSuccess6(res, file) {
+			this.sixImage = URL.createObjectURL(file.raw);
+			this.sixUrl = res.data.url;
 		},
 		beforeAvatarUpload(file) {
 			if (file.type != 'image/jpeg' && file.type != 'image/png' && file.type != 'application/pdf') {

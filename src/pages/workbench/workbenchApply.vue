@@ -400,7 +400,7 @@
 									<el-row :gutter="24">
 										<el-col :span="6">
 											<el-form-item label="备注/Remarks："  class="labelName"> 
-												<el-input v-model="beneficiary_list[0].remark" placeholder="请输入" ></el-input>
+												<el-input v-model="beneficiary_list[0].remark" placeholder="请输入" class="formRemark" ></el-input>
 											</el-form-item>
 										</el-col>
 									</el-row>
@@ -507,7 +507,7 @@
 									<el-row :gutter="24">
 										<el-col :span="6">
 											<el-form-item label="备注/Remarks："  class="labelName"> 
-												<el-input v-model="beneficiary_list[1].out_remark" placeholder="请输入" ></el-input>
+												<el-input v-model="beneficiary_list[1].out_remark" placeholder="请输入" class="formRemark" ></el-input>
 											</el-form-item>
 										</el-col>
 									</el-row>
@@ -846,8 +846,18 @@ export default{
 			that.purposeList = response
 		})
 		//获取货币列表
-		this.$api.getCurrencyList().then((response) =>{
-			this.currencyList= response.data.rows;
+		this.$api.getCurrencyList({current_page:1,per_page:10000}).then((response) =>{
+			console.log(response.data.rows);
+			let currencyList = []
+			let i = 0;
+			response.data.rows.forEach(function(item, index) {
+				if (item.code == 'AUD' || item.code == 'CNY') {
+					currencyList[i] = item;
+					i++;
+				}
+			})
+			console.log(currencyList);
+			this.currencyList = currencyList;
 		})
 		this.getRemitList(this.$route.params.id)
 		
@@ -970,6 +980,9 @@ export default{
 	}
 	.formAddr{
 		width: 37.5rem;
+	}
+	.formRemark{
+		width: 76.5rem;
 	}
 	.el-input__inner{
 		width: 18rem !important;
