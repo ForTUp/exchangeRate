@@ -31,7 +31,7 @@
 							<div class="returnDiv">
 								<el-button class="returnBtn" @click="$router.back(-1)">返回</el-button>
 							</div>
-							
+
 							<div class="bodyForm">
 								<div class="headForm">
 									<span class="spanMsg">汇款人 | Sender detail</span>
@@ -206,6 +206,18 @@
 								</div>
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
+									<el-col :span="6">
+										<el-form-item label="汇款店铺/Company："  class="labelName" prop="company_id">
+											<el-select v-model="form.company_id" placeholder="请选择" class="formSelect" clearable filterable >
+												<el-option
+												  v-for="item in companyList"
+												 :key="item.id"
+												 :label="item.name"
+												 :value="item.id">
+												</el-option>
+											 </el-select>
+										</el-form-item>
+									</el-col>
 									<el-col :span="6">
 										<el-form-item label="汇款类型/Type："  class="labelName" prop="type">
 											<div class="formRadio">
@@ -556,6 +568,7 @@ export default{
 						}
 					}
 				},
+				company_id:null,
 				type:1,
 				currency:"",
 				money: null,
@@ -565,11 +578,14 @@ export default{
 				beneficiary_list:[]
 			},
 			rules:{
+				company_id:[
+					{required: true, message: '请选择汇款店铺', trigger: 'change' }
+				],
 				type:[
-					{required: true, message: '请输入汇款类型', trigger: 'change' }
+					{required: true, message: '请选择汇款类型', trigger: 'change' }
 				],
 				currency:[
-					{required: true, message: '请输入汇款币种', trigger: 'change' }
+					{required: true, message: '请选择汇款币种', trigger: 'change' }
 				],
 				money:[
 					{required: true, message: '请输入汇款金额', trigger: 'change' }
@@ -593,6 +609,7 @@ export default{
 			source_ids:[],
 			purpose_ids:[],
 			currencyList:[],
+			companyList:[],
 			//图片blob
 			fourImage:'',
 			fiveImage:'',
@@ -702,9 +719,6 @@ export default{
 		loadLogin(){
 			this.$router.push('/login');
 		},
-		handleAvatarSuccess(res, file) {
-			this.imageUrl = URL.createObjectURL(file.raw);
-		},
 		beforeAvatarUpload(file) {
 			if (file.type != 'image/jpeg' && file.type != 'image/png' && file.type != 'application/pdf') {
 				this.$message.error('上传图片只能是JPG、PNG、JPEG的图片格式或PDF格式文件!');
@@ -713,11 +727,23 @@ export default{
 			return true;
 		},
 		handleAvatarSuccess4(res, file) {
-			this.fourImage = URL.createObjectURL(file.raw);
+			if (file.raw.type.indexOf('image') != -1) {
+				this.fourImage = URL.createObjectURL(file.raw);
+			} else if (file.raw.type.indexOf('pdf') != -1) {
+				this.fourImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=pdf';
+			} else {
+				this.fourImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=file';
+			}
 			this.fourUrl = res.data.url;
 		},
 		handleAvatarSuccess5(res, file) {
-			this.fiveImage = URL.createObjectURL(file.raw);
+			if (file.raw.type.indexOf('image') != -1) {
+				this.fiveImage = URL.createObjectURL(file.raw);
+			} else if (file.raw.type.indexOf('pdf') != -1) {
+				this.fiveImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=pdf';
+			} else {
+				this.fiveImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=file';
+			}
 			this.fiveUrl = res.data.url;
 		},
 		showPayee(){
@@ -845,9 +871,13 @@ export default{
 		this.$api.getConfig({type:'purpose'}).then((response)=>{
 			that.purposeList = response
 		})
+		//获取店铺列表
+		this.$api.getCompanyList({current_page:1,per_page:10000}).then((response) =>{
+			console.log(response.data.rows);
+			this.companyList = response.data.rows;
+		})
 		//获取货币列表
 		this.$api.getCurrencyList({current_page:1,per_page:10000}).then((response) =>{
-			console.log(response.data.rows);
 			let currencyList = []
 			let i = 0;
 			response.data.rows.forEach(function(item, index) {
@@ -872,6 +902,7 @@ export default{
 				console.log(response,'remitInfo')
 				let {data,code} = response;
 				if(code=='1'){
+					this.form.company_id=parseInt(data.company_id);
 					this.form.type=parseInt(data.type);
 					this.form.currency=data.currency;
 					this.form.money=data.money;

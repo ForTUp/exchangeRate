@@ -642,30 +642,63 @@ export default{
 			});
 		},
 		handleAvatarSuccess(res, file) {
-			this.firstImage = URL.createObjectURL(file.raw);
-			console.log(JSON.stringify(res))
-			this.firstUrl = res.data.url;
-			// this.form.certificate.passport.photos = this.form.certificate.idcard.photos + ','+res.data.url;
-			
+			if (file.raw.type.indexOf('image') != -1) {
+				this.firstImage = URL.createObjectURL(file.raw);
+			} else if (file.raw.type.indexOf('pdf') != -1) {
+				this.firstImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=pdf';
+			} else {
+				this.firstImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=file';
+			}
+			this.firstUrl = res.data.url;			
 		},
 		handleAvatarSuccess2(res, file) {
-			this.secondImage = URL.createObjectURL(file.raw);
+			if (file.raw.type.indexOf('image') != -1) {
+				this.secondImage = URL.createObjectURL(file.raw);
+			} else if (file.raw.type.indexOf('pdf') != -1) {
+				this.secondImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=pdf';
+			} else {
+				this.secondImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=file';
+			}
 			this.secondUrl = res.data.url;
 		},
 		handleAvatarSuccess3(res, file) {
-			this.thirdImage = URL.createObjectURL(file.raw);
+			if (file.raw.type.indexOf('image') != -1) {
+				this.thirdImage = URL.createObjectURL(file.raw);
+			} else if (file.raw.type.indexOf('pdf') != -1) {
+				this.thirdImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=pdf';
+			} else {
+				this.thirdImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=file';
+			}
 			this.thirdUrl = res.data.url;
 		},
 		handleAvatarSuccess4(res, file) {
-			this.fourImage = URL.createObjectURL(file.raw);
+			if (file.raw.type.indexOf('image') != -1) {
+				this.fourImage = URL.createObjectURL(file.raw);
+			} else if (file.raw.type.indexOf('pdf') != -1) {
+				this.fourImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=pdf';
+			} else {
+				this.fourImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=file';
+			}
 			this.fourUrl = res.data.url;
 		},
 		handleAvatarSuccess5(res, file) {
-			this.fiveImage = URL.createObjectURL(file.raw);
+			if (file.raw.type.indexOf('image') != -1) {
+				this.fiveImage = URL.createObjectURL(file.raw);
+			} else if (file.raw.type.indexOf('pdf') != -1) {
+				this.fiveImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=pdf';
+			} else {
+				this.fiveImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=file';
+			}
 			this.fiveUrl = res.data.url;
 		},
 		handleAvatarSuccess6(res, file) {
-			this.sixImage = URL.createObjectURL(file.raw);
+			if (file.raw.type.indexOf('image') != -1) {
+				this.sixImage = URL.createObjectURL(file.raw);
+			} else if (file.raw.type.indexOf('pdf') != -1) {
+				this.sixImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=pdf';
+			} else {
+				this.sixImage = appConfig.apiUrl + '/zIpTSBPkuO.php/ajax/icon?suffix=file';
+			}
 			this.sixUrl = res.data.url;
 		},
 		beforeAvatarUpload(file) {

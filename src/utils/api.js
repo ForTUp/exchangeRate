@@ -54,6 +54,9 @@ export default {
 	getExchangeList:(data)=>{
 		return post('/api/exchange/getExchangeList',data)
 	},
+	getCompanyList:(data)=>{
+		return get('/api/company/list',data)
+	},
 	getCurrencyList:(data)=>{
 		return get('/api/exchange/getCurrencyList',data)
 	},
