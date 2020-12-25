@@ -398,7 +398,7 @@
 								<!-- <el-row :gutter="24"  class="esignBtn"></el-row> -->
 							</div>
 							<div class="checkDiv">
-								<el-checkbox v-model="checked">我已阅读并同意<span class="checkBtn">《隐私保护政策条款》</span>，并确认上述信息和提供的文件真实无误。</el-checkbox>
+								<el-checkbox v-model="checked">我已阅读并同意<span class="checkBtn" ><a :href="policyUrl" target="_blank">《隐私保护政策条款》</a></span>，并确认上述信息和提供的文件真实无误。</el-checkbox>
 							</div>
 							<div class="formSubmitBtn">
 								<el-button  class="submitBtn" @click="submitForm('form')" >提交</el-button>
@@ -546,6 +546,7 @@ export default{
 			options: [
 				],
 			imageUrl:require('../../static/image/u95.png'),
+			policyUrl: appConfig.apiUrl + '/template/Privacy-Policy.pdf',
 			idtype: [],
 			nationality:[],
 			passport:[],

@@ -70,7 +70,7 @@
 								</el-row>
 							</div>
 							<!-- 添加汇款人-->
-							<div v-if="form.remit_type==2">
+							<div v-if="form.remit_type==2" class="bodyForm">
 								<el-row  :gutter="24"></el-row>
 								<el-row  :gutter="24">
 									<el-col :span="6">
