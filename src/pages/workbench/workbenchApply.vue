@@ -847,7 +847,9 @@ export default{
 		closeShow(num){
 			if(num==1){
 				this.isshow1=false;
+				this.isshow2=false;
 			} else {
+				
 				this.isshow2=false;
 			}
 		}
