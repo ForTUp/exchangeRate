@@ -311,10 +311,15 @@
 								
 								
 								<div class="Payee" v-if="isshow1">
-									<el-row :gutter="24">
-										<div class="PayeeDiv">
-											<span>1号接收人基本信息</span>
-										</div>
+									<el-row :gutter="12">
+										<el-col :span="6">
+											<div class="PayeeDiv">
+												<span>1号接收人基本信息</span>
+											</div>
+										</el-col>
+										<el-col :span="6" style="margin-top: 0.7rem !important; margin-left: -7rem;">
+											<el-button type="danger" icon="el-icon-delete" circle @click="closeShow(1)"></el-button>
+										</el-col>
 									</el-row>
 									<el-row  :gutter="24">
 										<el-col :span="6">
@@ -419,9 +424,14 @@
 								</div>
 								<div class="Payee" v-if="isshow2">
 									<el-row :gutter="24">
-										<div class="PayeeDiv" style="background-color: blueviolet;">
-											<span>2号接收人基本信息</span>
-										</div>
+										<el-col :span="6">
+											<div class="PayeeDiv" style="background-color: blueviolet;">
+												<span>2号接收人基本信息</span>
+											</div>
+										</el-col>
+										<el-col :span="6" style="margin-top: 0.7rem !important; margin-left: -7rem;">
+											<el-button type="danger" icon="el-icon-delete" circle @click="closeShow(2)"></el-button>
+										</el-col>
 									</el-row>
 									<el-row  :gutter="24">
 										<el-col :span="6">
@@ -824,7 +834,6 @@ export default{
 								that.form.remit_type=1;
 								that.form.remit_id=value.id;
 							}
-							
 							return;
 						}
 					})
@@ -834,6 +843,13 @@ export default{
 		},
 		goToIndex(){
 			this.$router.push('/index')
+		},
+		closeShow(num){
+			if(num==1){
+				this.isshow1=false;
+			} else {
+				this.isshow2=false;
+			}
 		}
 	},
 	mounted() {
