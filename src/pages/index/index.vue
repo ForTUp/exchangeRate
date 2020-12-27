@@ -85,7 +85,7 @@
 								</el-row>
 								<el-row :span="20">
 									<el-col :span="3">
-										<el-select v-model="nowForm.from" placeholder="请选择" clearable filterable class="">
+										<el-select v-model="nowForm.from" disabled placeholder="请选择" clearable filterable class="">
 											<el-option
 											  v-for="item in currencyList"
 											 :key="item.code"
@@ -111,7 +111,7 @@
 										 </el-select>
 									</el-col>
 									<el-col :span="4" style=" margin: 0;">
-										<el-input v-model="nowForm.totalMoney" readonly></el-input>
+										<el-input v-model="nowForm.totalMoney" disabled></el-input>
 									</el-col>
 								</el-row>
 							</el-form>
@@ -301,7 +301,7 @@
 			   </el-select>
 		    </el-form-item>
 			<el-form-item label="买入币种:" :label-width="formLabelWidth">
-			  <el-select v-model="form.from" placeholder="请选择" class="formSelect" clearable filterable >
+			  <el-select v-model="form.from" disabled placeholder="请选择" class="formSelect" clearable filterable >
 			  	<el-option
 			  	  v-for="item in currencyList"
 			  	 :key="item.code"
@@ -310,14 +310,14 @@
 			  	</el-option>
 			   </el-select>
 			</el-form-item>
-			<el-form-item label="买入金额:" :label-width="formLabelWidth" >
+			<el-form-item label="卖出金额:" :label-width="formLabelWidth" >
 			  <el-input v-model="form.money" autocomplete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="计算结果:" :label-width="formLabelWidth" >
-			  <el-input v-model="form.totalMoney" readonly autocomplete="off"></el-input>
+			<el-form-item label="买入金额:" :label-width="formLabelWidth" >
+			  <el-input v-model="form.totalMoney" disabled autocomplete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="费率:" :label-width="formLabelWidth" >
-			  <el-input v-model="form.currencyRate" readonly autocomplete="off"></el-input>
+			<el-form-item label="汇率:" :label-width="formLabelWidth" >
+			  <el-input v-model="form.currencyRate" disabled autocomplete="off"></el-input>
 			</el-form-item>
 		  </el-form>
 		  <div slot="footer" class="dialog-footer">
@@ -366,7 +366,7 @@ export default {
 			  //货币计算表单
 			  form:{
 				  money:'',
-				  from:'',
+				  from:'AUD',
 				  to:'',
 				  totalMoney:'',
 				  currencyRate:''
@@ -382,7 +382,7 @@ export default {
 			  zoom:15,
 			  //实时汇率
 			  nowForm:{
-				  from:'',
+				  from:'AUD',
 				  to:'',
 				  money:1,
 				  totalMoney:''
@@ -506,8 +506,8 @@ export default {
 				console.log(response)
 				let {data} = response;
 				if(response.code==1){
-					this.form.totalMoney=this.form.money*data.exchange21;
-					this.form.currencyRate =data.exchange21;
+					this.form.totalMoney=(this.form.money/data.exchange11).toFixed(2);
+					this.form.currencyRate =data.exchange11;
 					console.log(this.form.totalMoney)
 				}else{
 					this.$message({
@@ -544,7 +544,7 @@ export default {
 				console.log(response)
 				let {data} = response;
 				if(response.code==1){
-					this.nowForm.totalMoney=this.nowForm.money*data.exchange21;
+					this.nowForm.totalMoney=(this.nowForm.money*data.exchange11).toFixed(2);
 					console.log(this.nowForm.totalMoney)
 				}else{
 					this.$message({
