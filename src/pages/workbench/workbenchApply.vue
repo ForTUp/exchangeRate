@@ -845,11 +845,61 @@ export default{
 			this.$router.push('/index')
 		},
 		closeShow(num){
+			let beneficiary_list = this.beneficiary_list;
 			if(num==1){
+				this.beneficiary_list = [
+					{
+						realname:"",
+						areacode_id:"",
+						mobile:"",
+						relationship:"",
+						country_id:'',
+						province:"",
+						city:"",
+						address:"",
+						postcode:"",
+						bankname:"",
+						bank:"",
+						account:"",
+						swift_code:"",
+						remark:""
+					},
+					{
+						realname:"",
+						areacode_id:"",
+						mobile:"",
+						relationship:"",
+						country_id:'',
+						province:"",
+						city:"",
+						address:"",
+						postcode:"",
+						bankname:"",
+						bank:"",
+						account:"",
+						swift_code:"",
+						remark:""
+					}
+				];
 				this.isshow1=false;
 				this.isshow2=false;
 			} else {
-				
+				this.beneficiary_list =[beneficiary_list[0], {
+						realname:"",
+						areacode_id:"",
+						mobile:"",
+						relationship:"",
+						country_id:'',
+						province:"",
+						city:"",
+						address:"",
+						postcode:"",
+						bankname:"",
+						bank:"",
+						account:"",
+						swift_code:"",
+						remark:""
+					}];
 				this.isshow2=false;
 			}
 		}
