@@ -85,7 +85,7 @@
 								</el-row>
 								<el-row :span="20">
 									<el-col :span="3">
-										<el-select v-model="nowForm.from" disabled placeholder="请选择" clearable filterable class="">
+										<el-select v-model="nowForm.from" placeholder="请选择" clearable filterable class="">
 											<el-option
 											  v-for="item in currencyList"
 											 :key="item.code"
@@ -153,7 +153,7 @@
 								  </el-table-column>
 							</el-table>
 						</div>
-						<div class="block">
+						<!-- <div class="block">
 						  <el-pagination
 							@current-change="handleCurrentChange"
 							:current-page.sync="current_page"
@@ -161,7 +161,7 @@
 						    layout="prev, pager, next"
 						    :total="total">
 						  </el-pagination>
-						</div>
+						</div> -->
 					</div>
 					<div class="coreHead">
 						<h1>三大核心服务项目</h1>
@@ -301,7 +301,7 @@
 			   </el-select>
 		    </el-form-item>
 			<el-form-item label="买入币种:" :label-width="formLabelWidth">
-			  <el-select v-model="form.from" disabled placeholder="请选择" class="formSelect" clearable filterable >
+			  <el-select v-model="form.from" placeholder="请选择" class="formSelect" clearable filterable >
 			  	<el-option
 			  	  v-for="item in currencyList"
 			  	 :key="item.code"
@@ -361,7 +361,7 @@ export default {
 			  fit:'',
 			  tableData:[],
 			  current_page:1,
-			  per_page:10,
+			  per_page:10000,
 			  total:0,
 			  //货币计算表单
 			  form:{
@@ -638,7 +638,7 @@ export default {
 			}
 		});
 		//获取货币列表
-		this.$api.getCurrencyList({current_page:1,per_page:10000,status:"normal"}).then((response) =>{
+		this.$api.getCurrencyList({current_page:1,per_page:this.per_page,status:"normal"}).then((response) =>{
 			console.log(response.data.rows)
 			this.currencyList= response.data.rows;
 		})
