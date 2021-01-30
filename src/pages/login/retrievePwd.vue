@@ -144,7 +144,7 @@ export default{
 		color: #02a7f0;
 		margin: 0 1rem;
 		border-radius:0.125rem !important;
-		width: 5rem;
+		width: 7rem;
 		padding: 0.75rem 0.625rem;
 
 	}

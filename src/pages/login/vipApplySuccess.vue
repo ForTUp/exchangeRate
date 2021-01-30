@@ -78,7 +78,13 @@ export default{
 		
 	},
 	mounted:function () {
-		console.log(this.$route.params)
+		if (Object.keys(this.$route.params).length==0) {
+			this.$message({
+				message: "请先注册！",
+				type: 'warning'
+			})
+			this.$router.push('/vipApply');
+		}
 		this.form.username = this.$route.params.username;
 		this.form.password = this.$route.params.password;
 	},

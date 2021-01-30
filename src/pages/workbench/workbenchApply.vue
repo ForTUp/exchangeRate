@@ -388,9 +388,11 @@
 										</el-col>
 									</el-row>
 									<el-row :gutter="24">
+										<el-col :span="6">
 										<div class="PayeeDiv">
 											<span>1号接收人银行信息</span>
 										</div>
+										</el-col>
 									</el-row>
 									<el-row :gutter="24">
 										<el-col :span="6">
@@ -500,9 +502,11 @@
 										</el-col>
 									</el-row>
 									<el-row :gutter="24">
+										<el-col :span="6">
 										<div class="PayeeDiv" style="background-color: blueviolet;">
 											<span>2号接收人银行信息</span>
 										</div>
+										</el-col>
 									</el-row>
 									<el-row :gutter="24">
 										<el-col :span="6">
@@ -1180,11 +1184,11 @@ export default{
 		padding-left: 2rem;
 	}
 	.PayeeDiv{
-		width: 10rem;
+		width: 13rem;
 		height: 2rem;
 		line-height: 2rem;
 		border: 0.0625rem solid ;
-		margin: 1rem 2rem;
+		margin: 1rem 1rem;
 		background-color: orange;
 		color: #FFF;
 		border-radius: 3rem;

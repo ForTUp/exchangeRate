@@ -40,7 +40,7 @@
 			<el-main>
 				<div id="banner" class="form-wrap-top">
 				    <!--动态将图片轮播图的容器高度设置成与图片一致--><!-- @click.native="linkTo" -->
-					 <el-carousel class="lun_imgs" ref="carousel" >
+					 <el-carousel class="lun_imgs" height="312px" ref="carousel" >
 					   <el-carousel-item class="lun_img" v-for="item in imgList" v-bind:key="item.url" >
 						 <img class="bannerImg" :src="item.url" ref="bannerHeight" @load="imgLoad"/>
 					   </el-carousel-item>
@@ -95,7 +95,7 @@
 										 </el-select>
 									</el-col>
 									<el-col :span="3" >
-										<el-input v-model="nowForm.money" placeholder="" ></el-input>
+										<el-input v-model="nowForm.money" type="number" placeholder="" ></el-input>
 									</el-col>
 									<el-col :span="1" style="width: 8rem;text-align: center;">
 										<el-button style="border: 0.0625rem solid #0080FF;" @click="changeFiex"><i style="color: #0080FF;" class="iconfont iconjiaohuan"></i></el-button>
@@ -311,7 +311,7 @@
 			   </el-select>
 			</el-form-item>
 			<el-form-item label="卖出金额:" :label-width="formLabelWidth" >
-			  <el-input v-model="form.money" autocomplete="off"></el-input>
+			  <el-input v-model="form.money" type="number" autocomplete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="买入金额:" :label-width="formLabelWidth" >
 			  <el-input v-model="form.totalMoney" disabled autocomplete="off"></el-input>
@@ -954,7 +954,7 @@ export default {
 			.el-col{
 				// border: 0.0625rem solid blue;
 				height: 3rem;
-				padding: 0;
+				padding: 0.5rem;
 				.el-input{
 					width: 100%;
 				}

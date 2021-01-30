@@ -113,7 +113,7 @@
 									<el-col :span="6" >
 										<div class="formSpan">-</div>
 										<el-form-item label=""  class="labelName labelNameDown" prop="mobile">
-											<el-input v-model="form.mobile" placeholder="请输入您的手机号码" ></el-input>
+											<el-input v-model="form.mobile" type="number" placeholder="请输入您的手机号码" ></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="6">
@@ -131,7 +131,7 @@
 									<el-col :span="6">
 										<div class="formSpan">-</div>
 										<el-form-item label=""  class="labelName labelNameDown" prop="mobile2"> 
-											<el-input v-model="form.mobile2" placeholder="请输入您的手机号码" ></el-input>
+											<el-input v-model="form.mobile2" type="number" placeholder="请输入您的手机号码" ></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
@@ -589,13 +589,13 @@ export default{
 		submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
-					if(this.firstUrl=='' || this.secondUrl=='' || this.thirdUrl=='' || this.fourUrl=='' || this.fiveUrl=='' || this.sixUrl==''){
-						this.$message({
-							message: '请上传图片！',
-							type: 'warning'
-						})
-						return;
-					}
+					// if(this.firstUrl=='' || this.secondUrl=='' || this.thirdUrl=='' || this.fourUrl=='' || this.fiveUrl=='' || this.sixUrl==''){
+					// 	this.$message({
+					// 		message: '请上传图片！',
+					// 		type: 'warning'
+					// 	})
+					// 	return;
+					// }
 					if(this.checked==null || this.checked==''){
 						this.$message({
 							message: '请勾选隐私保护政策条款！',
@@ -941,7 +941,7 @@ export default{
 		
 	}
 	.formRadio{
-		margin-left: -12rem;
+		margin-left: -11.5rem;
 	}
 	.formSpan {
 		position: absolute;
@@ -1002,6 +1002,6 @@ export default{
 		height:18.75rem;
 	}
 	.sign-swrap {
-		padding-top:4.5rem;
+		padding-top:7rem;
 	}
 </style>
